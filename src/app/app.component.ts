@@ -7,7 +7,7 @@ import { SelectionModel } from '@angular/cdk/collections';
 @Component({
   selector: 'app-root',
   templateUrl: './app.component.html',
-  styleUrls: ['./app.component.sass']
+  styleUrls: ['./app.component.css']
 })
 export class AppComponent {
   isSelected = true;

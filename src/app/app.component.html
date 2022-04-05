@@ -1,52 +1,53 @@
 <!--Pasek na górze-->
-<mat-toolbar>>
-  <div class="pl-20">
-    <a class="color-grey2 font-14" routerLink="/" routerLinkActive="active">
-      <span>Home</span>
-     </a>
- </div>
+<mat-toolbar  class="navbar">
 
  <div class="pl-20">
-  <a class="color-grey2 font-14" routerLink="/office" routerLinkActive="active">
-    <span>Office view</span>
-   </a>
+   <a class="color-grey2 font-14" routerLink="/office" routerLinkActive="active">
+<span>Office</span>
+</a>
 </div>
 
 <div class="pl-20">
   <a class="color-grey2 font-14" routerLink="/reservations" routerLinkActive="active">
-    <span>Reservations</span>
-   </a>
+<span>Reservations</span>
+</a>
 </div>
 
 <div class="pl-20">
   <a class="color-grey2 font-14" routerLink="/aboutus" routerLinkActive="active">
-    <span>About us</span>
-   </a>
+<span>About us</span>
+</a>
+</div>
+
+<div class="pl-20">
+  <a class="color-grey2 font-14" routerLink="/faq" routerLinkActive="active">
+<span>FAQ</span>
+</a>
 </div>
 
 <div class="pl-20">
   <a class="color-grey2 font-14" routerLink="/login" routerLinkActive="active">
-    <span>Login</span>
-   </a>
-</div>
+<span>Login</span>
+</a>
+</div> 
 
 <div class="pl-20">
   <a class="color-grey2 font-14" routerLink="/register" routerLinkActive="active">
-    <span>Register</span>
-   </a>
+<span>Register</span>
+</a>
 </div>
 
 <div class="pl-20">
   <a class="color-grey2 font-14" routerLink="/account" routerLinkActive="active">
-    <span>Account</span>
-   </a>
+<span>Account</span>
+</a>
 </div>
   
 </mat-toolbar>
 
+<router-outlet></router-outlet>
 
-<!-- Stara nawigacja 
-  This nav gives you links to click, which tells the router which route to use (defined in the routes constant in  AppRoutingModule) --
+<!-- This nav gives you links to click, which tells the router which route to use (defined in the routes constant in  AppRoutingModule) --
 <nav>
   <ul>
     <li><a routerLink="/" routerLinkActive="active" [routerLinkActiveOptions]="{exact: true}">Main page.</a></li>
@@ -59,5 +60,6 @@
     <li><a routerLink="/account" routerLinkActive="active">My account.</a></li>
   </ul>
 </nav>
-<router-outlet></router-outlet>
+
+--> 
 
