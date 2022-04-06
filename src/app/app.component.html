@@ -1,53 +1,71 @@
 <!--Pasek na górze-->
-<mat-toolbar  class="navbar">
+<div class="outer_container">
+  <div class="inner_container">
 
- <div class="pl-20">
-   <a class="color-grey2 font-14" routerLink="/office" routerLinkActive="active">
-<span>Office</span>
-</a>
+    <mat-toolbar>
+      <img src="assets/projekt_logo.jpg" class="center" width="60" height="60" display:block>
+      Ripple Hot Seat
+
+      <div id="lalala">
+        <a class="l_navbar" routerLink="/" routerLinkActive="active">
+          <span>Home page</span>
+        </a>
+        <a class="l_navbar" routerLink="/office" routerLinkActive="active">
+          <span>Office</span>
+        </a>
+        <a class="l_navbar" routerLink="/reservations" routerLinkActive="active">
+          <span>Reservations</span>
+        </a>
+      </div>
+
+      <!--Zapchajdziura klasa do rozdzielenia lewej i prawej-->
+      <div class="example-fill-remaining-space"></div>
+
+      <!--W domysle zalogowany uzytkownik nie bedzie mogl sie zarejestrowac ani zalogowac, a zamiast tego bedzie mial tylko infomrmacje o koncie. 
+  Tak samo niezalogowany uzytkownik nie powinien byc w stanie wyswietlic informacji o koncie.-->
+
+      <div>
+        <a class="r_navbar" routerLink="/login" routerLinkActive="active">
+          <span>Login</span>
+        </a>
+        <a class="r_navbar" routerLink="/register" routerLinkActive="active">
+          <span>Register</span>
+        </a>
+        <a class="r_navbar" routerLink="/account" routerLinkActive="active">
+          <span>Account</span>
+        </a>
+      </div>
+
+    </mat-toolbar>
+
+    <router-outlet></router-outlet>
+
+  </div>
 </div>
 
-<div class="pl-20">
-  <a class="color-grey2 font-14" routerLink="/reservations" routerLinkActive="active">
-<span>Reservations</span>
-</a>
+<!--footer-->
+<div class="footer_container">
+  <mat-toolbar class="footer">
+    I'm a footer!
+    <div class="pl-20">
+      <a routerLink="/aboutus" routerLinkActive="active">
+        <span>About us</span>
+      </a>
+    </div>
+
+    <div class="pl-20">
+      <a routerLink="/faq" routerLinkActive="active">
+        <span>FAQ</span>
+      </a>
+    </div>
+
+  </mat-toolbar>
+
 </div>
 
-<div class="pl-20">
-  <a class="color-grey2 font-14" routerLink="/aboutus" routerLinkActive="active">
-<span>About us</span>
-</a>
-</div>
 
-<div class="pl-20">
-  <a class="color-grey2 font-14" routerLink="/faq" routerLinkActive="active">
-<span>FAQ</span>
-</a>
-</div>
-
-<div class="pl-20">
-  <a class="color-grey2 font-14" routerLink="/login" routerLinkActive="active">
-<span>Login</span>
-</a>
-</div> 
-
-<div class="pl-20">
-  <a class="color-grey2 font-14" routerLink="/register" routerLinkActive="active">
-<span>Register</span>
-</a>
-</div>
-
-<div class="pl-20">
-  <a class="color-grey2 font-14" routerLink="/account" routerLinkActive="active">
-<span>Account</span>
-</a>
-</div>
-  
-</mat-toolbar>
-
-<router-outlet></router-outlet>
-
-<!-- This nav gives you links to click, which tells the router which route to use (defined in the routes constant in  AppRoutingModule) --
+<!-- Stary kod, nie lubię usuwać go :( ) 
+  This nav gives you links to click, which tells the router which route to use (defined in the routes constant in  AppRoutingModule) --
 <nav>
   <ul>
     <li><a routerLink="/" routerLinkActive="active" [routerLinkActiveOptions]="{exact: true}">Main page.</a></li>
@@ -61,5 +79,4 @@
   </ul>
 </nav>
 
---> 
-
+-->

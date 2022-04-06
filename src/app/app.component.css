@@ -1,7 +1,61 @@
 .navbar {
     justify-content: space-between;
+    display:flex;
+}
+
+/*do marginesów*/
+#lalala {
+    margin-left:20px;
+}
+
+.l_navbar {
+    justify-content:left;
+    float:left;
+}
+
+.example-fill-remaining-space {
+    flex: 1 1 auto;
+  }
+
+.r_navbar {
+
+    justify-content:right;
+    float:right;
 }
 
 span {
     padding-right: 1rem;
+}
+
+a {
+    text-decoration: none; 
+    color:white;
+}
+
+p {
+    margin-bottom: 0%;
+    margin-top: 0%
+}
+
+.outer_container {
+    min-height:100%;
+}
+
+.inner_container {
+    padding-bottom:64px;
+}
+
+.footer{
+    justify-content: space-between;
+    /*position:fixed;*/
+    position:sticky;
+    bottom:0px;
+    background-color:black;
+    width:100%;
+    margin: 0, auto;
+}
+
+.footer_container {
+    height:24px;
+    margin-top: -64px;
 }

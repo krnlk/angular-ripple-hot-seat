@@ -6,7 +6,7 @@ import { SelectionModel } from '@angular/cdk/collections';
 @Component({
   selector: 'new-component',
   templateUrl: './new-component.component.html',
-  styleUrls: ['./new-component.component.sass']
+  styleUrls: ['./new-component.component.css']
 })
 export class NewComponentComponent{
   isSelected = true;
