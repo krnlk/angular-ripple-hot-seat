@@ -20,7 +20,8 @@ const routes: Routes = [
 { path: 'faq', component: FaqComponent },
 { path: 'login', component: LoginComponent },
 { path: 'register', component: RegisterComponent },
-{ path: 'account', component: AccountComponent }
+{ path: 'account', component: AccountComponent },
+{ path: '**', redirectTo:'', pathMatch:'full' }
 ];
 
 @NgModule({
