@@ -2,6 +2,10 @@
 html {
     height: 100%;
     background-color: slategrey;
+    background-image: url('./assets/Stock_glowna.webp');
+    background-repeat: no-repeat;
+    background-size: cover;
+    background-position: center;
 }
 
 app-root {

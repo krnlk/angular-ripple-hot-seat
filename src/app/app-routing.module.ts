@@ -2,7 +2,7 @@ import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
 
 import { AppComponent } from './app.component';
-import { NewComponentComponent } from './components/new-component/new-component.component';
+import { OfficeComponent } from './components/office/office.component';
 import { HomeComponent } from './components/home/home.component';
 import { ReservationsComponent } from './components/reservations/reservations.component';
 import { AboutusComponent } from './components/aboutus/aboutus.component';
@@ -14,7 +14,7 @@ import { AccountComponent } from './components/account/account.component';
 const routes: Routes = [
 //{ path: '', redirectTo:'/', pathMatch: 'full' }, 
 { path: '', component: HomeComponent },
-{ path: 'office', component: NewComponentComponent },
+{ path: 'office', component: OfficeComponent },
 { path: 'reservations', component: ReservationsComponent },
 { path: 'aboutus', component: AboutusComponent },
 { path: 'faq', component: FaqComponent },

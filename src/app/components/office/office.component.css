@@ -1,0 +1,21 @@
+.font{
+    color:black
+}
+
+.image_shown
+{
+    color: pink;
+    margin-left:150px;
+}
+
+.outer_container
+{
+    background-position: center;
+    background-color: rgba(0,0,0,.5);
+}
+
+.outer_container2
+{
+    height: 100%;
+    position: relative;
+}

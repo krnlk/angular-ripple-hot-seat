@@ -10,7 +10,7 @@ import { FormsModule } from '@angular/forms';
 import { NgMaterialModule } from './ng-material/ng-material.module';
 
 import { AppComponent } from './app.component';
-import { NewComponentComponent } from './components/new-component/new-component.component';
+import { OfficeComponent } from './components/office/office.component';
 import { HomeComponent } from './components/home/home.component';
 import { ReservationsComponent } from './components/reservations/reservations.component';
 import { AboutusComponent } from './components/aboutus/aboutus.component';
@@ -22,7 +22,7 @@ import { AccountComponent } from './components/account/account.component';
 @NgModule({
   declarations: [
     AppComponent,
-    NewComponentComponent,
+    OfficeComponent,
     HomeComponent,
     ReservationsComponent,
     AboutusComponent,

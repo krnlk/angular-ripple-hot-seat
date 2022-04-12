@@ -59,3 +59,12 @@ p {
     height:24px;
     margin-top: -64px;
 }
+
+.background_img{
+    background-image: url(/jakakolwiek-nazwa/src/assets/biuro.jpg);
+}
+
+.text_area1
+{
+    color:blueviolet;
+}
