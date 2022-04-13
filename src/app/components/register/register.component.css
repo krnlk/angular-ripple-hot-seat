@@ -1,41 +1,47 @@
-.text_box{
+.text_box2{
   color: white;
   margin-bottom: 20px;
   text-align: center;
 }
-.login_box{
+.register_box{
   font-size: 20px;
   background-color: rgba(60,60,60,1.0);
   margin: 250px 0px;
   border-radius: 10px;
 }
 
-.login{
+.register{
   background-color: rgba(0,0,0,.5);
-  background-position: center;
   justify-content: center;
   display: flex;
   align-items: center;
+  background-position: center;
 }
 
-.login_input{
+.register_input_right{
   background-color: rgba(60,60,60,1.0);
   border-radius: 5px;
-  margin: 10px 50px;
+  margin: 10px 10px 10px 50px;
 }
 
-#login_btn{
+.register_input_left{
+  background-color: rgba(60,60,60,1.0);
+  border-radius: 5px;
+  margin: 10px 50px 10px 10px;
+}
+
+#register_btn{
   color: white;
   background-color: rgba(30,30,30,1.0);;
-  margin: 10px 100px;
+  margin: 10px 190px;
   position: relative;
 }
 
-#login_btn:hover{
+#register_btn:hover{
   color: gold;
   border-color: gold;
 }
 
-.login_mar{
+.register_mar{
   margin: 75px 75px;
 }
