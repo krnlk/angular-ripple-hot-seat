@@ -8,6 +8,7 @@ import { AppRoutingModule } from './app-routing.module';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { FormsModule } from '@angular/forms';
 import { NgMaterialModule } from './ng-material/ng-material.module';
+import { HttpClientModule} from '@angular/common/http'
 
 import { AppComponent } from './app.component';
 import { OfficeComponent } from './components/office/office.component';
@@ -40,7 +41,8 @@ import { AccountComponent } from './components/account/account.component';
     NgMaterialModule,
     ReactiveFormsModule,
     MatListModule,
-    MatButtonModule
+    MatButtonModule,
+    HttpClientModule
   ],
   providers: [],
   bootstrap: [AppComponent],
