@@ -12,28 +12,26 @@ import { LoginService } from './login.service';
 })
 //implements onInit
 export class LoginComponent{
-  title= 'test1';
-  /*
   username!: string;
   password!: string;
   message:any
-  */
+  
 
   //constructor(private service:RestapiService,private router:Router) { }
   constructor(public service:LoginService){
 
   }
 
-  /*
+  
   ngOnInit(): void {
 
   }
-  */
+  
 
   
   doLogin(){
     console.log("Button is working");
-    this.service.getLogin();
+    this.service.getLogin(this.username, this.password);
     }
 
     /*
@@ -43,7 +41,7 @@ export class LoginComponent{
       this.message = data;
       this.router.navigate(["/home"])
     })
-  }
+    
     */
 
 
