@@ -19,6 +19,7 @@ import { FaqComponent } from './components/faq/faq.component';
 import { LoginComponent } from './components/login/login.component';
 import { RegisterComponent } from './components/register/register.component';
 import { AccountComponent } from './components/account/account.component';
+import { RestapiService } from './restapi.service';
 
 @NgModule({
   declarations: [
@@ -44,7 +45,7 @@ import { AccountComponent } from './components/account/account.component';
     MatButtonModule,
     HttpClientModule
   ],
-  providers: [],
+  providers: [RestapiService],
   bootstrap: [AppComponent],
 })
 export class AppModule { }
