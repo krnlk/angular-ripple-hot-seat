@@ -11,39 +11,49 @@ import { LoginService } from './login.service';
   styleUrls: ['./login.component.css']
 })
 //implements onInit
-export class LoginComponent{
+export class LoginComponent implements OnInit{
   username!: string;
   password!: string;
   message:any
   
 
   //constructor(private service:RestapiService,private router:Router) { }
-  constructor(public service:LoginService){
+  constructor(private http: LoginService, private router: Router) {}
+  //constructor(private http: HttpClient){
 
-  }
+  
 
   
   ngOnInit(): void {
 
   }
   
+  doLogin(){
+    //this.http.get<any>(`http://localhost:8080/login?username=${this.username}&password=${this.password}`)
+      this.http.getLogin(this.username, this.password).subscribe(
+        response=> {
+          console.log('Response: ');
+          console.log(response);
 
-  
+          //przetrzymywanie JWT
+          localStorage.setItem('token', response);
+
+          //po udanym zalogowaniu przenosi na strone glowna
+          this.router.navigateByUrl(''); 
+        },
+        error => {
+          console.log('Error: ');
+          console.log(error);
+        }
+      )
+  }
+
+  /*
   doLogin(){
     console.log("Button is working");
     this.service.getLogin(this.username, this.password);
     }
-
-    /*
-    let resp= this.service.login(this.username, this.password);
-    resp.subscribe(data=>{
-      console.log(data)
-      this.message = data;
-      this.router.navigate(["/home"])
-    })
-    
-    */
-
+  */
 
   }
   

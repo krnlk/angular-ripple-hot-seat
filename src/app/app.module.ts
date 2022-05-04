@@ -8,7 +8,7 @@ import { AppRoutingModule } from './app-routing.module';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { FormsModule } from '@angular/forms';
 import { NgMaterialModule } from './ng-material/ng-material.module';
-import { HttpClientModule} from '@angular/common/http'
+import { HttpClientModule, HTTP_INTERCEPTORS} from '@angular/common/http'
 
 import { AppComponent } from './app.component';
 import { OfficeComponent } from './components/office/office.component';
@@ -20,6 +20,9 @@ import { LoginComponent } from './components/login/login.component';
 import { RegisterComponent } from './components/register/register.component';
 import { AccountComponent } from './components/account/account.component';
 import { RestapiService } from './restapi.service';
+import { LoginService } from './components/login/login.service';
+import { ReservationsService } from './components/reservations/reservations.service';
+import { TokenInterceptorService } from './token-interceptor.service';
 
 @NgModule({
   declarations: [
@@ -45,7 +48,12 @@ import { RestapiService } from './restapi.service';
     MatButtonModule,
     HttpClientModule
   ],
-  providers: [RestapiService],
+  providers: [RestapiService, LoginService, ReservationsService,
+  {
+    provide: HTTP_INTERCEPTORS,
+    useClass: TokenInterceptorService,
+    multi: true
+  }],
   bootstrap: [AppComponent],
 })
 export class AppModule { }

@@ -1,15 +1,63 @@
 import { Component, OnInit } from '@angular/core';
+import { ReservationsService } from './reservations.service';
+import { Reservation } from "src/app/classes/reservation";
+import { NgForm } from '@angular/forms';
+
+/*
+interface reservation {
+  id: String,
+  startTime: String,
+  endTime: String,
+  deskId: String,
+  userId: String;
+}
+*/
 
 @Component({
   selector: 'app-reservations',
   templateUrl: './reservations.component.html',
   styleUrls: ['./reservations.component.sass']
 })
+
 export class ReservationsComponent implements OnInit {
+  columns!: ["id", "startTime", "endTime", "deskId", "userId"];
 
-  constructor() { }
+  reservations: Reservation[] = [];
 
-  ngOnInit(): void {
+  /*
+  id!: String;
+  startTime!: String;
+  endTime!: String;
+  deskId!: String;
+  userId!: String;
+  */
+
+  constructor(public service:ReservationsService){
+
   }
+  
+
+  ngOnInit() {
+    console.log("Reservations are being properly shown.");
+    //console.log(this.reservations);
+    //this.service.getReservations();
+
+    this.service.getReservations().subscribe(
+      response=> {
+        console.log('Response: ');
+        console.log(response);
+      },
+      error => {
+        console.log('Error: ');
+        console.log(error);
+      }
+    )
+  }
+
+  doGetReservations(){
+    console.log("Reservations are being properly shown.");
+    //console.log(this.reservations);
+    this.service.getReservations();
+    }
 
 }
