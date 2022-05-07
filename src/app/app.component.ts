@@ -35,5 +35,7 @@ export class AppComponent {
   // _loginService powinno byc prywatne, ale wtedy w pliku app.component.html jest narzekanie, ze atrybut jest prywatny i nie ma jak sie do niego dostac
   // moze to wynikac z roznej wersji angulara? (tutorial z 2018 roku)
   constructor(public _loginService: LoginService) {}
+
+  
 }
 
