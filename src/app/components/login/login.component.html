@@ -2,13 +2,33 @@
   <div class="login_box">
     <div class="login_mar">
       <h1 class="text_box">Login to your account</h1>
-      <input class="login_input" placeholder="e-mail">
+      <input type="text" name="username" [(ngModel)]="username" id="email" placeholder="username">
       <br>
-      <input type="password" class="login_input" placeholder="password">
+      <input type="password" name="password" [(ngModel)]="password" id="password" placeholder="password">
       <br>
-      <button mat-button id="login_btn">login</button>
+      <input type="submit" name="Login" id="go" value="Login" (click)="doLogin()">
     </div>
   </div>
 </div>
 
  
+<!--
+  <div class="background-wrap">
+  <div class="background"></div>
+</div>
+
+<form id="accesspanel" action="">
+  <h1 id="litheader">Skradzione od Java Techie</h1>
+  <div class="inset">
+    <p>
+      <input type="text" name="username" [(ngModel)]="username" id="email" placeholder="username">
+    </p>
+    <p>
+      <input type="password" name="password" [(ngModel)]="password" id="password" placeholder="password">
+    </p>
+  </div>
+  <p class="p-container">
+    <input type="submit" name="Login" id="go" value="Login" (click)="doLogin()">
+  </p>
+</form>
+-->
