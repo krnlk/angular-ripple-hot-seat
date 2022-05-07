@@ -24,6 +24,7 @@ import { LoginService } from './components/login/login.service';
 import { ReservationsService } from './components/reservations/reservations.service';
 import { TokenInterceptorService } from './token-interceptor.service';
 import { ResetPasswordComponent } from './components/reset-password/reset-password.component';
+import { PopUpOfficeComponent } from './pop-up-office/pop-up-office.component';
 
 @NgModule({
   declarations: [
@@ -36,7 +37,8 @@ import { ResetPasswordComponent } from './components/reset-password/reset-passwo
     LoginComponent,
     RegisterComponent,
     AccountComponent,
-    ResetPasswordComponent
+    ResetPasswordComponent,
+    PopUpOfficeComponent
   ],
   imports: [
     BrowserModule,
