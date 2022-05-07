@@ -1,10 +1,10 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 
-import { NewComponentComponent } from './office.component';
+import { OfficeComponent } from './office.component';
 
-describe('NewComponentComponent', () => {
-  let component: NewComponentComponent;
-  let fixture: ComponentFixture<NewComponentComponent>;
+describe('OfficeComponentComponent', () => {
+  let component: OfficeComponent;
+  let fixture: ComponentFixture<OfficeComponent>;
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({

@@ -1,1 +1,22 @@
-<p>reservations works!</p>
+<div class="container">
+    <table class="table table-striped">
+      <thead>
+          <tr>
+            <th>id</th>
+            <th>startTime</th>
+            <th>endTime</th>
+            <th>deskId</th>
+            <th>userId</th>
+          </tr>
+      </thead>
+      <tbody>
+        <tr *ngFor="let reservation of reservations">
+          <td>{{ reservation.id }}</td>
+          <td>{{ reservation.startTime }}</td>
+          <td>{{ reservation.endTime }}</td>
+          <td>{{ reservation.deskId }}</td>
+          <td>{{ reservation.userId }}</td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
