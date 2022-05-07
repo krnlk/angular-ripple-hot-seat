@@ -34,6 +34,9 @@
         <a class="r_navbar" *ngIf="_loginService.isLoggedIn()" routerLink="/account" routerLinkActive="active">
           <span>Account</span>
         </a>
+        <a class="r_navbar" *ngIf="_loginService.isLoggedIn()" routerLink="/reset-password" routerLinkActive="active">
+          <span>Reset Password</span>
+        </a>
         <a class="r_navbar" style="cursor:pointer" *ngIf="_loginService.isLoggedIn()" (click)="_loginService.logoutUser()">
           <span>Logout</span>
         </a>

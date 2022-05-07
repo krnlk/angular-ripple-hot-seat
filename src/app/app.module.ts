@@ -23,6 +23,7 @@ import { RestapiService } from './restapi.service';
 import { LoginService } from './components/login/login.service';
 import { ReservationsService } from './components/reservations/reservations.service';
 import { TokenInterceptorService } from './token-interceptor.service';
+import { ResetPasswordComponent } from './components/reset-password/reset-password.component';
 
 @NgModule({
   declarations: [
@@ -34,7 +35,8 @@ import { TokenInterceptorService } from './token-interceptor.service';
     FaqComponent,
     LoginComponent,
     RegisterComponent,
-    AccountComponent
+    AccountComponent,
+    ResetPasswordComponent
   ],
   imports: [
     BrowserModule,
