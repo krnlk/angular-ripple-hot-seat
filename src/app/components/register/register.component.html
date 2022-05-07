@@ -1,17 +1,20 @@
 <div class="register">
   <div class="register_box">
     <div class="register_mar">
-      <h1 class="text_box2">Create new account</h1>
-      <input class="register_input_right" placeholder="name">
-      <input class="register_input_left" placeholder="surname">
+      <h1 class="text_box2">Register account</h1>
+      <input class="register_input" placeholder="Username">
       <br>
-      <input class="register_input_right" placeholder="username">
-      <input class="register_input_left" placeholder="e-mail">
+      <input class="register_input" placeholder="E-mail address">
       <br>
-      <input type="password" class="register_input_right" placeholder="password">
-      <input type="password" class="register_input_left" placeholder="confirm password">
+      <input type="password" class="register_input" placeholder="Password">
       <br>
-      <button mat-button id="register_btn">register</button>
+      <input type="password" class="register_input" placeholder="Confirm password">
+      <br>
+      <button id="register_btn">Register account</button>
+      <div id="text">
+        <a>Already have an account? </a>
+        <b id="link" routerLink="../login" routerLinkActive="active">Log in</b>
+      </div>
     </div>
   </div>
 </div>
