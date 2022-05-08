@@ -3,6 +3,7 @@ import { BrowserModule } from '@angular/platform-browser';
 import { MatSliderModule } from '@angular/material/slider';
 import { MatListModule } from '@angular/material/list'; 
 import { MatButtonModule } from '@angular/material/button';
+import { MatDialogModule } from '@angular/material/dialog';
 import { ReactiveFormsModule } from '@angular/forms';
 import { AppRoutingModule } from './app-routing.module';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
@@ -24,7 +25,6 @@ import { LoginService } from './components/login/login.service';
 import { ReservationsService } from './components/reservations/reservations.service';
 import { TokenInterceptorService } from './token-interceptor.service';
 import { ResetPasswordComponent } from './components/reset-password/reset-password.component';
-import { PopUpOfficeComponent } from './pop-up-office/pop-up-office.component';
 
 @NgModule({
   declarations: [
@@ -37,8 +37,7 @@ import { PopUpOfficeComponent } from './pop-up-office/pop-up-office.component';
     LoginComponent,
     RegisterComponent,
     AccountComponent,
-    ResetPasswordComponent,
-    PopUpOfficeComponent
+    ResetPasswordComponent
   ],
   imports: [
     BrowserModule,
@@ -50,6 +49,7 @@ import { PopUpOfficeComponent } from './pop-up-office/pop-up-office.component';
     ReactiveFormsModule,
     MatListModule,
     MatButtonModule,
+    MatDialogModule,
     HttpClientModule
   ],
   providers: [RestapiService, LoginService, ReservationsService,

@@ -1,6 +1,7 @@
 {
     "/reservations/*": {
-        "target": "http://localhost:8080",
+        //"target": "http://localhost:8080",
+        "target": "https://ripple-hot-seat-backend-app.herokuapp.com",
         "secure": false,
         "logLevel": "info"
     }
