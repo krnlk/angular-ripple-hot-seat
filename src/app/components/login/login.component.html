@@ -1,44 +1,21 @@
-<div class="register">
-  <div class="register_box">
-    <div class="register_mar">
-      <h1 class="text_box2">Login to your account</h1>
-      <input class="register_input" name="username" [(ngModel)]="username" id="email" placeholder="Username">
+<div class="login">
+  <div class="login_box">
+    <div class="login_mar">
+      <h1 class="text_box">Login to your account</h1>
+      <input class="login_input" type="text" name="username" [(ngModel)]="username" id="email" placeholder="username">
       <br>
-      <input class="password" class="register_input" [(ngModel)]="password" id="password" placeholder="Password">
+      <input class="login_input" type="password" name="password" [(ngModel)]="password" id="password" placeholder="password">
       <br>
-      <button id="register_btn" (click)="doLogin()"> Login </button>
+      <input id="login_btn" type="submit" name="Login" value="Login" (click)="doLogin()">
       <div id="text">
-        <a>Don't have an account? </a>
-        <b id="link" routerLink="../register" routerLinkActive="active">Register</b>
+        <a>No account yet? </a>
+        <b id="link" routerLink="../register" routerLinkActive="active">Register account</b>
       </div>
     </div>
   </div>
 </div>
 
-<!--
-  <div class="register">
-  <div class="register_box">
-    <div class="register_mar">
-      <h1 class="text_box2">Register account</h1>
-      <input class="register_input" placeholder="Username">
-      <br>
-      <input class="register_input" placeholder="E-mail address">
-      <br>
-      <input type="password" class="register_input" placeholder="Password">
-      <br>
-      <input type="password" class="register_input" placeholder="Confirm password">
-      <br>
-      <button id="register_btn">Register account</button>
-      <div id="text">
-        <a>Already have an account? </a>
-        <b id="link" routerLink="../login" routerLinkActive="active">Log in</b>
-      </div>
-    </div>
-  </div>
-</div>
 
--->
- 
 <!--
   <div class="background-wrap">
   <div class="background"></div>
