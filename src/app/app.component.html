@@ -25,14 +25,20 @@
   Tak samo niezalogowany uzytkownik nie powinien byc w stanie wyswietlic informacji o koncie.-->
 
       <div>
-        <a class="r_navbar" routerLink="/login" routerLinkActive="active">
+        <a class="r_navbar" *ngIf="!_loginService.isLoggedIn()" routerLink="/login" routerLinkActive="active">
           <span>Login</span>
         </a>
-        <a class="r_navbar" routerLink="/register" routerLinkActive="active">
+        <a class="r_navbar" *ngIf="!_loginService.isLoggedIn()" routerLink="/register" routerLinkActive="active">
           <span>Register</span>
         </a>
-        <a class="r_navbar" routerLink="/account" routerLinkActive="active">
+        <a class="r_navbar" *ngIf="_loginService.isLoggedIn()" routerLink="/account" routerLinkActive="active">
           <span>Account</span>
+        </a>
+        <a class="r_navbar" *ngIf="_loginService.isLoggedIn()" routerLink="/reset-password" routerLinkActive="active">
+          <span>Reset Password</span>
+        </a>
+        <a class="r_navbar" style="cursor:pointer" *ngIf="_loginService.isLoggedIn()" (click)="_loginService.logoutUser()">
+          <span>Logout</span>
         </a>
       </div>
 

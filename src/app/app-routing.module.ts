@@ -10,6 +10,7 @@ import { FaqComponent } from './components/faq/faq.component';
 import { LoginComponent } from './components/login/login.component';
 import { RegisterComponent } from './components/register/register.component';
 import { AccountComponent } from './components/account/account.component';
+import { ResetPasswordComponent } from './components/reset-password/reset-password.component';
 
 const routes: Routes = [
 //{ path: '', redirectTo:'/', pathMatch: 'full' }, 
@@ -21,6 +22,7 @@ const routes: Routes = [
 { path: 'login', component: LoginComponent },
 { path: 'register', component: RegisterComponent },
 { path: 'account', component: AccountComponent },
+{ path: 'reset-password', component: ResetPasswordComponent },
 { path: '**', redirectTo:'', pathMatch:'full' }
 ];
 
