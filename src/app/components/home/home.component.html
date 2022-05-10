@@ -1,7 +1,17 @@
 <!-- The routed views render in the <router-outlet>-->
-
     <mat-slider min="1" max="100" step="1" value="50"></mat-slider>
 
     <img src= "assets/Logo.png" class="center" width="600" height="800" display:block>
-    
-    <h1 class="text_box"> Hello world!</h1> 
+
+    <button (click)="openMyDialog()">Open My Dialog</button>
+
+    <h1 class="text_box"> Hello world!</h1>
+
+    <dialog id="myDialog">
+      <p>Hello, world!</p>
+      <input type="text" name="username" id="whatever" placeholder="Write something...">
+      <br>
+      <button>Useless button</button>
+      <br>
+      <button (click)="closeMyDialog()">Close My Dialog</button>
+    </dialog>
