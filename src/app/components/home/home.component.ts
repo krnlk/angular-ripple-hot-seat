@@ -5,7 +5,6 @@ import { Component, OnInit } from '@angular/core';
   templateUrl: './home.component.html',
   styleUrls: ['./home.component.css']
 })
-
 export class HomeComponent implements OnInit {
 
   constructor() { }
@@ -13,13 +12,4 @@ export class HomeComponent implements OnInit {
   ngOnInit(): void {
   }
 
-  openMyDialog() {
-    let myDialog:any = <any>document.getElementById("myDialog");
-    myDialog.showModal();
-  }
-
-  closeMyDialog() {
-    let myDialog:any = <any>document.getElementById("myDialog");
-    myDialog.close();
-  }
 }

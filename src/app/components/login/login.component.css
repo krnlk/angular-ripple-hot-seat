@@ -1,23 +1,21 @@
-.text_box{
+.text_box2{
   color: white;
   margin-bottom: 30px;
   text-align: center;
 }
-
-.login_box{
+.register_box{
   background-color: rgba(60,60,60,1.0);
   margin: 250px 0px;
   border-radius: 20px;
 }
 
-.login{
+.register{
   background-color: rgba(0,0,0,.5);
   justify-content: center;
   display: flex;
 }
 
-
-.login_input{
+.register_input{
   background-color: rgba(210,210,210,1.0);
   border-radius: 20px;
   font-size: 14px;
@@ -29,7 +27,7 @@
   min-width: 250px;
 }
 
-#login_btn{
+#register_btn{
   color: white;
   background-color: dodgerblue;
   font-size: 14px;
@@ -41,12 +39,12 @@
   margin: 20px auto 20px auto;
 }
 
-#login_btn:hover{
+#register_btn:hover{
   color: gold;
   border-color: gold;
 }
 
-.login_mar{
+.register_mar{
   margin: 75px 75px;
 }
 
@@ -59,3 +57,5 @@
 #link{
   color: dodgerblue;
 }
+
+
