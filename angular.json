@@ -81,8 +81,7 @@
           },
           "defaultConfiguration": "development",
           "options": {
-            "browserTarget": "jakakolwiek-nazwa:build",
-            "proxyConfig": "proxy.config.json"
+            "browserTarget": "jakakolwiek-nazwa:build"
           }
         },
         "extract-i18n": {
