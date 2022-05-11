@@ -28,7 +28,7 @@ span {
 }
 
 a {
-    text-decoration: none; 
+    text-decoration: none;
     color:white;
 }
 
@@ -52,7 +52,7 @@ p {
     bottom:0px;
     background-color:black;
     width:100%;
-    margin: 0, auto;
+    margin: auto;
 }
 
 .footer_container {
