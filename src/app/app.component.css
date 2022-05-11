@@ -3,10 +3,6 @@
     display:flex;
 }
 
-.hidden{
-  display: none;
-}
-
 /*do marginesów*/
 #lalala {
     margin-left:20px;
