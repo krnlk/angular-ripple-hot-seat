@@ -2,18 +2,21 @@
   <div class="register_box">
     <div class="register_mar">
       <h1 class="text_box2">Register account</h1>
-      <input class="register_input" placeholder="Username">
+      <input class="register_input" [(ngModel)]="login" placeholder="Username">
       <br>
       <input class="register_input" placeholder="E-mail address">
       <br>
-      <input type="password" class="register_input" placeholder="Password">
+      <input type="password" class="register_input" [(ngModel)]="password" placeholder="Password">
       <br>
-      <input type="password" class="register_input" placeholder="Confirm password">
+      <input type="password" class="register_input" [(ngModel)]="password2" placeholder="Confirm password">
       <br>
-      <button id="register_btn" style="cursor:pointer">Register account</button>
+      <button id="register_btn" style="cursor:pointer" (click)="doRegister()">Register account</button>
       <div id="text">
         <a>Already have an account? </a>
         <b id="link" style="cursor:pointer" routerLink="../login" routerLinkActive="active">Login</b>
+      </div>
+      <div id="text">
+        <b id="link" routerLink="" routerLinkActive="active" (click)="showMatToolbar()">Back to the main page</b>
       </div>
     </div>
   </div>

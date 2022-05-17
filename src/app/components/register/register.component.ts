@@ -42,12 +42,18 @@ export class RegisterComponent implements OnInit {
 
         //po udanym zalogowaniu powinno przeniesc na strone z info o tym, ze wyslano maila?
         this.router.navigateByUrl('');
+        this.showMatToolbar();
       },
       (error) => {
         console.log('Error: ');
         console.log(error);
       }
     )
+  }
+
+  showMatToolbar(){
+    let matToolbar:any = <any>document.getElementById("matToolbar");
+    matToolbar.classList.remove("hidden");
   }
 
 }
