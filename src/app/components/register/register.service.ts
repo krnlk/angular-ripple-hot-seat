@@ -22,10 +22,11 @@ export class RegisterService {
 
 
 
-    postRegister(post: { username: string; password: string; isAdmin: string; }) {
+    postRegister(post: { login: string; password: string; isAdmin: string; }) {
 
         const httpOptions = {
-            headers: new HttpHeaders({'Content-Type': 'application/json'})
+            headers: new HttpHeaders({'Content-Type': 'application/json'}),
+            responseType: 'text' as const
           }
           
         console.log("Creating a new account...");

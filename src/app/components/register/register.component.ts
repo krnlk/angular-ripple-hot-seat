@@ -8,14 +8,16 @@ import { RegisterService } from './register.service';
   styleUrls: ['./register.component.css']
 })
 export class RegisterComponent implements OnInit {
-  username!: string
+  login!: string
   email!: string
   password!: string
   password2!: string
 
+  /*
   postData = {
     username: '${username}'
   }
+  */
 
   constructor(public http: RegisterService, public router:Router) { }
 
@@ -26,13 +28,13 @@ export class RegisterComponent implements OnInit {
     //this.http.get<any>(`http://localhost:8080/login?username=${this.username}&password=${this.password}`)
 
     let post = {
-      username: 'Ron',
-      password: 'Weasley',
+      login: `${this.login}`,
+      password: `${this.password}`,
       isAdmin: 'false'
     };
 
     this.http.postRegister(post).subscribe(
-      (data: any) => {
+      (data) => {
         console.log('Registered succesfully.');
         console.log('Data: ');
         console.log(data);
@@ -40,7 +42,7 @@ export class RegisterComponent implements OnInit {
         //po udanym zalogowaniu powinno przeniesc na strone z info o tym, ze wyslano maila?
         this.router.navigateByUrl('');
       },
-      (error: any) => {
+      (error) => {
         console.log('Error: ');
         console.log(error);
       }
