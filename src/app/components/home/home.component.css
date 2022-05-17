@@ -1,16 +1,25 @@
-.text{
-
+.container1{
+    margin: 250px 10% 0px 10%;
+    display: flex;
 }
 
-.text_box1{
-    width:max-content;
+.container2{
+    margin: 0px 10% 50px 10%;
+    display: flex;
+}
+
+#empty1{
+    width: 60%;
+}
+
+#empty2{
+    width: 40%;
+}
+
+#text_box1{
+    width: 40%;
     background-color: rgba(0,0,0,.7);
     color:white;
-    margin-left: 250px;
-    margin-top: 750px;
-
-    max-height: 100%;
-    max-width: 40%;
     font-size: 16px;
 }
 
@@ -19,14 +28,13 @@
     font-weight: bold;
 }
 
-.text_box2{
-    width:max-content;
+#text_box2{
+    width: 60%;
     background-color: rgba(0,0,0,.7);
-    background-position-x:5px;
     color:white;
-    margin-left: 1100px;
-    margin-top: -400px;
-    max-height: 100vh;
-    max-width: 30%;
     font-size: 16px;
+}
+
+.text{
+    margin: 20px;
 }

@@ -3,8 +3,12 @@
     display:flex;
 }
 
+.hidden{
+  display: none;
+}
+
 /*do marginesów*/
-#lalala {
+#mar {
     margin-left:20px;
 }
 
@@ -28,7 +32,7 @@ span {
 }
 
 a {
-    text-decoration: none; 
+    text-decoration: none;
     color:white;
 }
 
@@ -47,12 +51,11 @@ p {
 
 .footer{
     justify-content: space-between;
-    /*position:fixed;*/
     position:sticky;
     bottom:0px;
     background-color:black;
     width:100%;
-    margin: 0, auto;
+    margin: auto;
 }
 
 .footer_container {
@@ -62,9 +65,18 @@ p {
 
 .background_img{
     background-image: url(/jakakolwiek-nazwa/src/assets/biuro.jpg);
+    hight: 100%;
+    position: absolute;
+    top: 0;
 }
 
 .text_area1
 {
     color:blueviolet;
+}
+
+.center{
+  width: 60px;
+  height: 60px;
+  display: block;
 }

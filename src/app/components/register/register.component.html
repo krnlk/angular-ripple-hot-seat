@@ -1,22 +1,19 @@
 <div class="register">
   <div class="register_box">
     <div class="register_mar">
-      <h1 class="text_box2">Register an account</h1>
-      <input class="register_input" [(ngModel)]="login" placeholder="Login">
+      <h1 class="text_box2">Register account</h1>
+      <input class="register_input" placeholder="Username">
       <br>
-      <input class="register_input" [(ngModel)]="email" placeholder="E-mail address">
+      <input class="register_input" placeholder="E-mail address">
       <br>
-      <input type="password" class="register_input" [(ngModel)]="password" placeholder="Password">
+      <input type="password" class="register_input" placeholder="Password">
       <br>
-      <input type="password" class="register_input" [(ngModel)]="password2" placeholder="Confirm password">
+      <input type="password" class="register_input" placeholder="Confirm password">
       <br>
-      <button id="register_btn" (click)="doRegister()">Register an account</button>
+      <button id="register_btn" style="cursor:pointer">Register account</button>
       <div id="text">
         <a>Already have an account? </a>
-        <b id="link" routerLink="../login" routerLinkActive="active">Log in</b>
-      </div>
-      <div id="text">
-        <b id="link" routerLink="" routerLinkActive="active">Back to the main page</b>
+        <b id="link" style="cursor:pointer" routerLink="../login" routerLinkActive="active">Login</b>
       </div>
     </div>
   </div>
