@@ -58,4 +58,8 @@
   color: dodgerblue;
 }
 
+b:hover{
+  text-shadow: 0 0 5px #ff0000;
+  cursor: pointer;
+ }
 

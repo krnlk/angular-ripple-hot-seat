@@ -57,3 +57,12 @@
 #link{
   color: dodgerblue;
 }
+
+#link{
+  color: dodgerblue;
+}
+
+b:hover{
+  text-shadow: 0 0 5px blue;
+  cursor: pointer;
+ }
