@@ -1,3 +1,4 @@
+"use strict";
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
 
@@ -13,7 +14,7 @@ import { AccountComponent } from './components/account/account.component';
 import { ResetPasswordComponent } from './components/reset-password/reset-password.component';
 
 const routes: Routes = [
-//{ path: '', redirectTo:'/', pathMatch: 'full' }, 
+//{ path: '', redirectTo:'/', pathMatch: 'full' },
 { path: '', component: HomeComponent },
 { path: 'office', component: OfficeComponent },
 { path: 'reservations', component: ReservationsComponent },

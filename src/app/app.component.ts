@@ -1,3 +1,4 @@
+"use strict";
 import {Component, OnInit} from '@angular/core';
 import { ICountry } from '../assets/country.model';
 import { MatSelectionListChange } from '@angular/material/list';

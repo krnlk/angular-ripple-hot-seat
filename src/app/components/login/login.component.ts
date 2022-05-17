@@ -1,3 +1,4 @@
+"use strict";
 import { Component, OnInit } from '@angular/core';
 import { Injectable } from '@angular/core';
 import { RestapiService } from 'src/app/restapi.service';
@@ -15,19 +16,19 @@ export class LoginComponent implements OnInit{
   username!: string;
   password!: string;
   message:any
-  
+
 
   //constructor(private service:RestapiService,private router:Router) { }
   constructor(private http: LoginService, private router: Router) {}
   //constructor(private http: HttpClient){
 
-  
 
-  
+
+
   ngOnInit(): void {
 
   }
-  
+
   doLogin(){
     //this.http.get<any>(`http://localhost:8080/login?username=${this.username}&password=${this.password}`)
       this.http.getLogin(this.username, this.password).subscribe(
@@ -39,7 +40,7 @@ export class LoginComponent implements OnInit{
           localStorage.setItem('token', response);
 
           //po udanym zalogowaniu przenosi na strone glowna
-          this.router.navigateByUrl(''); 
+          this.router.navigateByUrl('');
         },
         error => {
           console.log('Error: ');
@@ -56,6 +57,6 @@ export class LoginComponent implements OnInit{
   */
 
   }
-  
+
 
 

@@ -1,21 +1,20 @@
 <!--Pasek na górze-->
 <div class="outer_container">
   <div class="inner_container">
-
     <mat-toolbar id="matToolbar">
-      <img src="assets/projekt_logo.jpg" class="center" width="60" height="60" display:block>
-      Ripple Hot Seat
+      <img src="assets/projekt_logo.jpg" class="center">
+      <h1>Ripple Hot Seat</h1>
 
-      <div id="lalala">
-        <a class="l_navbar" routerLink="/" routerLinkActive="active" (click)="showMatToolbar()">
-          <span>Home page</span>
-        </a>
-        <a class="l_navbar" routerLink="/office" routerLinkActive="active" (click)="showMatToolbar()">
-          <span>Office</span>
-        </a>
-        <a class="l_navbar" routerLink="/reservations" routerLinkActive="active" (click)="showMatToolbar()">
-          <span>Reservations</span>
-        </a>
+      <div id="mar">
+        <span class="l_navbar" style="cursor:pointer" routerLink="/" routerLinkActive="active" (click)="showMatToolbar()">
+          Home page
+        </span>
+        <span class="l_navbar" style="cursor:pointer" routerLink="/office" routerLinkActive="active" (click)="showMatToolbar()">
+          Office
+        </span>
+        <span class="l_navbar" style="cursor:pointer" routerLink="/reservations" routerLinkActive="active" (click)="showMatToolbar()">
+          Reservations
+        </span>
       </div>
 
       <!--Zapchajdziura klasa do rozdzielenia lewej i prawej-->
@@ -25,30 +24,27 @@
   Tak samo niezalogowany uzytkownik nie powinien byc w stanie wyswietlic informacji o koncie.-->
 
       <div>
-        <a class="r_navbar" *ngIf="!_loginService.isLoggedIn()" routerLink="/login" routerLinkActive="active" (click)="hideMatToolbar()">
-          <span>Login</span>
-        </a>
-        <a class="r_navbar" *ngIf="!_loginService.isLoggedIn()" routerLink="/register" routerLinkActive="active" (click)="hideMatToolbar()">
-          <span>Register</span>
-        </a>
-        <a class="r_navbar" *ngIf="_loginService.isLoggedIn()" routerLink="/account" routerLinkActive="active" (click)="showMatToolbar()">
-          <span>Account</span>
-        </a>
-        <a class="r_navbar" *ngIf="_loginService.isLoggedIn()" routerLink="/reset-password" routerLinkActive="active" (click)="hideMatToolbar()">
-          <span>Reset Password</span>
-        </a>
-        <a class="r_navbar" style="cursor:pointer" *ngIf="_loginService.isLoggedIn()" (click)="_loginService.logoutUser(); showMatToolbar();">
-          <span>Logout</span>
-        </a>
+        <span class="r_navbar" style="cursor:pointer" *ngIf="!_loginService.isLoggedIn()" routerLink="/login" routerLinkActive="active" (click)="hideMatToolbar()">
+          Login
+        </span>
+        <span class="r_navbar" style="cursor:pointer" *ngIf="!_loginService.isLoggedIn()" routerLink="/register" routerLinkActive="active" (click)="hideMatToolbar()">
+          Register
+        </span>
+        <span class="r_navbar" style="cursor:pointer" *ngIf="_loginService.isLoggedIn()" routerLink="/account" routerLinkActive="active" (click)="showMatToolbar()">
+          Account
+        </span>
+        <span class="r_navbar" style="cursor:pointer" *ngIf="_loginService.isLoggedIn()" routerLink="/reset-password" routerLinkActive="active" (click)="hideMatToolbar()">
+          Reset Password
+        </span>
+        <span class="r_navbar" style="cursor:pointer" *ngIf="_loginService.isLoggedIn()" (click)="_loginService.logoutUser(); showMatToolbar();">
+          Logout
+        </span>
       </div>
 
     </mat-toolbar>
-
     <router-outlet></router-outlet>
-
   </div>
 </div>
-
 <!--footer-->
 <div class="footer_container">
   <mat-toolbar class="footer">
@@ -58,15 +54,12 @@
         <span>About us</span>
       </a>
     </div>
-
     <div class="pl-20">
       <a routerLink="/faq" routerLinkActive="active">
         <span>FAQ</span>
       </a>
     </div>
-
   </mat-toolbar>
-
 </div>
 
 

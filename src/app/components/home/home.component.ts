@@ -1,3 +1,4 @@
+"use strict";
 import { Component, OnInit } from '@angular/core';
 
 @Component({
@@ -11,15 +12,5 @@ export class HomeComponent implements OnInit {
   constructor() { }
 
   ngOnInit(): void {
-  }
-
-  openMyDialog() {
-    let myDialog:any = <any>document.getElementById("myDialog");
-    myDialog.showModal();
-  }
-
-  closeMyDialog() {
-    let myDialog:any = <any>document.getElementById("myDialog");
-    myDialog.close();
   }
 }

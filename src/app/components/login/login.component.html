@@ -6,10 +6,10 @@
       <br>
       <input class="login_input" type="password" name="password" [(ngModel)]="password" id="password" placeholder="password">
       <br>
-      <input id="login_btn" type="submit" name="Login" value="Login" (click)="doLogin()">
+      <input id="login_btn" style="cursor:pointer" type="submit" name="Login" value="Login" (click)="doLogin()">
       <div id="text">
         <a>No account yet? </a>
-        <b id="link" routerLink="../register" routerLinkActive="active">Register account</b>
+        <b id="link" style="cursor:pointer" routerLink="../register" routerLinkActive="active">Register account</b>
       </div>
     </div>
   </div>

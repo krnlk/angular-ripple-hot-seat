@@ -1,3 +1,4 @@
+"use strict";
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 
 import { PopUpOfficeComponent } from './pop-up-office.component';

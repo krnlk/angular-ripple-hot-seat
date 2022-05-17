@@ -1,3 +1,4 @@
+"use strict";
 import { Injectable, Injector } from '@angular/core';
 import { HttpInterceptor } from '@angular/common/http';
 import { LoginService } from './components/login/login.service';

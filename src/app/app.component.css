@@ -8,7 +8,7 @@
 }
 
 /*do marginesów*/
-#lalala {
+#mar {
     margin-left:20px;
 }
 
@@ -51,7 +51,6 @@ p {
 
 .footer{
     justify-content: space-between;
-    /*position:fixed;*/
     position:sticky;
     bottom:0px;
     background-color:black;
@@ -66,9 +65,18 @@ p {
 
 .background_img{
     background-image: url(/jakakolwiek-nazwa/src/assets/biuro.jpg);
+    hight: 100%;
+    position: absolute;
+    top: 0;
 }
 
 .text_area1
 {
     color:blueviolet;
+}
+
+.center{
+  width: 60px;
+  height: 60px;
+  display: block;
 }
