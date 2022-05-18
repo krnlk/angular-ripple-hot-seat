@@ -10,10 +10,14 @@
       <br>
       <input type="password" class="register_input" [(ngModel)]="password2" placeholder="Confirm password">
       <br>
-      <button id="register_btn" (click)="doRegister()">Register an account</button>
+      <button id="register_btn" style="cursor:pointer">Register account</button>
       <div id="text">
         <a>Already have an account? </a>
-        <b id="link" routerLink="../login" routerLinkActive="active">Log in</b>
+        <b id="link" style="cursor:pointer" routerLink="../login" routerLinkActive="active">Login</b>
+<!--       <button id="register_btn" (click)="doRegister()">Register an account</button>
+      <div id="text">
+        <a>Already have an account? </a>
+        <b id="link" routerLink="../login" routerLinkActive="active">Log in</b> -->
       </div>
     </div>
   </div>

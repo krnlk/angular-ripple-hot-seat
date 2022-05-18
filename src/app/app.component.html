@@ -1,76 +1,73 @@
 <!--Pasek na górze-->
 <div class="outer_container">
   <div class="inner_container">
+    <mat-toolbar id="matToolbar">
+      <img src="assets/projekt_logo.jpg" class="center">
+      <h1 class="app_name">
+          Ripple Hot Seat
+        </h1>
 
-    <mat-toolbar>
-      <img src="assets/projekt_logo.jpg" class="center" width="60" height="60" display:block>
-      Ripple Hot Seat
-
-      <div id="lalala">
-        <a class="l_navbar" routerLink="/" routerLinkActive="active">
-          <span>Home page</span>
-        </a>
-        <a class="l_navbar" routerLink="/office" routerLinkActive="active">
-          <span>Office</span>
-        </a>
-        <a class="l_navbar" routerLink="/reservations" routerLinkActive="active">
-          <span>Reservations</span>
-        </a>
+      <div>
+        <span class="l_navbar" style="cursor:pointer" routerLink="/" routerLinkActive="active" (click)="showMatToolbar()">
+          Home page
+        </span>
+        <span class="l_navbar" style="cursor:pointer" routerLink="/office" routerLinkActive="active" (click)="showMatToolbar()">
+          Office
+        </span>
+        <span class="l_navbar" style="cursor:pointer" routerLink="/reservations" routerLinkActive="active" (click)="showMatToolbar()">
+          Reservations
+        </span>
       </div>
 
       <!--Zapchajdziura klasa do rozdzielenia lewej i prawej-->
       <div class="example-fill-remaining-space"></div>
 
-      <!--W domysle zalogowany uzytkownik nie bedzie mogl sie zarejestrowac ani zalogowac, a zamiast tego bedzie mial tylko infomrmacje o koncie. 
+      <!--W domysle zalogowany uzytkownik nie bedzie mogl sie zarejestrowac ani zalogowac, a zamiast tego bedzie mial tylko infomrmacje o koncie.
   Tak samo niezalogowany uzytkownik nie powinien byc w stanie wyswietlic informacji o koncie.-->
 
       <div>
-        <a class="r_navbar" *ngIf="!_loginService.isLoggedIn()" routerLink="/login" routerLinkActive="active">
-          <span>Login</span>
-        </a>
-        <a class="r_navbar" *ngIf="!_loginService.isLoggedIn()" routerLink="/register" routerLinkActive="active">
-          <span>Register</span>
-        </a>
-        <a class="r_navbar" *ngIf="_loginService.isLoggedIn()" routerLink="/account" routerLinkActive="active">
-          <span>Account</span>
-        </a>
-        <a class="r_navbar" *ngIf="_loginService.isLoggedIn()" routerLink="/reset-password" routerLinkActive="active">
-          <span>Reset Password</span>
-        </a>
-        <a class="r_navbar" style="cursor:pointer" *ngIf="_loginService.isLoggedIn()" (click)="_loginService.logoutUser()">
-          <span>Logout</span>
-        </a>
+        <span class="r_navbar" style="cursor:pointer" *ngIf="!_loginService.isLoggedIn()" routerLink="/login" routerLinkActive="active" (click)="hideMatToolbar()">
+          Login
+        </span>
+        <span class="r_navbar" style="cursor:pointer" *ngIf="!_loginService.isLoggedIn()" routerLink="/register" routerLinkActive="active" (click)="hideMatToolbar()">
+          Register
+        </span>
+        <span class="r_navbar" style="cursor:pointer" *ngIf="_loginService.isLoggedIn()" routerLink="/account" routerLinkActive="active" (click)="showMatToolbar()">
+          Account
+        </span>
+        <span class="r_navbar" style="cursor:pointer" *ngIf="_loginService.isLoggedIn()" routerLink="/reset-password" routerLinkActive="active" (click)="hideMatToolbar()">
+          Reset Password
+        </span>
+        <span class="r_navbar" style="cursor:pointer" *ngIf="_loginService.isLoggedIn()" (click)="_loginService.logoutUser(); showMatToolbar();">
+          Logout
+        </span>
       </div>
 
     </mat-toolbar>
-
     <router-outlet></router-outlet>
-
   </div>
 </div>
-
 <!--footer-->
 <div class="footer_container">
   <mat-toolbar class="footer">
-    I'm a footer!
     <div class="pl-20">
-      <a routerLink="/aboutus" routerLinkActive="active">
+      I'm a footer!
+    </div>
+    <div class="pl-20">
+      <a routerLink="/aboutus" routerLinkActive="active" (click)="showMatToolbar()">
         <span>About us</span>
       </a>
     </div>
-
     <div class="pl-20">
-      <a routerLink="/faq" routerLinkActive="active">
+      <a routerLink="/faq" routerLinkActive="active" (click)="showMatToolbar()">
         <span>FAQ</span>
       </a>
     </div>
-
   </mat-toolbar>
-
 </div>
 
 
-<!-- Stary kod, nie lubię usuwać go :( ) 
+<!-- Stary kod, nie lubię usuwać go :( )
   This nav gives you links to click, which tells the router which route to use (defined in the routes constant in  AppRoutingModule) --
 <nav>
   <ul>
