@@ -11,6 +11,7 @@ import { SelectionModel } from '@angular/cdk/collections';
 })
 export class OfficeComponent{
   isSelected = true;
+  officeImage = File;
   onListSelectionChange(ob: MatSelectionListChange) {
      console.log("Selected Item: " + ob.source.selectedOptions.selected.length);
   }
