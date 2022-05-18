@@ -54,13 +54,13 @@
   <mat-toolbar class="footer">
     I'm a footer!
     <div class="pl-20">
-      <a routerLink="/aboutus" routerLinkActive="active">
+      <a routerLink="/aboutus" routerLinkActive="active" (click)="showMatToolbar()">
         <span>About us</span>
       </a>
     </div>
 
     <div class="pl-20">
-      <a routerLink="/faq" routerLinkActive="active">
+      <a routerLink="/faq" routerLinkActive="active" (click)="showMatToolbar()">
         <span>FAQ</span>
       </a>
     </div>

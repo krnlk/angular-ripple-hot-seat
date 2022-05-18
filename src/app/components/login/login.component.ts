@@ -4,6 +4,7 @@ import { RestapiService } from 'src/app/restapi.service';
 import { Router } from '@angular/router';
 import { HttpClient } from '@angular/common/http';
 import { LoginService } from './login.service';
+import { AppComponent } from 'src/app/app.component';
 
 @Component({
   selector: 'app-login',
@@ -39,13 +40,19 @@ export class LoginComponent implements OnInit{
           localStorage.setItem('token', response);
 
           //po udanym zalogowaniu przenosi na strone glowna
-          this.router.navigateByUrl(''); 
+          this.router.navigateByUrl('');
+          this.showMatToolbar();
         },
         error => {
           console.log('Error: ');
           console.log(error);
         }
       )
+  }
+
+  showMatToolbar(){
+    let matToolbar:any = <any>document.getElementById("matToolbar");
+    matToolbar.classList.remove("hidden");
   }
 
   /*

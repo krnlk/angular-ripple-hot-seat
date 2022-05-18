@@ -1,35 +1,84 @@
 <h4> Biuro Placeholder </h4>
 
-
-  <li *ngFor="let room of rooms">
-    {{ room.id }}
-    {{ room.number }}
-    {{ room.level }}
-    {{ room.office }}
-    {{ room.picturePath }}
-  </li>
+<button (click)="openAddRoomDialog()">Add new level</button>
+<button (click)="openRemoveRoomDialog()">Remove room</button>
+<button (click)="openEditDeskDialog()">Edit desk</button>
+<button (click)="openPositionDialog()">Change position</button>
 
 
-<!--
-<div class="outer_container">
-
-</div>
-<h3>Material List</h3>
-<mat-selection-list (selectionChange)="onListSelectionChange($event)">
-  <mat-list-option class="font">Murdeshwar</mat-list-option>
-  <mat-list-option class="font" [selected]="isSelected">Varanasi</mat-list-option>
-  <mat-list-option class="font" disabled="true">Noida</mat-list-option>
-  <mat-list-option class="font">Bhopal</mat-list-option>
-</mat-selection-list>
 
 
-<h3>Material List with Reactive Form</h3>
-<form [formGroup]="techForm" (ngSubmit)="onFormSubmit()">
-  <mat-selection-list formControlName="selectedTech">
-    <mat-list-option class="font" *ngFor="let tech of techList" [value]="tech">
-      {{tech.lang}}
-    </mat-list-option>
-  </mat-selection-list>
-  <button mat-raised-button color="warn">Submit</button>
-</form>
--->
+<dialog id="addRoomDialog">
+  <p>Add a new level</p>
+  <input type="text" name="number" id="whatever" placeholder="...">
+  <br>
+  <button>Add</button>
+  <button (click)="closeAddRoomDialog()">Cancel</button>
+</dialog>
+
+<dialog id="removeRoomDialog">
+  <p>Remove a room</p>
+  <button (click)="openRemoveSureDialog()">Remove</button>
+  <button (click)="closeRemoveRoomDialog()">Cancel</button>
+</dialog>
+
+<dialog id="removeSureDialog">
+  <p>Are you sure you want to remove this desk?</p>
+  <br>
+  <p>This action is irreversible!</p>
+  <button>Remove</button>
+  <button (click)="closeRemoveSureDialog();closeRemoveRoomDialog();closeEditDeskDialog()">Cancel</button>
+</dialog>
+
+<dialog id="editDeskDialog">
+  <p>Edit a desk</p>
+  <input type="text" name="username" id="whatever" placeholder="...">
+  <br>
+  <br>
+  <input type="text" name="username" id="whatever" placeholder="...">
+  <br>
+  <br>
+  <input type="text" name="username" id="whatever" placeholder="...">
+  <br>
+  <br>
+  <input type="text" name="username" id="whatever" placeholder="...">
+  <br>
+  <br>
+  <button>Save</button>
+  <button (click)="closeEditDeskDialog()">Cancel</button>
+  <br>
+  <button (click)="openRemoveSureDialog()">Remove</button>
+
+</dialog>
+
+<dialog id="positionDialog">
+  <p>Add level</p>
+  <input type="text" name="username" id="whatever" placeholder="...">
+  <br>
+  <button>Add</button>
+  <button (click)="closePositionDialog()">Cancel</button>
+</dialog>
+
+
+
+
+
+
+<li>
+  Room id
+  Number
+  Level
+  Office
+  Picture
+</li>
+
+
+<li *ngFor="let room of rooms">
+  {{ room.id }}
+  {{ room.number }}
+  {{ room.level }}
+  {{ room.office }}
+  {{ room.picture }}
+</li>
+
+
