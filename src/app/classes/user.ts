@@ -1,4 +1,3 @@
-"use strict";
 export class User{
     id: string;
     username: string;

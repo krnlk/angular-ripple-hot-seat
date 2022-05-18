@@ -1,8 +1,7 @@
-"use strict";
 import { NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
 import { MatSliderModule } from '@angular/material/slider';
-import { MatListModule } from '@angular/material/list';
+import { MatListModule } from '@angular/material/list'; 
 import { MatButtonModule } from '@angular/material/button';
 import { MatDialogModule } from '@angular/material/dialog';
 import { ReactiveFormsModule } from '@angular/forms';

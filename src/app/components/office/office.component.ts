@@ -1,4 +1,3 @@
-"use strict";
 import { Component } from '@angular/core';
 import { MatSelectionListChange } from '@angular/material/list';
 import { FormBuilder } from '@angular/forms';
@@ -58,7 +57,6 @@ export class OfficeComponent{
 
   /*
   isSelected = true;
-  officeImage = File;
   onListSelectionChange(ob: MatSelectionListChange) {
      console.log("Selected Item: " + ob.source.selectedOptions.selected.length);
   }

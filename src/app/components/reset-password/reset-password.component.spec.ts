@@ -1,4 +1,3 @@
-"use strict";
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 
 import { ResetPasswordComponent } from './reset-password.component';
