@@ -1,4 +1,3 @@
-"use strict";
 import { Component, OnInit } from '@angular/core';
 import { Injectable } from '@angular/core';
 import { HttpClient, HttpResponse} from '@angular/common/http';
@@ -26,7 +25,7 @@ export class LoginService{
       localStorage.removeItem('token')
       this.router.navigate(['/'])
     }
-
+    
     getToken() {
       // napisane w taki sposob, aby tymczasowo naprawic pewien blad przy logowaniu i autoryzacji
       return localStorage.getItem('token')
@@ -50,15 +49,15 @@ getLogin(username: string, password: string) {
             console.log(response);
             localStorage.setItem('tokenData', JSON.stringify(response));
             //localStorage.setItem('token', response.token)
-            this.router.navigateByUrl('/home');
+            this.router.navigateByUrl('/home'); 
         },
         error => {
             console.log('Error: ');
             console.log(error);
           }
-        //bearer token nie jest nigdzie przechowywany
+        //bearer token nie jest nigdzie przechowywany 
         // https://dev-academy.com/angular-jwt/
     )
-}
+}   
 */
 }
