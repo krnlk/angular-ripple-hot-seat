@@ -2,14 +2,14 @@
   <div class="register_box">
     <div class="register_mar">
       <h1 class="text_box2">Login to your account</h1>
-      <input class="register_input" name="username" [(ngModel)]="username" id="email" placeholder="Username">
+      <input type="text" class="register_input" name="username" [(ngModel)]="username" id="email" placeholder="Username">
       <br>
-      <input class="password" class="register_input" [(ngModel)]="password" id="password" placeholder="Password">
+      <input type="password" class="password" class="register_input" [(ngModel)]="password" id="password" placeholder="Password">
       <br>
-<!--       <button id="register_btn" (click)="doLogin()"> Login </button>
+       <button id="register_btn" (click)="doLogin()" style="cursor:pointer"> Login </button>
       <div id="text">
         <a>Don't have an account? </a>
-        <b id="link" routerLink="../register" routerLinkActive="active">Register</b> -->
+        <b id="link" routerLink="../register" routerLinkActive="active" style="cursor:pointer">Register</b>
       </div>
     </div>
   </div>
@@ -38,7 +38,7 @@
 </div>
 
 -->
- 
+
 <!--
   <div class="background-wrap">
   <div class="background"></div>

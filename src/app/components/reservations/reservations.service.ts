@@ -24,9 +24,8 @@ export class ReservationsService{
 getReservations() {
     console.log("Getting reservations...");
     //return this.http.get<any>(`http://localhost:8080/reservations`, httpOptions)
-    return this.http.get<any>(`https://ripple-hot-seat-backend-app.herokuapp.com/reservations`, httpOptions)
+    return this.http.get<any>(`https://ripple-hot-seat-backend-app.herokuapp.com/reservations`)
 }
-//     return this.http.get<any>(`https://ripple-hot-seat-backend-app.herokuapp.com/reservations`)
 
 
 /*
