@@ -11,6 +11,7 @@ import { LoginService } from './components/login/login.service';
   templateUrl: './app.component.html',
   styleUrls: ['./app.component.css']
 })
+
 export class AppComponent{
   /*
   isSelected = true;

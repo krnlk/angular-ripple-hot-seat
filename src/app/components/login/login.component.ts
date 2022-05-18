@@ -5,6 +5,7 @@ import { RestapiService } from 'src/app/restapi.service';
 import { Router } from '@angular/router';
 import { HttpClient } from '@angular/common/http';
 import { LoginService } from './login.service';
+import {AppComponent} from "../../app.component";
 
 @Component({
   selector: 'app-login',
@@ -47,6 +48,11 @@ export class LoginComponent implements OnInit{
           console.log(error);
         }
       )
+  }
+
+  showMatToolbar(){
+    let matToolbar:any = <any>document.getElementById("matToolbar");
+    matToolbar.classList.remove("hidden");
   }
 
   /*

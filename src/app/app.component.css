@@ -7,14 +7,8 @@
   display: none;
 }
 
-/*do marginesów*/
-#mar {
-    margin-left:20px;
-}
-
-.l_navbar {
-    justify-content:left;
-    float:left;
+#mar{
+  margin: 0 20px 0 0;
 }
 
 .example-fill-remaining-space {
@@ -22,7 +16,6 @@
   }
 
 .r_navbar {
-
     justify-content:right;
     float:right;
 }
@@ -58,6 +51,11 @@ p {
     margin: auto;
 }
 
+/*.header{*/
+/*    min-height: 50% !important;*/
+
+/*}*/
+
 .footer_container {
     height:24px;
     margin-top: -64px;
@@ -65,9 +63,6 @@ p {
 
 .background_img{
     background-image: url(/jakakolwiek-nazwa/src/assets/biuro.jpg);
-    hight: 100%;
-    position: absolute;
-    top: 0;
 }
 
 .text_area1
@@ -75,8 +70,90 @@ p {
     color:blueviolet;
 }
 
-.center{
-  width: 60px;
-  height: 60px;
-  display: block;
+@media all and (min-width: 1000px){
+  .app_name{
+    font-size: 20px;
+    margin-right: 20px;
+  }
+
+  .l_navbar {
+    justify-content:left;
+    float:left;
+  }
+
+  .r_navbar {
+    justify-content:right;
+    float:right;
+  }
+
+  .center{
+    width: 50px;
+    justify-content:left;
+    float:left;
+    display: block;
+    margin: 0 20px 0 0;
+  }
+}
+
+@media all and (max-width: 1000px){
+  .app_name{
+    font-size: 15px;
+    margin-right: 20px;
+  }
+
+  .l_navbar {
+    justify-content:left;
+    float:left;
+    font-size: 15px;
+  }
+
+  .r_navbar {
+    justify-content:right;
+    float:right;
+    font-size: 15px;
+  }
+
+  .center{
+    width: 40px;
+    justify-content:left;
+    float:left;
+    display: block;
+    margin: 0 20px 0 0;
+  }
+
+  .pl-20{
+    font-size: 15px;
+  }
+}
+
+@media all and (max-width: 500px){
+  .app_name{
+    display: none;
+  }
+
+  .l_navbar {
+    justify-content: left;
+    float:left;
+    font-size: 8px;
+    display: flex;
+  }
+
+  .r_navbar {
+    justify-content:right;
+    float:right;
+    font-size: 8px;
+    display: flex;
+  }
+
+  .center{
+    width: 25px;
+    justify-content:left;
+    float:left;
+    display: block;
+    margin: 0 20px 0 0;
+  }
+
+  .pl-20{
+    font-size: 8px;
+  }
 }
