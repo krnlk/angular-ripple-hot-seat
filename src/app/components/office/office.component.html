@@ -6,30 +6,6 @@
     {{ room.number }}
     {{ room.level }}
     {{ room.office }}
-    {{ room.picturePath }}
+    {{ room.picture }}
   </li>
 
-
-<!--
-<div class="outer_container">
-
-</div>
-<h3>Material List</h3>
-<mat-selection-list (selectionChange)="onListSelectionChange($event)">
-  <mat-list-option class="font">Murdeshwar</mat-list-option>
-  <mat-list-option class="font" [selected]="isSelected">Varanasi</mat-list-option>
-  <mat-list-option class="font" disabled="true">Noida</mat-list-option>
-  <mat-list-option class="font">Bhopal</mat-list-option>
-</mat-selection-list>
-
-
-<h3>Material List with Reactive Form</h3>
-<form [formGroup]="techForm" (ngSubmit)="onFormSubmit()">
-  <mat-selection-list formControlName="selectedTech">
-    <mat-list-option class="font" *ngFor="let tech of techList" [value]="tech">
-      {{tech.lang}}
-    </mat-list-option>
-  </mat-selection-list>
-  <button mat-raised-button color="warn">Submit</button>
-</form>
--->

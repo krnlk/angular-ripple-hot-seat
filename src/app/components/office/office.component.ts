@@ -5,15 +5,15 @@ import { FormBuilder } from '@angular/forms';
 import { SelectionModel } from '@angular/cdk/collections';
 import { HttpClient, HttpHeaders } from '@angular/common/http'
 import { OfficeService } from './office.service';
+import { OnInit } from '@angular/core';
 
 @Component({
   selector: 'office-component',
   templateUrl: './office.component.html',
   styleUrls: ['./office.component.css']
 })
-export class OfficeComponent{
+export class OfficeComponent {
   // skradzione z https://www.youtube.com/watch?v=Oz6zuhjrMi4
-
 
  // constructor(private httpClient: HttpClient) { }
   constructor(public http: HttpClient) {}
@@ -24,6 +24,7 @@ export class OfficeComponent{
   */
 
   rooms: any;
+
 
   ngOnInit(): void{
     this.http.get("https://ripple-hot-seat-backend-app.herokuapp.com/login?username=login&password=password", {responseType: 'text'})
