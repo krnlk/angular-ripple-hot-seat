@@ -15,17 +15,12 @@
     flex: 1 1 auto;
   }
 
-.r_navbar {
-    justify-content:right;
-    float:right;
-}
-
 span {
     padding-right: 1rem;
 }
 
 a {
-    text-decoration: none;
+    text-decoration: none; 
     color:white;
 }
 
@@ -48,7 +43,7 @@ p {
     bottom:0px;
     background-color:black;
     width:100%;
-    margin: auto;
+    margin: 0, auto;
 }
 
 /*.header{*/
@@ -68,6 +63,7 @@ p {
 .text_area1
 {
     color:blueviolet;
+
 }
 
 @media all and (min-width: 1000px){

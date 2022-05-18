@@ -1,7 +1,0 @@
-{
-    "/reservations/*": {
-        "target": "https://ripple-hot-seat-backend-app.herokuapp.com",
-        "secure": false,
-        "logLevel": "info"
-    }
-}

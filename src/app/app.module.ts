@@ -24,8 +24,10 @@ import { AccountComponent } from './components/account/account.component';
 import { RestapiService } from './restapi.service';
 import { LoginService } from './components/login/login.service';
 import { ReservationsService } from './components/reservations/reservations.service';
+import { OfficeService } from './components/office/office.service';
 import { TokenInterceptorService } from './token-interceptor.service';
 import { ResetPasswordComponent } from './components/reset-password/reset-password.component';
+import { RegisterService } from './components/register/register.service';
 
 @NgModule({
   declarations: [
@@ -53,7 +55,7 @@ import { ResetPasswordComponent } from './components/reset-password/reset-passwo
     MatDialogModule,
     HttpClientModule
   ],
-  providers: [RestapiService, LoginService, ReservationsService,
+  providers: [RestapiService, LoginService, ReservationsService, OfficeService, RegisterService,
   {
     provide: HTTP_INTERCEPTORS,
     useClass: TokenInterceptorService,
