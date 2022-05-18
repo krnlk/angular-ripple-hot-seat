@@ -57,14 +57,59 @@ export class OfficeComponent {
   }
 
   
-  openMyDialog() {
-    let myDialog:any = <any>document.getElementById("myDialog");
-    myDialog.showModal();
+  // add room
+  openAddRoomDialog() {
+    let addRoomDialog:any = <any>document.getElementById("addRoomDialog");
+    addRoomDialog.showModal();
   }
 
-  closeMyDialog() {
-    let myDialog:any = <any>document.getElementById("myDialog");
-    myDialog.close();
+  closeAddRoomDialog() {
+    let addRoomDialog:any = <any>document.getElementById("addRoomDialog");
+    addRoomDialog.close();
+  }
+
+  // remove room
+  openRemoveRoomDialog() {
+    let removeRoomDialog:any = <any>document.getElementById("removeRoomDialog");
+    removeRoomDialog.showModal();
+  }
+
+  closeRemoveRoomDialog() {
+    let removeRoomDialog:any = <any>document.getElementById("removeRoomDialog");
+    removeRoomDialog.close();
+  }
+
+  // remove room - are you sure?
+  openRemoveSureDialog() {
+    let removeSureDialog:any = <any>document.getElementById("removeSureDialog");
+    removeSureDialog.showModal();
+  }
+
+  closeRemoveSureDialog() {
+    let removeSureDialog:any = <any>document.getElementById("removeSureDialog");
+    removeSureDialog.close();
+  }
+
+  // edit desk
+  openEditDeskDialog() {
+    let editDeskDialog:any = <any>document.getElementById("editDeskDialog");
+    editDeskDialog.showModal();
+  }
+
+  closeEditDeskDialog() {
+    let editDeskDialog:any = <any>document.getElementById("editDeskDialog");
+    editDeskDialog.close();
+  }
+
+  // position
+  openPositionDialog() {
+    let positionDialog:any = <any>document.getElementById("positionDialog");
+    positionDialog.showModal();
+  }
+
+  closePositionDialog() {
+    let positionDialog:any = <any>document.getElementById("positionDialog");
+    positionDialog.close();
   }
 
   title = 'jakakolwiek-nazwa';

@@ -1,15 +1,67 @@
 <h4> Biuro Placeholder </h4>
 
-<button (click)="openMyDialog()">Open My Dialog</button>
+<button (click)="openAddRoomDialog()">Add new level</button>
+<button (click)="openRemoveRoomDialog()">Remove room</button>
+<button (click)="openEditDeskDialog()">Edit desk</button>
+<button (click)="openPositionDialog()">Change position</button>
 
-<dialog id="myDialog">
-  <p>Hello, world!</p>
-  <input type="text" name="username" id="whatever" placeholder="Write something...">
+
+
+
+<dialog id="addRoomDialog">
+  <p>Add a new level</p>
+  <input type="text" name="number" id="whatever" placeholder="...">
   <br>
-  <button>Useless button</button>
-  <br>
-  <button (click)="closeMyDialog()">Close My Dialog</button>
+  <button>Add</button>
+  <button (click)="closeAddRoomDialog()">Cancel</button>
 </dialog>
+
+<dialog id="removeRoomDialog">
+  <p>Remove a room</p>
+  <button (click)="openRemoveSureDialog()">Remove</button>
+  <button (click)="closeRemoveRoomDialog()">Cancel</button>
+</dialog>
+
+<dialog id="removeSureDialog">
+  <p>Are you sure you want to remove this desk?</p>
+  <br>
+  <p>This action is irreversible!</p>
+  <button>Remove</button>
+  <button (click)="closeRemoveSureDialog();closeRemoveRoomDialog();closeEditDeskDialog()">Cancel</button>
+</dialog>
+
+<dialog id="editDeskDialog">
+  <p>Edit a desk</p>
+  <input type="text" name="username" id="whatever" placeholder="...">
+  <br>
+  <br>
+  <input type="text" name="username" id="whatever" placeholder="...">
+  <br>
+  <br>
+  <input type="text" name="username" id="whatever" placeholder="...">
+  <br>
+  <br>
+  <input type="text" name="username" id="whatever" placeholder="...">
+  <br>
+  <br>
+  <button>Save</button>
+  <button (click)="closeEditDeskDialog()">Cancel</button>
+  <br>
+  <button (click)="openRemoveSureDialog()">Remove</button>
+
+</dialog>
+
+<dialog id="positionDialog">
+  <p>Add level</p>
+  <input type="text" name="username" id="whatever" placeholder="...">
+  <br>
+  <button>Add</button>
+  <button (click)="closePositionDialog()">Cancel</button>
+</dialog>
+
+
+
+
 
 
 <li>
