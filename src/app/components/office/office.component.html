@@ -1,11 +1,32 @@
 <h4> Biuro Placeholder </h4>
 
+<button (click)="openMyDialog()">Open My Dialog</button>
 
-  <li *ngFor="let room of rooms">
-    {{ room.id }}
-    {{ room.number }}
-    {{ room.level }}
-    {{ room.office }}
-    {{ room.picture }}
-  </li>
+<dialog id="myDialog">
+  <p>Hello, world!</p>
+  <input type="text" name="username" id="whatever" placeholder="Write something...">
+  <br>
+  <button>Useless button</button>
+  <br>
+  <button (click)="closeMyDialog()">Close My Dialog</button>
+</dialog>
+
+
+<li>
+  Room id
+  Number
+  Level
+  Office
+  Picture
+</li>
+
+
+<li *ngFor="let room of rooms">
+  {{ room.id }}
+  {{ room.number }}
+  {{ room.level }}
+  {{ room.office }}
+  {{ room.picture }}
+</li>
+
 

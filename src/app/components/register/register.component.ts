@@ -20,7 +20,7 @@ export class RegisterComponent implements OnInit {
   }
   */
 
-  constructor(public http: RegisterService, public router:Router) { }
+  constructor(public http: RegisterService, public router: Router) { }
 
   ngOnInit(): void {
   }
@@ -34,25 +34,32 @@ export class RegisterComponent implements OnInit {
       isAdmin: 'false'
     };
 
-    this.http.postRegister(post).subscribe(
-      (data) => {
-        console.log('Registered succesfully.');
-        console.log('Data: ');
-        console.log(data);
+    //do the passwords match?
+    if (this.password == this.password2) {
+      this.http.postRegister(post).subscribe(
+        (data) => {
+          console.log('Registered succesfully.');
+          console.log('Data: ');
+          console.log(data);
 
-        //po udanym zalogowaniu powinno przeniesc na strone z info o tym, ze wyslano maila?
-        this.router.navigateByUrl('');
-        this.showMatToolbar();
-      },
-      (error) => {
-        console.log('Error: ');
-        console.log(error);
-      }
-    )
+          //po udanym zalogowaniu powinno przeniesc na strone z info o tym, ze wyslano maila?
+          this.router.navigateByUrl('');
+          this.showMatToolbar();
+        },
+        (error) => {
+          console.log('Error: ');
+          console.log(error);
+        }
+      )
+    }
+
+    else {
+      console.log('Your passwords do not match.');
+    }
   }
 
-  showMatToolbar(){
-    let matToolbar:any = <any>document.getElementById("matToolbar");
+  showMatToolbar() {
+    let matToolbar: any = <any>document.getElementById("matToolbar");
     matToolbar.classList.remove("hidden");
   }
 

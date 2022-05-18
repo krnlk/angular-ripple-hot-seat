@@ -6,26 +6,32 @@ import { SelectionModel } from '@angular/cdk/collections';
 import { HttpClient, HttpHeaders } from '@angular/common/http'
 import { OfficeService } from './office.service';
 import { OnInit } from '@angular/core';
+import { BoundTarget } from '@angular/compiler';
+
+/*
+interface Room {
+  id: string;
+  number: string;
+  level: string;
+  office: string;
+  picture: string;
+}*/
 
 @Component({
   selector: 'office-component',
   templateUrl: './office.component.html',
   styleUrls: ['./office.component.css']
 })
+
+
 export class OfficeComponent {
   // skradzione z https://www.youtube.com/watch?v=Oz6zuhjrMi4
 
- // constructor(private httpClient: HttpClient) { }
-  constructor(public http: HttpClient) {}
-  /*
-  getRoom(){
-    return this.httpClient.get('https://ripple-hot-seat-backend-app.herokuapp.com/office/rooms');
-  }
-  */
-
   rooms: any;
+  constructor(public http: HttpClient) {}
 
 
+  // mostly for testing - it shouldn't download all offices in the future, just one
   ngOnInit(): void{
     this.http.get("https://ripple-hot-seat-backend-app.herokuapp.com/login?username=login&password=password", {responseType: 'text'})
     .subscribe(
@@ -39,6 +45,7 @@ export class OfficeComponent {
           responseRoom => {
             console.log('responseRoom ');
             console.log(responseRoom);
+            this.rooms = responseRoom;
           },
           errorRoom => {
             console.log('errorRoom ');
@@ -47,30 +54,19 @@ export class OfficeComponent {
         )
       }
     );
-    
-
-    /*
-    this.officeService.getRoom().subscribe(data => {
-      this.rooms = data;
-      
-    })
-    */
   }
 
-  /*
-  isSelected = true;
-  onListSelectionChange(ob: MatSelectionListChange) {
-     console.log("Selected Item: " + ob.source.selectedOptions.selected.length);
+  
+  openMyDialog() {
+    let myDialog:any = <any>document.getElementById("myDialog");
+    myDialog.showModal();
   }
 
-  constructor(private formBuilder: FormBuilder) { }
-  techForm = this.formBuilder.group({
-    selectedTech: ''
-  });
-  onFormSubmit() {
-    //console.log(this.techForm.get('selectedTech').value);
+  closeMyDialog() {
+    let myDialog:any = <any>document.getElementById("myDialog");
+    myDialog.close();
   }
-*/
+
   title = 'jakakolwiek-nazwa';
 }
 
