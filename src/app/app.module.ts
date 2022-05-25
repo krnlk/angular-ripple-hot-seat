@@ -30,6 +30,7 @@ import { TokenInterceptorService } from './token-interceptor.service';
 import { ResetPasswordComponent } from './components/reset-password/reset-password.component';
 import { RegisterService } from './components/register/register.service';
 import { DatePipe } from '@angular/common';
+import { RoomComponent } from './components/office/components/room/room.component';
 
 @NgModule({
   declarations: [
@@ -42,7 +43,8 @@ import { DatePipe } from '@angular/common';
     LoginComponent,
     RegisterComponent,
     AccountComponent,
-    ResetPasswordComponent
+    ResetPasswordComponent,
+    RoomComponent
   ],
   imports: [
     BrowserModule,

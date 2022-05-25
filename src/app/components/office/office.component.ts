@@ -1,14 +1,11 @@
 "use strict";
 import { Component } from '@angular/core';
-import { MatSelectionListChange } from '@angular/material/list';
-import { FormBuilder } from '@angular/forms';
-import { SelectionModel } from '@angular/cdk/collections';
-import { HttpClient, HttpHeaders } from '@angular/common/http'
+import { HttpClient, HttpClientModule, HttpHeaders } from '@angular/common/http'
 import { OfficeService } from './office.service';
 import { OnInit } from '@angular/core';
-import { BoundTarget } from '@angular/compiler';
-import { DatePipe } from '@angular/common';
 import { formatDate } from '@angular/common';
+
+
 
 /*
 interface Room {
@@ -35,6 +32,7 @@ dateFormat(DateCurrent, "dddd, mmmm dS, yyyy, h:MM:ss TT");
 export class OfficeComponent {
   // skradzione z https://www.youtube.com/watch?v=Oz6zuhjrMi4
 
+  //a bunch of data for inputs n stuff
   imgUrl: string = '6276a11274ea2f51b016c7a8';
 
   rooms: any;
@@ -45,12 +43,21 @@ export class OfficeComponent {
   imageToShow: any;
   isImageLoading!: boolean;
 
+  //for queries
   dateFrom!: string;
   dateUntil!: string;
   timeFrom = '7:00';
   timeUntil = '15:00';
   Input1!: string;
   Input2!: string;
+  Input3!: string;
+
+  //cursor's current coordinates on the image (?)
+  cursorX!: number;
+  cursorY!: number;
+
+  //file to be uploaded
+  //selectedFile: File;
 
 
   constructor(private service: OfficeService, public http: HttpClient) 
@@ -59,7 +66,6 @@ export class OfficeComponent {
     this.dateFrom = formatDate(this.DateCurrent, 'dd-MM-yyyy', 'en-US', '+0530');
     this.dateUntil = this.dateFrom;
   }
-
 
   // mostly for testing - it shouldn't download all offices in the future, just one
   ngOnInit(): void{
@@ -150,9 +156,29 @@ getImageFromService() {
     this.timeUntil = this.Input2;
   }
   
+  //adds a dot on the image, the dot will signify how many desks are taken
   doAddDot(){
     
   }
+
+  //https://www.youtube.com/watch?v=YkvqLNcJz3Y - uploading files
+  //selects a file in PNG format that will be uploaded by submitLevelFile()
+  /*
+  selectLevelFile(event: { target: { files: File[]; }; }){
+    this.selectedFile = <File>event.target.files[0];
+  }
+
+  //uploads the selected file to the database
+  uploadLevelFile(){
+    //bandaid, there should be an image id variable
+    const fd = new FormData();
+    fd.append('image', this.selectedFile, this.selectedFile.name)
+    this.http.post('https://ripple-hot-seat-backend-app.herokuapp.com/rooms/image/6276a11274ea2f51b016c7a8', fd)
+      .subscribe(res => {
+
+      });
+  }
+  */
 
   // POP UP WINDOWS SPAM HURRAY
   // add room
@@ -164,6 +190,12 @@ getImageFromService() {
   closeAddRoomDialog() {
     let addRoomDialog:any = <any>document.getElementById("addRoomDialog");
     addRoomDialog.close();
+  }
+
+  //get coordinates of a mouse
+  mouseMoved(event: MouseEvent) {
+    this.cursorX = event.clientX;
+    this.cursorY = event.clientY;
   }
 
   // remove room

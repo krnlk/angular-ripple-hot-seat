@@ -33,10 +33,24 @@
     </h1>
     
 <!--show room image-->
-
+<div (mousemove)="mouseMoved($event)">
 <img [src]="imageToShow"
 alt="Place image title"
-*ngIf="!isImageLoading">
+*ngIf="!isImageLoading;">
+</div>
+
+<!--text bar in case there is no image for the level-->
+<!--
+<div>
+<input type="file" (change)="selectLevelFile($event)" #fileI nput placeholder="Select file with a level plan in png format" />
+<span (click)="selectLevelFile()" class="material-icons">
+  date_range
+</span>
+<button type="button" (click)="fileInput.click()">Pick File</button>
+<input id="login_btn" style="cursor:pointer" type="submit" value="Send" (click)="uploadLevelFile()">
+</div>
+-->
+
 
 <!--search for the rooms fulfilling the date & time criteria-->
 <input id="login_btn" style="cursor:pointer" type="submit" name="Login" value="Search" (click)="doSearch()">
@@ -45,9 +59,9 @@ alt="Place image title"
 <!--This should only load in for the admin...-->
 <div class="adminRight">
   <span>Current cursor position:</span>
-  <input type="text" name="telnum" value="-" readonly="readonly" />
+  <input type="text" name="telnum" value="{{cursorX}}" readonly="readonly" />
   <br>
-  <input type="text" name="telnum" value="123456" readonly="readonly" />
+  <input type="text" name="telnum" value="{{cursorY}}" readonly="readonly" />
   <br>
   <span>Add number/name of a room:</span>
   <input type="text" name="X" placeholder="X" />

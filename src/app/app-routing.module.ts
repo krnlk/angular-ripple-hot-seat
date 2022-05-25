@@ -12,11 +12,12 @@ import { LoginComponent } from './components/login/login.component';
 import { RegisterComponent } from './components/register/register.component';
 import { AccountComponent } from './components/account/account.component';
 import { ResetPasswordComponent } from './components/reset-password/reset-password.component';
+import { RoomComponent } from './components/office/components/room/room.component';
 
 const routes: Routes = [
-//{ path: '', redirectTo:'/', pathMatch: 'full' },
 { path: '', component: HomeComponent },
 { path: 'office', component: OfficeComponent },
+{ path: 'office/room', component: RoomComponent },
 { path: 'reservations', component: ReservationsComponent },
 { path: 'aboutus', component: AboutusComponent },
 { path: 'faq', component: FaqComponent },
