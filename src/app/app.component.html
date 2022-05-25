@@ -31,7 +31,7 @@
           Register
         </span>
         <span class="r_navbar" style="cursor:pointer" *ngIf="_loginService.isLoggedIn()" routerLink="/account" routerLinkActive="active" (click)="showMatToolbar()">
-          Account
+          {{username}}
         </span>
         <span class="r_navbar" style="cursor:pointer" *ngIf="_loginService.isLoggedIn()" routerLink="/reset-password" routerLinkActive="active" (click)="hideMatToolbar()">
           Reset Password

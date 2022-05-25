@@ -40,6 +40,12 @@ export class LoginComponent implements OnInit{
           //przetrzymywanie JWT
           localStorage.setItem('token', response);
 
+          //user info
+          localStorage.setItem('username', this.username);
+          //localStorage.setItem('isAdmin', response);
+
+
+
           //po udanym zalogowaniu przenosi na strone glowna
           this.router.navigateByUrl('');
           this.showMatToolbar();

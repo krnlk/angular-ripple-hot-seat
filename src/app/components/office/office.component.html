@@ -5,8 +5,64 @@
 <button (click)="openEditDeskDialog()">Edit desk</button>
 <button (click)="openPositionDialog()">Change position</button>
 
+<div class="container">
+  <div id="empty1"></div>
+  <div id="text_box1">
+    <h1 class="dateCenter">
+      <a> {{dateFrom}} </a>
+      <span (click)="openDateDialog()" class="material-icons">
+        date_range
+      </span>
+      <a> - </a>
+      <a> {{dateUntil}} </a>
+      <span (click)="openDateDialog()" class="material-icons">
+        date_range
+      </span>
+    </h1>
 
+    <h1 class="timeRight">
+      <a> {{timeFrom}} </a>
+      <span (click)="openTimeDialog()" class="material-icons">
+        date_range
+      </span>
+      <a> - </a>
+      <a> {{timeUntil}} </a>
+      <span (click)="openTimeDialog()" class="material-icons">
+        date_range
+      </span>
+    </h1>
+    
+<!--show room image-->
 
+<img [src]="imageToShow"
+alt="Place image title"
+*ngIf="!isImageLoading">
+
+<!--search for the rooms fulfilling the date & time criteria-->
+<input id="login_btn" style="cursor:pointer" type="submit" name="Login" value="Search" (click)="doSearch()">
+
+<!--Button that lets an ADMIN ONLY KEEP THAT IN MIND PLEASE PLEASE PLEASE add dots to an image on the site?-->
+<!--This should only load in for the admin...-->
+<div class="adminRight">
+  <span>Current cursor position:</span>
+  <input type="text" name="telnum" value="-" readonly="readonly" />
+  <br>
+  <input type="text" name="telnum" value="123456" readonly="readonly" />
+  <br>
+  <span>Add number/name of a room:</span>
+  <input type="text" name="X" placeholder="X" />
+  <br>
+  <input type="text" name="Y" placeholder="Y" />
+  <br>
+  <input type="text" name="NR/NAZWA" placeholder="NR/NAZWA"/>
+  <br>
+  <input id="login_btn" style="cursor:pointer" type="submit" name="Login" value="Add" (click)="doAddDot()">
+</div>
+<!--End of things that should only load for the admin...-->
+
+  </div>
+  <div id="empty2"></div>
+</div>
 
 <dialog id="addRoomDialog">
   <p>Add a new level</p>
@@ -59,9 +115,25 @@
   <button (click)="closePositionDialog()">Cancel</button>
 </dialog>
 
+<dialog id="dateDialog">
+  <p>Please select date(s)</p>
+  <input type="dateFrom" class="date_input" [(ngModel)]="Input1" placeholder="{{dateFrom}}">
+  <br>
+  <input type="dateUntil" class="date_input" [(ngModel)]="Input2" placeholder="{{dateUntil}}">
+  <br>
+  <button (click)="updateDateQuery()">OK</button>
+  <button (click)="closeDateDialog()">Cancel</button>
+</dialog>
 
-
-
+<dialog id="timeDialog">
+  <p>Please select reservation time</p>
+  <input type="text" class="time_input" [(ngModel)]="Input1" placeholder="From...">
+  <br>
+  <input type="timeUntil" class="time_input" [(ngModel)]="Input2" placeholder="Until...">
+  <br>
+  <button (click)="updateTimeQuery()">OK</button>
+  <button (click)="closeTimeDialog()">Cancel</button>
+</dialog>
 
 
 <li>
@@ -80,5 +152,3 @@
   {{ room.office }}
   {{ room.picture }}
 </li>
-
-

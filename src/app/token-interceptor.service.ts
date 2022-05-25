@@ -8,8 +8,11 @@ import { Observable } from 'rxjs';
   providedIn: 'root'
 })
 export class TokenInterceptorService implements HttpInterceptor {
-
-  //private readonly token: string;
+/*
+  intercept(req: HttpRequest<any>, next: HttpHandler): Observable<HttpEvent<any>> {
+    return next.handle(req)
+  }
+  */
   private token: string;
 
   constructor() {
@@ -31,17 +34,5 @@ export class TokenInterceptorService implements HttpInterceptor {
       return next.handle(req);
   }
 
-/*
-  constructor(private injector: Injector) { }
 
-  intercept(req:any, next:any){
-    let loginService = this.injector.get(LoginService);
-    let tokenizedReq = req.clone({
-      setHeaders: {
-        Authorization: `Bearer ${loginService.getToken()}`
-      }
-    })
-    return next.handle(tokenizedReq);
-  }
-*/
 }

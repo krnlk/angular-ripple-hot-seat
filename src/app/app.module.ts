@@ -11,6 +11,7 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { FormsModule } from '@angular/forms';
 import { NgMaterialModule } from './ng-material/ng-material.module';
 import { HttpClientModule, HTTP_INTERCEPTORS} from '@angular/common/http'
+import { MatIconModule } from '@angular/material/icon';
 
 import { AppComponent } from './app.component';
 import { OfficeComponent } from './components/office/office.component';
@@ -28,6 +29,7 @@ import { OfficeService } from './components/office/office.service';
 import { TokenInterceptorService } from './token-interceptor.service';
 import { ResetPasswordComponent } from './components/reset-password/reset-password.component';
 import { RegisterService } from './components/register/register.service';
+import { DatePipe } from '@angular/common';
 
 @NgModule({
   declarations: [
@@ -53,9 +55,10 @@ import { RegisterService } from './components/register/register.service';
     MatListModule,
     MatButtonModule,
     MatDialogModule,
-    HttpClientModule
+    HttpClientModule,
+    MatIconModule
   ],
-  providers: [RestapiService, LoginService, ReservationsService, OfficeService, RegisterService,
+  providers: [RestapiService, LoginService, ReservationsService, OfficeService, RegisterService, 
   {
     provide: HTTP_INTERCEPTORS,
     useClass: TokenInterceptorService,
