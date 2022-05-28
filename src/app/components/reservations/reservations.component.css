@@ -1,0 +1,45 @@
+/* Stolen from https://www.w3docs.com/tools/code-editor/14099 */
+/* Outermost. */
+#centerAll {
+    top: 50%;
+    left: 50%;
+    width: 60em;
+    height: 44em;
+    margin-top: -22em;
+    margin-left: -30em;
+    position: fixed;
+    color: white;
+}
+
+/* Background */
+#background {
+    background-color: rgba(0, 0, 0, .7);
+    position: absolute;
+    height: 96%;
+    width: 100%;
+}
+
+/* For centering the table inside the background. */
+#centerTable {
+    position: relative;
+    margin: 5%;
+}
+
+/* Stolen from https://www.w3docs.com/tools/editor/4282 */
+table {
+    width: 100%;
+    border-collapse: collapse;
+}
+
+th,
+td,
+tbody {
+    text-align: center;
+    padding: 10px;
+}
+
+/* Define the hover highlight color for the table row */
+.table tr:hover {
+    background-color: white;
+    color: black;
+}

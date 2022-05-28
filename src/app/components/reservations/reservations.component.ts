@@ -21,7 +21,7 @@ interface reservation {
 })
 
 export class ReservationsComponent implements OnInit {
-  columns!: ["id", "startTime", "endTime", "deskId", "userId"];
+  columns!: ["time", "officeName", "roomNumber", "deskNumber"];
 
   reservations: Reservation[] = [];
 
@@ -39,6 +39,8 @@ export class ReservationsComponent implements OnInit {
 
 
   ngOnInit() {
+    //testing css
+    /*
     console.log("Reservations are being properly shown.");
     //console.log(this.reservations);
     //this.service.getReservations();
@@ -60,5 +62,5 @@ export class ReservationsComponent implements OnInit {
     //console.log(this.reservations);
     this.service.getReservations();
     }
-
-}
+*/
+}}

@@ -30,6 +30,10 @@ export class LoginComponent implements OnInit{
 
   }
 
+  //pozycja w kontekście https://stackoverflow.com/questions/3972014/get-contenteditable-caret-position
+
+  //1. przy logowaniu: albo dostajemy jsona is admin, login, password
+  //2. do serwera zapytanie o usera (isAdmin, email etc)
   doLogin(){
     //this.http.get<any>(`http://localhost:8080/login?username=${this.username}&password=${this.password}`)
       this.http.getLogin(this.username, this.password).subscribe(

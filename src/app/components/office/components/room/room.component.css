@@ -1,0 +1,67 @@
+.font{
+    color: white;
+}
+
+.image_shown
+{
+    color: pink;
+    margin-left:150px;
+}
+
+.outer_container
+{
+    background-position: center;
+    background-color: rgba(0,0,0,.5);
+}
+
+.outer_container2
+{
+    height: 100%;
+    position: relative;
+}
+
+.dateCenter
+{
+    text-align: center;
+}
+
+.timeRight
+{
+    text-align: right;
+}
+
+.container{
+    margin: 250px 10% 0px 10%;
+    display: flex;
+}
+
+#empty1{
+    width: 60%;
+}
+
+#empty2{
+    width: 40%;
+}
+
+#text_box1{
+    width: 40%;
+    background-color: rgba(0,0,0,.7);
+    color:white;
+    font-size: 16px;
+}
+
+.title{
+    font-size: 22px;
+    font-weight: bold;
+}
+
+#text_box2{
+    width: 60%;
+    background-color: rgba(0,0,0,.7);
+    color:white;
+    font-size: 16px;
+}
+
+.text{
+    margin: 20px;
+}

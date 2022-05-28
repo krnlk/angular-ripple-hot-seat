@@ -48,6 +48,8 @@ export class OfficeComponent {
   dateUntil!: string;
   timeFrom = '7:00';
   timeUntil = '15:00';
+
+  ///za darmo jest kalendarz w htmlu
   Input1!: string;
   Input2!: string;
   Input3!: string;

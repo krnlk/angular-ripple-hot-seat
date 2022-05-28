@@ -1,1 +1,168 @@
-<p>room works!</p>
+<h4> Biuro Placeholder </h4>
+
+<button (click)="openAddRoomDialog()">Add new level</button>
+<button (click)="openRemoveRoomDialog()">Remove room</button>
+<button (click)="openEditDeskDialog()">Edit desk</button>
+<button (click)="openPositionDialog()">Change position</button>
+
+<div class="container">
+  <div id="empty1"></div>
+  <div id="text_box1">
+    <h1 class="dateCenter">
+      <a> {{dateFrom}} </a>
+      <span (click)="openDateDialog()" class="material-icons">
+        date_range
+      </span>
+      <a> - </a>
+      <a> {{dateUntil}} </a>
+      <span (click)="openDateDialog()" class="material-icons">
+        date_range
+      </span>
+    </h1>
+
+    <h1 class="timeRight">
+      <a> {{timeFrom}} </a>
+      <span (click)="openTimeDialog()" class="material-icons">
+        date_range
+      </span>
+      <a> - </a>
+      <a> {{timeUntil}} </a>
+      <span (click)="openTimeDialog()" class="material-icons">
+        date_range
+      </span>
+    </h1>
+    
+<!--show room image-->
+<div (mousemove)="mouseMoved($event)">
+<img [src]="imageToShow"
+alt="Place image title"
+*ngIf="!isImageLoading;">
+</div>
+
+<!--text bar in case there is no image for the level-->
+<!--
+<div>
+<input type="file" (change)="selectLevelFile($event)" #fileI nput placeholder="Select file with a level plan in png format" />
+<span (click)="selectLevelFile()" class="material-icons">
+  date_range
+</span>
+<button type="button" (click)="fileInput.click()">Pick File</button>
+<input id="login_btn" style="cursor:pointer" type="submit" value="Send" (click)="uploadLevelFile()">
+</div>
+-->
+
+
+<!--search for the rooms fulfilling the date & time criteria-->
+<input id="login_btn" style="cursor:pointer" type="submit" name="Login" value="Search" (click)="doSearch()">
+
+<!--Button that lets an ADMIN ONLY KEEP THAT IN MIND PLEASE PLEASE PLEASE add dots to an image on the site?-->
+<!--This should only load in for the admin...-->
+<div class="adminRight">
+  <span>Current cursor position:</span>
+  <input type="text" name="telnum" value="{{cursorX}}" readonly="readonly" />
+  <br>
+  <input type="text" name="telnum" value="{{cursorY}}" readonly="readonly" />
+  <br>
+  <span>Add number/name of a room:</span>
+  <input type="text" name="X" placeholder="X" />
+  <br>
+  <input type="text" name="Y" placeholder="Y" />
+  <br>
+  <input type="text" name="NR/NAZWA" placeholder="NR/NAZWA"/>
+  <br>
+  <input id="login_btn" style="cursor:pointer" type="submit" name="Login" value="Add" (click)="doAddDot()">
+</div>
+<!--End of things that should only load for the admin...-->
+
+  </div>
+  <div id="empty2"></div>
+</div>
+
+<dialog id="addRoomDialog">
+  <p>Add a new level</p>
+  <input type="text" name="number" id="whatever" placeholder="...">
+  <br>
+  <button>Add</button>
+  <button (click)="closeAddRoomDialog()">Cancel</button>
+</dialog>
+
+<dialog id="removeRoomDialog">
+  <p>Remove a room</p>
+  <button (click)="openRemoveSureDialog()">Remove</button>
+  <button (click)="closeRemoveRoomDialog()">Cancel</button>
+</dialog>
+
+<dialog id="removeSureDialog">
+  <p>Are you sure you want to remove this desk?</p>
+  <br>
+  <p>This action is irreversible!</p>
+  <button>Remove</button>
+  <button (click)="closeRemoveSureDialog();closeRemoveRoomDialog();closeEditDeskDialog()">Cancel</button>
+</dialog>
+
+<dialog id="editDeskDialog">
+  <p>Edit a desk</p>
+  <input type="text" name="username" id="whatever" placeholder="...">
+  <br>
+  <br>
+  <input type="text" name="username" id="whatever" placeholder="...">
+  <br>
+  <br>
+  <input type="text" name="username" id="whatever" placeholder="...">
+  <br>
+  <br>
+  <input type="text" name="username" id="whatever" placeholder="...">
+  <br>
+  <br>
+  <button>Save</button>
+  <button (click)="closeEditDeskDialog()">Cancel</button>
+  <br>
+  <button (click)="openRemoveSureDialog()">Remove</button>
+
+</dialog>
+
+<dialog id="positionDialog">
+  <p>Add level</p>
+  <input type="text" name="username" id="whatever" placeholder="...">
+  <br>
+  <button>Add</button>
+  <button (click)="closePositionDialog()">Cancel</button>
+</dialog>
+
+<dialog id="dateDialog">
+  <p>Please select date(s)</p>
+  <input type="dateFrom" class="date_input" [(ngModel)]="Input1" placeholder="{{dateFrom}}">
+  <br>
+  <input type="dateUntil" class="date_input" [(ngModel)]="Input2" placeholder="{{dateUntil}}">
+  <br>
+  <button (click)="updateDateQuery()">OK</button>
+  <button (click)="closeDateDialog()">Cancel</button>
+</dialog>
+
+<dialog id="timeDialog">
+  <p>Please select reservation time</p>
+  <input type="text" class="time_input" [(ngModel)]="Input1" placeholder="From...">
+  <br>
+  <input type="timeUntil" class="time_input" [(ngModel)]="Input2" placeholder="Until...">
+  <br>
+  <button (click)="updateTimeQuery()">OK</button>
+  <button (click)="closeTimeDialog()">Cancel</button>
+</dialog>
+
+
+<li>
+  Room id
+  Number
+  Level
+  Office
+  Picture
+</li>
+
+
+<li *ngFor="let room of rooms">
+  {{ room.id }}
+  {{ room.number }}
+  {{ room.level }}
+  {{ room.office }}
+  {{ room.picture }}
+</li>

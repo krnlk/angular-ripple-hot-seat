@@ -1,22 +1,37 @@
-<div class="container">
-    <table class="table table-striped">
+<!--Center everything on screen-->
+<div id="centerAll">
+  <!--Outside the background-->
+  <span>Reserved desks:</span>
+  <!--Inside the background-->
+  <div id="background">
+    <div id="centerTable">
+    <table class="table">
       <thead>
-          <tr>
-            <th>id</th>
-            <th>startTime</th>
-            <th>endTime</th>
-            <th>deskId</th>
-            <th>userId</th>
-          </tr>
+        <tr>
+          <th>time</th>
+          <th>office</th>
+          <th>room number</th>
+          <th>desk number</th>
+        </tr>
       </thead>
       <tbody>
         <tr *ngFor="let reservation of reservations">
-          <td>{{ reservation.id }}</td>
-          <td>{{ reservation.startTime }}</td>
-          <td>{{ reservation.endTime }}</td>
-          <td>{{ reservation.deskId }}</td>
-          <td>{{ reservation.userId }}</td>
+          <td>{{ reservation.time }}</td>
+          <td>{{ 'office '+ reservation.office }}</td>
+          <td>{{ 'room ' + reservation.roomNumber }}</td>
+          <td>{{ 'desk ' + reservation.deskNumber }}</td>
+        </tr>
+      </tbody>
+      <tbody>
+        <tr>
+        <!--Filler text for testing-->
+        <td> | Lalalala</td>
+        <td> Lalalala</td>
+        <td> Lalalala</td>
+        <td> Lalalala</td>
         </tr>
       </tbody>
     </table>
+    </div>
   </div>
+</div>

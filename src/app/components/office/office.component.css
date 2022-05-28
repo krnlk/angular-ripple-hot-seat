@@ -1,3 +1,4 @@
+/*
 .font{
     color: white;
 }
@@ -68,4 +69,91 @@
 
 .adminRight{
     margin-right: 25px;
+}
+*/
+/* Stolen from https://www.w3docs.com/tools/code-editor/14099 */
+/* Outermost. */
+
+.centerAll {
+    top: 50%;
+    left: 50%;
+    width: 60em;
+    height: 44em;
+    margin-top: -22em;
+    margin-left: -30em;
+    position: fixed;
+    color: white;
+}
+
+/* Background */
+.background {
+    background-color: rgba(0,0,0,.7);
+    position: absolute;
+    height: 96%;
+    width: 100%;
+}
+
+/* For centering the table inside the background. */
+.centerTable {
+    position: relative;
+    margin: 5%;
+}
+
+/* Center an image in the middle */
+.centerImage {
+    position:relative;
+    margin-left: 40%;
+    height: 100%;
+}
+
+/* Positioning stuff that only admin should be able to see */
+.rightAdmin {
+    position: relative;
+    width: 30%;
+    margin-top: 5%;
+    height: 100%;
+    float: right;
+}
+
+.centerText {
+    position: relative;
+    text-align: center;
+    margin-right: 20%;
+}
+
+/* For the text box containing the "X", "Y" letters to the left of the mouse coordinates */
+.centerTextCursor1 {
+    background-color: gray;
+    color: white;
+    text-align: center;
+    width: 20%;
+    height: 4%;
+}
+
+/* For the text box containing the "X", "Y" letters to the left of the circle insertion coordinates */
+.centerTextCursor2 {
+    background-color: turquoise;
+    color: white;
+    text-align: center;
+    width: 20%;
+    height: 4%;
+}
+
+/* For the text box containing the coordinates of the cursor. */
+.centerTextInput {
+    background-color: white;
+    border: turquoise;
+    border-width: 1px;
+    color: black;
+    text-align: center;
+    width: 50%;
+    height: 4%;
+}
+
+/* Centers the "add" button visible to the admin on the right side of the background. */
+.centerAddButton{
+    background-color: turquoise;
+    color: white;
+    width: 30%;
+    height: 10%;
 }
