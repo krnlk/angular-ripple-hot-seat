@@ -22,7 +22,9 @@ export class LoginService{
         //return this.http.get(`http://localhost:8080/login?username=${username}&password=${password}`, {responseType: 'text'})
     }
 
+    // Log the user off and remove any cookies/localStorage items (username, token, isAdmin etc)
     logoutUser() {
+      localStorage.removeItem('username')
       localStorage.removeItem('token')
       this.router.navigate(['/'])
     }
@@ -36,6 +38,17 @@ export class LoginService{
       // https://www.youtube.com/watch?v=7L80dKtfHe0&list=PLC3y8-rFHvwg2RBz6UplKTGIXREj9dV0G&index=25
       // wedlug tego tutoriala, takie podwojne zaprzeczenie oznacza, ze metoda zwroci albo true, albo false (w zaleznosci od tego, czy ktos jest zalogowany)
       return !!localStorage.getItem('token')
+    }
+
+    //Gets the values from localStorage, making it so it isn't neccessary to refresh the page before seeing the changes take effect
+    getUsername(){
+      //If you are logged in, get the username
+      if(this.isLoggedIn()) return localStorage.getItem('username') 
+      else return '' 
+    }
+
+    getIsAdmin(){
+
     }
 
 /*

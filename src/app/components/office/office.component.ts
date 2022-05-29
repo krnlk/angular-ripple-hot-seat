@@ -71,7 +71,7 @@ export class OfficeComponent {
 
   // mostly for testing - it shouldn't download all offices in the future, just one
   ngOnInit(): void{
-    this.getImageFromService();
+    //this.getImageFromService();
     /*
     this.http.get("https://ripple-hot-seat-backend-app.herokuapp.com/login?username=login&password=password", {responseType: 'text'})
     .subscribe(

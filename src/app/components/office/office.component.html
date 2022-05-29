@@ -33,13 +33,13 @@
     <button (click)="openEditDeskDialog()">Edit desk</button>
     <button (click)="openPositionDialog()">Change position</button>
 
-    <!--show room image-->
-    <div (mousemove)="mouseMoved($event)">
-      <img class="centerImage" [src]="imageToShow" alt="Place image title" *ngIf="!isImageLoading;">
-    </div>
-
-    <!--text bar in case there is no image for the level-->
-    <!--
+    <div class="leftUser">
+      <!--show room image-->
+      <div (mousemove)="mouseMoved($event)">
+        <img class="centerImage" [src]="imageToShow" alt="Place image title" *ngIf="!isImageLoading;">
+      </div>
+      <!--text bar in case there is no image for the level-->
+      <!--
 <div>
 <input type="file" (change)="selectLevelFile($event)" #fileI nput placeholder="Select file with a level plan in png format" />
 <span (click)="selectLevelFile()" class="material-icons">
@@ -50,10 +50,9 @@
 </div>
 -->
 
-
     <!--search for the rooms fulfilling the date & time criteria-->
     <input id="login_btn" style="cursor:pointer" type="submit" name="Login" value="Search" (click)="doSearch()">
-
+    </div>
     <!--Button that lets an ADMIN ONLY KEEP THAT IN MIND PLEASE PLEASE PLEASE add dots to an image on the site?-->
     <!--This should only load in for the admin...-->
     <div class="rightAdmin">
@@ -68,13 +67,13 @@
       <span class="centerText">Add number/name of a room:</span>
       <br>
       <input type="text" class="centerTextCursor2" value="X:" disabled="disabled">
-      <input class="centerTextInput" type="number"/>
+      <input class="centerTextInput" type="number" />
       <br><br>
       <input type="text" class="centerTextCursor2" value="Y:" disabled="disabled">
-      <input class="centerTextInput" type="number"/>
+      <input class="centerTextInput" type="number" />
       <br><br>
       <input type="text" class="centerTextCursor2" value="NR/NAME:" disabled="disabled">
-      <input class="centerTextInput" type="number"/>
+      <input class="centerTextInput" type="number" />
       <br><br>
       <div class="centerText">
         <input class="centerAddButton" style="cursor:pointer" type="submit" value="ADD" (click)="doAddDot()">

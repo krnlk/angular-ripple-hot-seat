@@ -102,8 +102,16 @@
 /* Center an image in the middle */
 .centerImage {
     position:relative;
-    margin-left: 40%;
+    margin: 40%;
     height: 100%;
+}
+
+/* Positioning stuff on the left and middle of the background */
+.leftUser {
+    position: relative;
+    width: 70%;
+    height: 100%;
+    float: left;
 }
 
 /* Positioning stuff that only admin should be able to see */
