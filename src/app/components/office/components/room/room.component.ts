@@ -2,6 +2,8 @@ import { Component, OnInit } from '@angular/core';
 import { HttpClient, HttpClientModule, HttpHeaders } from '@angular/common/http'
 import { RoomService} from  './room.service';
 import { formatDate } from '@angular/common';
+import { BindingScope } from '@angular/compiler/src/render3/view/template';
+import { Element } from '@angular/compiler';
 
 @Component({
   selector: 'app-room',
@@ -13,25 +15,26 @@ export class RoomComponent implements OnInit {
   imgUrl: string = '6276a11274ea2f51b016c7a8';
 
   rooms: any;
-  DateCurrent: Date = new Date();
-  jstoday = '';
   room_id: any;
   
   imageToShow: any;
   isImageLoading!: boolean;
 
   //for queries
-  dateFrom!: string;
-  dateUntil!: string;
-  timeFrom = '7:00';
-  timeUntil = '15:00';
   Input1!: string;
   Input2!: string;
   Input3!: string;
+  positionX!: number;
+  positionY!: number;
+  number!: number;
+  positioning!: string;
 
   //cursor's current coordinates on the image (?)
   cursorX!: number;
   cursorY!: number;
+  pageX!: number;
+  pageY!: number;
+
 
   //file to be uploaded
   //selectedFile: File;
@@ -39,37 +42,12 @@ export class RoomComponent implements OnInit {
 
   constructor(private service: RoomService, public http: HttpClient) 
   {
-    //this.jstoday = formatDate(this.DateCurrent, 'dd-MM-yyyy hh:mm:ss a', 'en-US', '+0530');
-    this.dateFrom = formatDate(this.DateCurrent, 'dd-MM-yyyy', 'en-US', '+0530');
-    this.dateUntil = this.dateFrom;
+
   }
 
   // mostly for testing - it shouldn't download all offices in the future, just one
   ngOnInit(): void{
     this.getImageFromService();
-    /*
-    this.http.get("https://ripple-hot-seat-backend-app.herokuapp.com/login?username=login&password=password", {responseType: 'text'})
-    .subscribe(
-      responseLogin => {
-        let token = responseLogin;
-        this.http.get("https://ripple-hot-seat-backend-app.herokuapp.com/rooms", {
-          headers: new HttpHeaders({
-            'Authorization': 'Bearer '+token
-          })
-        }).subscribe(
-          responseRoom => {
-            console.log('responseRoom ');
-            console.log(responseRoom);
-            this.rooms = responseRoom;
-          },
-          errorRoom => {
-            console.log('errorRoom ');
-            console.log(errorRoom);
-          } 
-        )
-      }
-    );
-    */
   }
 
   //do what you want cuz being a pirate is free, you are a pirate!
@@ -121,42 +99,23 @@ getImageFromService() {
 
   }
 
-  //update dates for showing desks 
-  updateDateQuery(){
-    this.dateFrom = this.Input1;
-    this.dateUntil = this.Input2;
-  }
 
-  //update time for showing desks
-  updateTimeQuery(){
-    this.timeFrom = this.Input1;
-    this.timeUntil = this.Input2;
-  }
-  
-  //adds a dot on the image, the dot will signify how many desks are taken
-  doAddDot(){
+  //posts a desk to the database & then forces gets all the desks on the image again
+  doAddDesk(){
     
   }
 
-  //https://www.youtube.com/watch?v=YkvqLNcJz3Y - uploading files
-  //selects a file in PNG format that will be uploaded by submitLevelFile()
-  /*
-  selectLevelFile(event: { target: { files: File[]; }; }){
-    this.selectedFile = <File>event.target.files[0];
+  //upload's the room file to the database
+  doUploadRoomFile() {
+
   }
 
-  //uploads the selected file to the database
-  uploadLevelFile(){
-    //bandaid, there should be an image id variable
-    const fd = new FormData();
-    fd.append('image', this.selectedFile, this.selectedFile.name)
-    this.http.post('https://ripple-hot-seat-backend-app.herokuapp.com/rooms/image/6276a11274ea2f51b016c7a8', fd)
-      .subscribe(res => {
+  //funkcja do zczytywania rozmiaru obrazka, zapisac wartosci rozmiaru obrazka (zczytane piksele)
+  //pozniej te wartosci nadac w wielkosci diva
+  //przed wyswietleniem obrazka wczytac rozmiary X i Y, zapisac, nadac te wielkosci rozmiarom diva
 
-      });
-  }
-  */
-
+ // select
+ 
   // POP UP WINDOWS SPAM HURRAY
   // add room
   openAddRoomDialog() {
@@ -169,10 +128,18 @@ getImageFromService() {
     addRoomDialog.close();
   }
 
-  //get coordinates of a mouse
+
+  
+  //get coordinates of the mouse
   mouseMoved(event: MouseEvent) {
-    this.cursorX = event.clientX;
-    this.cursorY = event.clientY;
+    let rect = (event.target as HTMLElement).getBoundingClientRect();
+
+    this.cursorX = Math.round(event.clientX - rect.left);
+    this.cursorY = Math.round(event.clientY - rect.top);
+
+    if(this.cursorX < 0) this.cursorX = 0;
+    if(this.cursorY < 0) this.cursorY = 0;
+
   }
 
   // remove room
@@ -187,14 +154,37 @@ getImageFromService() {
   }
 
   // remove room - are you sure?
-  openRemoveSureDialog() {
-    let removeSureDialog:any = <any>document.getElementById("removeSureDialog");
+  openRemoveRoomSureDialog() {
+    let removeRoomSureDialog:any = <any>document.getElementById("removeRoomSureDialog");
+    removeRoomSureDialog.showModal();
+  }
+
+  closeRemoveRoomSureDialog() {
+    let removeRoomSureDialog:any = <any>document.getElementById("removeRoomSureDialog");
+    removeRoomSureDialog.close();
+  }
+
+  
+  // remove a desk
+  openRemoveDeskDialog() {
+    let removeDeskDialog:any = <any>document.getElementById("removeDeskDialog");
+    removeDeskDialog.showModal();
+  }
+
+  closeRemoveDeskDialog() {
+    let removeDeskDialog:any = <any>document.getElementById("removeDeskDialog");
+    removeDeskDialog.close();
+  }
+
+  // remove desk - are you sure?
+  openRemoveDeskSureDialog() {
+    let removeSureDialog:any = <any>document.getElementById("removeDeskSureDialog");
     removeSureDialog.showModal();
   }
 
-  closeRemoveSureDialog() {
-    let removeSureDialog:any = <any>document.getElementById("removeSureDialog");
-    removeSureDialog.close();
+  closeRemoveDeskSureDialog() {
+    let removeDeskSureDialog:any = <any>document.getElementById("removeDeskSureDialog");
+    removeDeskSureDialog.close();
   }
 
   // edit desk
