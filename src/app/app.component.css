@@ -3,24 +3,42 @@
     display:flex;
 }
 
-.hidden{
-  display: none;
+/*do marginesów*/
+#lalala {
+    margin-left:20px;
 }
 
-#mar{
-  margin: 0 20px 0 0;
+.l_navbar {
+    justify-content:left;
+    float:left;
+}
+
+.l_navbar:hover {
+    text-shadow: 0 0 5px white;
+    cursor: pointer;
 }
 
 .example-fill-remaining-space {
     flex: 1 1 auto;
   }
 
+.r_navbar {
+
+    justify-content:right;
+    float:right;
+}
+
+.r_navbar:hover {
+    text-shadow: 0 0 5px white;
+    cursor: pointer;
+}
+
 span {
     padding-right: 1rem;
 }
 
 a {
-    text-decoration: none; 
+    text-decoration: none;
     color:white;
 }
 
@@ -37,19 +55,20 @@ p {
     padding-bottom:64px;
 }
 
-.footer{
+.footer {
     justify-content: space-between;
+    /*position:fixed;*/
     position:sticky;
     bottom:0px;
     background-color:black;
     width:100%;
-    margin: 0, auto;
+    margin: auto;
 }
 
-/*.header{*/
-/*    min-height: 50% !important;*/
-
-/*}*/
+.footer:hover {
+    text-shadow: 0 0 5px white;
+    cursor: pointer;
+}
 
 .footer_container {
     height:24px;
@@ -63,93 +82,10 @@ p {
 .text_area1
 {
     color:blueviolet;
-
 }
 
-@media all and (min-width: 1000px){
-  .app_name{
-    font-size: 20px;
-    margin-right: 20px;
-  }
-
-  .l_navbar {
-    justify-content:left;
-    float:left;
-  }
-
-  .r_navbar {
-    justify-content:right;
-    float:right;
-  }
-
-  .center{
-    width: 50px;
-    justify-content:left;
-    float:left;
-    display: block;
-    margin: 0 20px 0 0;
-  }
-}
-
-@media all and (max-width: 1000px){
-  .app_name{
-    font-size: 15px;
-    margin-right: 20px;
-  }
-
-  .l_navbar {
-    justify-content:left;
-    float:left;
-    font-size: 15px;
-  }
-
-  .r_navbar {
-    justify-content:right;
-    float:right;
-    font-size: 15px;
-  }
-
-  .center{
-    width: 40px;
-    justify-content:left;
-    float:left;
-    display: block;
-    margin: 0 20px 0 0;
-  }
-
-  .pl-20{
-    font-size: 15px;
-  }
-}
-
-@media all and (max-width: 500px){
-  .app_name{
-    display: none;
-  }
-
-  .l_navbar {
-    justify-content: left;
-    float:left;
-    font-size: 8px;
-    display: flex;
-  }
-
-  .r_navbar {
-    justify-content:right;
-    float:right;
-    font-size: 8px;
-    display: flex;
-  }
-
-  .center{
-    width: 25px;
-    justify-content:left;
-    float:left;
-    display: block;
-    margin: 0 20px 0 0;
-  }
-
-  .pl-20{
-    font-size: 8px;
-  }
+.center{
+  width: 60px;
+  height: 60px;
+  display: block;
 }

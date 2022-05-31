@@ -1,11 +1,10 @@
-"use strict";
 import { Component, OnInit } from '@angular/core';
 import { Injectable } from '@angular/core';
 import { RestapiService } from 'src/app/restapi.service';
 import { Router } from '@angular/router';
 import { HttpClient } from '@angular/common/http';
 import { LoginService } from './login.service';
-import {AppComponent} from "../../app.component";
+import { AppComponent } from 'src/app/app.component';
 
 @Component({
   selector: 'app-login',
@@ -17,19 +16,19 @@ export class LoginComponent implements OnInit{
   username!: string;
   password!: string;
   message:any
-
+  
 
   //constructor(private service:RestapiService,private router:Router) { }
   constructor(private http: LoginService, private router: Router) {}
   //constructor(private http: HttpClient){
 
+  
 
-
-
+  
   ngOnInit(): void {
 
   }
-
+  
   doLogin(){
     //this.http.get<any>(`http://localhost:8080/login?username=${this.username}&password=${this.password}`)
       this.http.getLogin(this.username, this.password).subscribe(
@@ -42,6 +41,7 @@ export class LoginComponent implements OnInit{
 
           //po udanym zalogowaniu przenosi na strone glowna
           this.router.navigateByUrl('');
+          this.showMatToolbar();
         },
         error => {
           console.log('Error: ');
@@ -63,6 +63,6 @@ export class LoginComponent implements OnInit{
   */
 
   }
-
+  
 
 

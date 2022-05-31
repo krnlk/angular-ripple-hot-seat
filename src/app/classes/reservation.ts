@@ -1,4 +1,3 @@
-"use strict";
 export class Reservation {
     id: String;
     startTime: String;

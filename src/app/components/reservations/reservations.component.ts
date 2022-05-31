@@ -1,4 +1,3 @@
-"use strict";
 import { Component, OnInit } from '@angular/core';
 import { ReservationsService } from './reservations.service';
 import { Reservation } from "src/app/classes/reservation";
@@ -36,7 +35,7 @@ export class ReservationsComponent implements OnInit {
   constructor(public service:ReservationsService){
 
   }
-
+  
 
   ngOnInit() {
     console.log("Reservations are being properly shown.");
