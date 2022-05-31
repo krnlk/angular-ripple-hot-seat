@@ -1,11 +1,14 @@
 "use strict";
 import { Component } from '@angular/core';
-import { HttpClient, HttpClientModule, HttpHeaders } from '@angular/common/http'
+import {HttpClient, HttpClientModule, HttpEventType, HttpHeaders, HttpResponse} from '@angular/common/http'
 import { OfficeService } from './office.service';
 import { OnInit } from '@angular/core';
 import { formatDate } from '@angular/common';
+import {FormControl, FormGroup, Validators} from "@angular/forms";
 
-
+class ImageSnippet {
+  constructor(public src: string, public file: File) {}
+}
 
 /*
 interface Room {
@@ -39,7 +42,7 @@ export class OfficeComponent {
   DateCurrent: Date = new Date();
   jstoday = '';
   room_id: any;
-  
+
   imageToShow: any;
   isImageLoading!: boolean;
 
@@ -57,44 +60,63 @@ export class OfficeComponent {
   //cursor's current coordinates on the image (?)
   cursorX!: number;
   cursorY!: number;
+  percentDone!: number;
+  uploadSuccess!: boolean;
+
 
   //file to be uploaded
   //selectedFile: File;
 
+  selectedFile!: ImageSnippet;
 
-  constructor(private service: OfficeService, public http: HttpClient) 
+  constructor(private service: OfficeService, public http: HttpClient)
   {
     //this.jstoday = formatDate(this.DateCurrent, 'dd-MM-yyyy hh:mm:ss a', 'en-US', '+0530');
     this.dateFrom = formatDate(this.DateCurrent, 'dd-MM-yyyy', 'en-US', '+0530');
     this.dateUntil = this.dateFrom;
+
   }
+
+  processFile(imageInput: any) {
+    const file: File = imageInput.files[0];
+    const reader = new FileReader();
+    reader.addEventListener('load', (event: any) => {
+      this.selectedFile = new ImageSnippet(event.target.result, file);
+      this.service.uploadImage(this.selectedFile.file).subscribe();
+    });
+    reader.readAsDataURL(file);
+  }
+
+  // upLoadFile(){
+  //   this.service.uploadImage(this.selectedFile.file).subscribe();
+  // }
 
   // mostly for testing - it shouldn't download all offices in the future, just one
   ngOnInit(): void{
-    //this.getImageFromService();
-    /*
-    this.http.get("https://ripple-hot-seat-backend-app.herokuapp.com/login?username=login&password=password", {responseType: 'text'})
-    .subscribe(
-      responseLogin => {
-        let token = responseLogin;
-        this.http.get("https://ripple-hot-seat-backend-app.herokuapp.com/rooms", {
-          headers: new HttpHeaders({
-            'Authorization': 'Bearer '+token
-          })
-        }).subscribe(
-          responseRoom => {
-            console.log('responseRoom ');
-            console.log(responseRoom);
-            this.rooms = responseRoom;
-          },
-          errorRoom => {
-            console.log('errorRoom ');
-            console.log(errorRoom);
-          } 
-        )
-      }
-    );
-    */
+    this.getImageFromService();
+
+    // this.http.get("https://ripple-hot-seat-backend-app.herokuapp.com/login?username=login&password=password", {responseType: 'text'})
+    // .subscribe(
+    //   responseLogin => {
+    //     let token = responseLogin;
+    //     this.http.get("https://ripple-hot-seat-backend-app.herokuapp.com/rooms", {
+    //       headers: new HttpHeaders({
+    //         'Authorization': 'Bearer '+token
+    //       })
+    //     }).subscribe(
+    //       responseRoom => {
+    //         console.log('responseRoom ');
+    //         console.log(responseRoom);
+    //         this.rooms = responseRoom;
+    //       },
+    //       errorRoom => {
+    //         console.log('errorRoom ');
+    //         console.log(errorRoom);
+    //       }
+    //     )
+    //   }
+    // );
+
   }
 
   //do what you want cuz being a pirate is free, you are a pirate!
@@ -146,7 +168,7 @@ getImageFromService() {
 
   }
 
-  //update dates for showing desks 
+  //update dates for showing desks
   updateDateQuery(){
     this.dateFrom = this.Input1;
     this.dateUntil = this.Input2;
@@ -157,10 +179,10 @@ getImageFromService() {
     this.timeFrom = this.Input1;
     this.timeUntil = this.Input2;
   }
-  
+
   //adds a dot on the image, the dot will signify how many desks are taken
   doAddDot(){
-    
+
   }
 
   //https://www.youtube.com/watch?v=YkvqLNcJz3Y - uploading files
@@ -260,7 +282,7 @@ getImageFromService() {
       let timeDialog:any = <any>document.getElementById("timeDialog");
       timeDialog.showModal();
     }
-  
+
     closeTimeDialog() {
       let timeDialog:any = <any>document.getElementById("timeDialog");
       timeDialog.close();
