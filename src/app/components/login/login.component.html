@@ -1,15 +1,16 @@
-<div class="login">
-  <div class="login_box">
-    <div class="login_mar">
-      <h1 class="text_box">Login to your account</h1>
-      <input class="login_input" type="text" name="username" [(ngModel)]="username" id="email" placeholder="username">
+
+<div class="register">
+  <div class="register_box">
+    <div class="register_mar">
+      <h1 class="text_box2">Login to your account</h1>
+      <input type="text" class="register_input" name="username" [(ngModel)]="username" id="email" placeholder="Username">
       <br>
-      <input class="login_input" type="password" name="password" [(ngModel)]="password" id="password" placeholder="password">
+      <input type="password" class="password" class="register_input" [(ngModel)]="password" id="password" placeholder="Password">
       <br>
-      <button id="register_btn" (click)="doLogin()"> Login </button>
+       <button id="register_btn" (click)="doLogin()" style="cursor:pointer"> Login </button>
       <div id="text">
         <a>Don't have an account? </a>
-        <b id="link" routerLink="../register" routerLinkActive="active">Register</b>
+        <b id="link" routerLink="../register" routerLinkActive="active" style="cursor:pointer">Register</b>
       </div>
       <div id="text">
         <b id="link" routerLink="" routerLinkActive="active" (click)="showMatToolbar()">Back to the main page</b>
@@ -17,7 +18,6 @@
     </div>
   </div>
 </div>
-
 
 <!--
   <div class="background-wrap">
