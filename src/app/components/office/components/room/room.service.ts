@@ -35,7 +35,7 @@ export class RoomService{
 getRoom() {
 }   
 
-uploadRoomFile() {
+uploadRoomFile(image_id: string) {
   return this.http.post(`https://ripple-hot-seat-backend-app.herokuapp.com/rooms/image/${image_id}`, {responseType: 'blob'})
 }
   
