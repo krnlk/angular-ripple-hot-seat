@@ -47,7 +47,7 @@ export class RoomComponent implements OnInit {
 
   // mostly for testing - it shouldn't download all offices in the future, just one
   ngOnInit(): void{
-    this.getImageFromService();
+    //this.getImageFromService();
   }
 
   //do what you want cuz being a pirate is free, you are a pirate!
@@ -114,7 +114,9 @@ getImageFromService() {
   //pozniej te wartosci nadac w wielkosci diva
   //przed wyswietleniem obrazka wczytac rozmiary X i Y, zapisac, nadac te wielkosci rozmiarom diva
 
- // select
+ selectRoomFile() {
+   
+ }
  
   // POP UP WINDOWS SPAM HURRAY
   // add room
