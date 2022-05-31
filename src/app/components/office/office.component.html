@@ -1,18 +1,23 @@
 <div class="centerAll">
 
-  <h1 class="dateCenter">
+  <span class="officeLeft"> Biuro Placeholder </span>
+
+  <!--Replace normal text stuff with input type date later-->
+  <div class="dateCenter">
+    <input class="dateBox" type="date" value="2022-05-06" [(ngModel)]="dateFrom">
     <a> {{dateFrom}} </a>
     <span (click)="openDateDialog()" class="material-icons">
       date_range
     </span>
     <a> - </a>
+    <input class="dateBox" type="date" [(ngModel)]="dateUntil">
     <a> {{dateUntil}} </a>
     <span (click)="openDateDialog()" class="material-icons">
       date_range
     </span>
-  </h1>
+  </div>
 
-  <h1 class="timeRight">
+  <div class="timeRight">
     <a> {{timeFrom}} </a>
     <span (click)="openTimeDialog()" class="material-icons">
       date_range
@@ -22,14 +27,38 @@
     <span (click)="openTimeDialog()" class="material-icons">
       date_range
     </span>
-  </h1>
+  </div>
 
-  <span> Biuro Placeholder </span>
   <div class="background">
     <span>Level Placeholder</span>
 
-    <button (click)="openAddRoomDialog()">Add new level</button>
-    <button (click)="openRemoveRoomDialog()">Remove room</button>
+    <span class="material-icons" (click)="openAddRoomDialog()">
+      add
+    </span>
+
+    <span class="material-icons" (click)="openRemoveRoomDialog()">
+      remove
+    </span>
+
+    <br>
+
+    <!--Prints a list of all available levels in that office-->
+    <input list="cars">
+    <datalist id="cars" value="Volkswagen">
+      <option value="BMW">
+      <option value="Bentley">
+      <option value="Mercedes">
+      <option value="Audi">
+      <option value="Volkswagen">
+
+        <!--Once there's something to load from backend
+    <div *ngFor="let ticket of customer.ticket">
+    {{ ticket.ticketId }}
+    {{ ticket.place }}
+  </div>
+          -->
+    </datalist>
+
     <button (click)="openEditDeskDialog()">Edit desk</button>
     <button (click)="openPositionDialog()">Change position</button>
 
@@ -50,8 +79,10 @@
 </div>
 -->
 
-    <!--search for the rooms fulfilling the date & time criteria-->
-    <input id="login_btn" style="cursor:pointer" type="submit" name="Login" value="Search" (click)="doSearch()">
+      <!--search for the rooms fulfilling the date & time criteria-->
+      <div class="centerText">
+        <input class="centerAddButton" style="cursor:pointer" type="submit" value="Search" (click)="doSearch()">
+      </div>
     </div>
     <!--Button that lets an ADMIN ONLY KEEP THAT IN MIND PLEASE PLEASE PLEASE add dots to an image on the site?-->
     <!--This should only load in for the admin...-->

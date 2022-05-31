@@ -140,7 +140,7 @@
 
 /* For the text box containing the "X", "Y" letters to the left of the circle insertion coordinates */
 .centerTextCursor2 {
-    background-color: turquoise;
+    background-color: rgb(37, 150, 190);
     color: white;
     text-align: center;
     width: 20%;
@@ -150,7 +150,7 @@
 /* For the text box containing the coordinates of the cursor. */
 .centerTextInput {
     background-color: white;
-    border: turquoise;
+    border: rgb(37, 150, 190);
     border-width: 1px;
     color: black;
     text-align: center;
@@ -159,9 +159,53 @@
 }
 
 /* Centers the "add" button visible to the admin on the right side of the background. */
-.centerAddButton{
-    background-color: turquoise;
+.centerAddButton {
+    background-color: rgb(37, 150, 190);
     color: white;
     width: 30%;
     height: 10%;
 }
+
+/* Puts the office name on the left */
+.officeLeft {
+    text-align: left;
+    display: inline;
+}
+
+/* Centers the date filter */
+.dateCenter {
+    text-align: center;
+    display: inline;
+    width: 50%;
+    margin-left: 15%;
+    padding: 10px;
+}
+
+/* Puts the time filter on the right */
+.timeRight {
+    text-align: right;
+    display: inline;
+    float: right;
+}
+
+/* Makes input type box prettier */
+.dateBox {
+    background-color: transparent;
+    border: none;
+    color: white;
+}
+
+.dateBox:hover {
+    text-shadow: 0 0 5px white;
+    cursor: pointer;
+}
+
+.material-icons {
+    display: inline;
+}
+
+.material-icons:hover {
+    text-shadow: 0 0 5px white;
+    cursor: pointer;
+}
+

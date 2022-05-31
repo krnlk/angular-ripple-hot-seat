@@ -1,81 +1,94 @@
-<h4> Biuro Placeholder </h4>
+<div class="centerAll">
 
-<button (click)="openAddRoomDialog()">Add new level</button>
-<button (click)="openRemoveRoomDialog()">Remove room</button>
-<button (click)="openEditDeskDialog()">Edit desk</button>
-<button (click)="openPositionDialog()">Change position</button>
+  <span class="officeLeft"> Biuro Placeholder </span>
 
-<div class="container">
-  <div id="empty1"></div>
-  <div id="text_box1">
-    <h1 class="dateCenter">
-      <a> {{dateFrom}} </a>
-      <span (click)="openDateDialog()" class="material-icons">
-        date_range
+  <div class="background">
+    <div class="skipLeft">
+      <span>Room Placeholder:</span>
+
+      <span class="material-icons" (click)="openRemoveRoomDialog()">
+        remove
       </span>
-      <a> - </a>
-      <a> {{dateUntil}} </a>
-      <span (click)="openDateDialog()" class="material-icons">
-        date_range
-      </span>
-    </h1>
 
-    <h1 class="timeRight">
-      <a> {{timeFrom}} </a>
-      <span (click)="openTimeDialog()" class="material-icons">
-        date_range
-      </span>
-      <a> - </a>
-      <a> {{timeUntil}} </a>
-      <span (click)="openTimeDialog()" class="material-icons">
-        date_range
-      </span>
-    </h1>
-    
-<!--show room image-->
-<div (mousemove)="mouseMoved($event)">
-<img [src]="imageToShow"
-alt="Place image title"
-*ngIf="!isImageLoading;">
-</div>
+      <br>
 
-<!--text bar in case there is no image for the level-->
-<!--
-<div>
-<input type="file" (change)="selectLevelFile($event)" #fileI nput placeholder="Select file with a level plan in png format" />
-<span (click)="selectLevelFile()" class="material-icons">
-  date_range
-</span>
-<button type="button" (click)="fileInput.click()">Pick File</button>
-<input id="login_btn" style="cursor:pointer" type="submit" value="Send" (click)="uploadLevelFile()">
-</div>
--->
+      <!--Prints a list of all available levels in that office-->
+      <input list="cars">
+      <datalist id="cars" value="Volkswagen">
+        <option value="BMW">
+        <option value="Bentley">
+        <option value="Mercedes">
+        <option value="Audi">
+        <option value="Volkswagen">
+
+          <!--Once there's something to load from backend
+    <div *ngFor="let ticket of customer.ticket">
+    {{ ticket.ticketId }}
+    {{ ticket.place }}
+  </div>
+          -->
+      </datalist>
 
 
-<!--search for the rooms fulfilling the date & time criteria-->
-<input id="login_btn" style="cursor:pointer" type="submit" name="Login" value="Search" (click)="doSearch()">
+      <button (click)="openEditDeskDialog()">Edit desk</button>
+      <button (click)="openPositionDialog()">Change position</button>
+    </div>
+    <div class="leftUser">
+      <!--show room image-->
+      <div class="centerImage" (mousemove)="mouseMoved($event)">
+        <img [src]="imageToShow" alt="Place image title" *ngIf="!isImageLoading;">
+      </div>
+      <!--text bar in case there is no image for the level-->
 
-<!--Button that lets an ADMIN ONLY KEEP THAT IN MIND PLEASE PLEASE PLEASE add dots to an image on the site?-->
-<!--This should only load in for the admin...-->
-<div class="adminRight">
-  <span>Current cursor position:</span>
-  <input type="text" name="telnum" value="{{cursorX}}" readonly="readonly" />
-  <br>
-  <input type="text" name="telnum" value="{{cursorY}}" readonly="readonly" />
-  <br>
-  <span>Add number/name of a room:</span>
-  <input type="text" name="X" placeholder="X" />
-  <br>
-  <input type="text" name="Y" placeholder="Y" />
-  <br>
-  <input type="text" name="NR/NAZWA" placeholder="NR/NAZWA"/>
-  <br>
-  <input id="login_btn" style="cursor:pointer" type="submit" name="Login" value="Add" (click)="doAddDot()">
-</div>
-<!--End of things that should only load for the admin...-->
+      <!--
+      <div>
+        <input type="file" (change)="selectRoomFile($event)" #fileInput
+          placeholder="Select file with a level plan in png format" />
+        <span (click)="selectRoomFile()" class="material-icons">
+          date_range
+        </span>
+        <button type="button" (click)="fileInput.click()">Pick File</button>
+        <input id="login_btn" style="cursor:pointer" type="submit" value="Send" (click)="doUploadRoomFile()">
+      </div>
+    -->
+
+    <input type="file">
+    <input type="submit" (click)="doUploadRoomFile">
+
+      <!--search for the rooms fulfilling the date & time criteria-->
+    </div>
+    <!--Button that lets an ADMIN ONLY KEEP THAT IN MIND PLEASE PLEASE PLEASE add dots to an image on the site?-->
+    <!--This should only load in for the admin...-->
+    <div class="rightAdmin">
+      <span class="centerText">Current cursor position:</span>
+      <br>
+      <input type="text" class="centerTextCursor1" value="X:" disabled="disabled">
+      <input class="centerTextInput" type="number" value="{{cursorX}}" readonly="readonly" />
+      <br><br>
+      <input type="text" class="centerTextCursor1" value="Y:" disabled="disabled">
+      <input class="centerTextInput" type="number" value="{{cursorY}}" readonly="readonly" />
+      <br><br>
+      <span class="centerText">Add a new desk:</span>
+      <br>
+      <input type="text" class="centerTextCursor2" value="X:" [(ngModel)]="positionX" disabled="disabled">
+      <input class="centerTextInput" type="number" />
+      <br><br>
+      <input type="text" class="centerTextCursor2" value="Y:" [(ngModel)]="positionY" disabled="disabled">
+      <input class="centerTextInput" type="number" />
+      <br><br>
+      <input type="text" class="centerTextCursor2" value="NR:" [(ngModel)]="number" disabled="disabled">
+      <input class="centerTextInput" type="number" />
+      <br><br>
+      <input type="text" class="centerTextCursor2" value="FACE:" [(ngModel)]="positioning" disabled="disabled">
+      <input class="centerTextInput" type="number" />
+      <br><br>
+      <div class="centerText">
+        <input class="centerAddButton" style="cursor:pointer" type="submit" value="ADD" (click)="doAddDesk()">
+      </div>
+    </div>
+    <!--End of things that should only load for the admin...-->
 
   </div>
-  <div id="empty2"></div>
 </div>
 
 <dialog id="addRoomDialog">
@@ -87,17 +100,25 @@ alt="Place image title"
 </dialog>
 
 <dialog id="removeRoomDialog">
-  <p>Remove a room</p>
-  <button (click)="openRemoveSureDialog()">Remove</button>
+  <p>Remove room</p>
+  <button (click)="openRemoveRoomSureDialog()">Remove</button>
   <button (click)="closeRemoveRoomDialog()">Cancel</button>
 </dialog>
 
-<dialog id="removeSureDialog">
+<dialog id="removeDeskSureDialog">
   <p>Are you sure you want to remove this desk?</p>
   <br>
   <p>This action is irreversible!</p>
   <button>Remove</button>
-  <button (click)="closeRemoveSureDialog();closeRemoveRoomDialog();closeEditDeskDialog()">Cancel</button>
+  <button (click)="closeRemoveDeskSureDialog();closeRemoveDeskDialog();closeEditDeskDialog()">Cancel</button>
+</dialog>
+
+<dialog id="removeRoomSureDialog">
+  <p>Are you sure you want to remove this room?</p>
+  <br>
+  <p>This action is irreversible!</p>
+  <button>Remove</button>
+  <button (click)="closeRemoveRoomSureDialog();closeRemoveRoomDialog()">Cancel</button>
 </dialog>
 
 <dialog id="editDeskDialog">
@@ -117,7 +138,7 @@ alt="Place image title"
   <button>Save</button>
   <button (click)="closeEditDeskDialog()">Cancel</button>
   <br>
-  <button (click)="openRemoveSureDialog()">Remove</button>
+  <button (click)="openRemoveDeskSureDialog()">Remove</button>
 
 </dialog>
 
@@ -128,41 +149,3 @@ alt="Place image title"
   <button>Add</button>
   <button (click)="closePositionDialog()">Cancel</button>
 </dialog>
-
-<dialog id="dateDialog">
-  <p>Please select date(s)</p>
-  <input type="dateFrom" class="date_input" [(ngModel)]="Input1" placeholder="{{dateFrom}}">
-  <br>
-  <input type="dateUntil" class="date_input" [(ngModel)]="Input2" placeholder="{{dateUntil}}">
-  <br>
-  <button (click)="updateDateQuery()">OK</button>
-  <button (click)="closeDateDialog()">Cancel</button>
-</dialog>
-
-<dialog id="timeDialog">
-  <p>Please select reservation time</p>
-  <input type="text" class="time_input" [(ngModel)]="Input1" placeholder="From...">
-  <br>
-  <input type="timeUntil" class="time_input" [(ngModel)]="Input2" placeholder="Until...">
-  <br>
-  <button (click)="updateTimeQuery()">OK</button>
-  <button (click)="closeTimeDialog()">Cancel</button>
-</dialog>
-
-
-<li>
-  Room id
-  Number
-  Level
-  Office
-  Picture
-</li>
-
-
-<li *ngFor="let room of rooms">
-  {{ room.id }}
-  {{ room.number }}
-  {{ room.level }}
-  {{ room.office }}
-  {{ room.picture }}
-</li>
