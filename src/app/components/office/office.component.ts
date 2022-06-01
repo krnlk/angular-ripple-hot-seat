@@ -49,6 +49,13 @@ export class OfficeComponent {
   timeFrom = '7:00';
   timeUntil = '15:00';
 
+  //variables for posting a room
+  officeId: string = '629718f651a28f41bf39ed02'; //bandaid
+  positionX!: number;
+  positionY!: number;
+  number!: number;
+  level!: number;
+
   ///za darmo jest kalendarz w htmlu
   Input1!: string;
   Input2!: string;
@@ -64,37 +71,13 @@ export class OfficeComponent {
 
   constructor(private service: OfficeService, public http: HttpClient) 
   {
-    //this.jstoday = formatDate(this.DateCurrent, 'dd-MM-yyyy hh:mm:ss a', 'en-US', '+0530');
     this.dateFrom = formatDate(this.DateCurrent, 'dd-MM-yyyy', 'en-US', '+0530');
     this.dateUntil = this.dateFrom;
   }
 
   // mostly for testing - it shouldn't download all offices in the future, just one
   ngOnInit(): void{
-    //this.getImageFromService();
-    /*
-    this.http.get("https://ripple-hot-seat-backend-app.herokuapp.com/login?username=login&password=password", {responseType: 'text'})
-    .subscribe(
-      responseLogin => {
-        let token = responseLogin;
-        this.http.get("https://ripple-hot-seat-backend-app.herokuapp.com/rooms", {
-          headers: new HttpHeaders({
-            'Authorization': 'Bearer '+token
-          })
-        }).subscribe(
-          responseRoom => {
-            console.log('responseRoom ');
-            console.log(responseRoom);
-            this.rooms = responseRoom;
-          },
-          errorRoom => {
-            console.log('errorRoom ');
-            console.log(errorRoom);
-          } 
-        )
-      }
-    );
-    */
+    //this.getImageFromService();  
   }
 
   //do what you want cuz being a pirate is free, you are a pirate!
@@ -156,6 +139,32 @@ getImageFromService() {
   updateTimeQuery(){
     this.timeFrom = this.Input1;
     this.timeUntil = this.Input2;
+  }
+
+  //adds a room at this floor in this office
+  //adding an image will always be done separately
+  doAddRoom(){
+    let post = {
+      number: this.number,
+      level: this.level,
+      officeId: this.officeId,
+      positionX: this.positionX,
+      positionY: this.positionY
+    };
+
+    //do the passwords match?
+    this.service.addRoom(post).subscribe(
+      (data) => {
+        console.log('A desk has been added.');
+        console.log('Data: ');
+        console.log(data);
+
+      },
+      (error) => {
+        console.log('Error while adding a desk: ');
+        console.log(error);
+      }
+    )
   }
   
   //adds a dot on the image, the dot will signify how many desks are taken

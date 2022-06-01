@@ -29,8 +29,8 @@ export class RegisterComponent implements OnInit {
     //this.http.get<any>(`http://localhost:8080/login?username=${this.username}&password=${this.password}`)
 
     let post = {
-      login: `${this.login}`,
-      password: `${this.password}`,
+      login: this.login,
+      password: this.password,
       isAdmin: 'false'
     };
 
