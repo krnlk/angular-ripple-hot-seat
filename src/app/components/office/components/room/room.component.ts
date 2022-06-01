@@ -58,17 +58,16 @@ export class RoomComponent implements OnInit {
 
   constructor(private service: RoomService, public http: HttpClient) {
     this.dateNow = formatDate(this.DateCurrent, 'dd-MM-yyyy', 'en-US', '+0530');
+    //chyba two way data bindindg przy dacie
   }
 
   // mostly for testing - it shouldn't download all offices in the future, just one
   ngOnInit(): void {
-    //this.getImageFromService();
+    this.getImageFromService();
   }
 
   //makes a reservation
   doMakeReservation(){
-    console.log('A reservation has been made succesfully.');
-
     let post = {
       //startTime: this.startTime,
       startTime: this.startDay+"T"+this.startHour,

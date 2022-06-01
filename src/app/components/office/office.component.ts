@@ -77,7 +77,9 @@ export class OfficeComponent {
 
   // mostly for testing - it shouldn't download all offices in the future, just one
   ngOnInit(): void{
-    //this.getImageFromService();  
+    this.getImageFromService();  //powinien byc obrazek dla tego konkretnego pietra, w kazdym razie 
+
+    //poproszę officeId, wszystkie dane z tego piętra
   }
 
   //do what you want cuz being a pirate is free, you are a pirate!
