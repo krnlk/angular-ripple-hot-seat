@@ -63,4 +63,6 @@ export class ReservationsComponent implements OnInit {
     this.service.getReservations();
     }
 */
-}}
+}
+
+}

@@ -10,7 +10,26 @@
         remove
       </span>
 
+      <!--Date input-->
+      <div class="dateCenter">
+        <input class="dateBox" type="date" value="2022-05-06" [(ngModel)]="dateNow">
+        <a> {{dateNow}} </a>
+      </div>
+
+      <!--Time input-->
+      <div class="timeRight">
+        <a> {{timeNow}} </a>
+        <input type="time">
+        <span (click)="openTimeDialog()" class="material-icons">
+          date_range
+        </span>
+      </div>
+
       <br>
+
+      <div class="centerText">
+        <input class="centerAddButton" style="cursor:pointer" type="submit" value="Make a reservation" (click)="openReservationDialog()">
+      </div>
 
       <!--Prints a list of all available levels in that office-->
       <input list="cars">
@@ -29,9 +48,6 @@
           -->
       </datalist>
 
-
-      <button (click)="openEditDeskDialog()">Edit desk</button>
-      <button (click)="openPositionDialog()">Change position</button>
     </div>
     <div class="leftUser">
       <!--show room image-->
@@ -52,8 +68,8 @@
       </div>
     -->
 
-    <input type="file">
-    <input type="submit" (click)="doUploadRoomFile">
+      <input type="file">
+      <input type="submit" (click)="doUploadRoomFile">
 
       <!--search for the rooms fulfilling the date & time criteria-->
     </div>
@@ -70,17 +86,17 @@
       <br><br>
       <span class="centerText">Add a new desk:</span>
       <br>
-      <input type="text" class="centerTextCursor2" value="X:" [(ngModel)]="positionX" disabled="disabled">
-      <input class="centerTextInput" type="number" />
+      <input type="text" class="centerTextCursor2" value="X:" disabled="disabled">
+      <input class="centerTextInput" type="number" [(ngModel)]="positionX" />
       <br><br>
-      <input type="text" class="centerTextCursor2" value="Y:" [(ngModel)]="positionY" disabled="disabled">
-      <input class="centerTextInput" type="number" />
+      <input type="text" class="centerTextCursor2" value="Y:" disabled="disabled">
+      <input class="centerTextInput" type="number" [(ngModel)]="positionY" />
       <br><br>
-      <input type="text" class="centerTextCursor2" value="NR:" [(ngModel)]="number" disabled="disabled">
-      <input class="centerTextInput" type="number" />
+      <input type="text" class="centerTextCursor2" value="NR:" disabled="disabled">
+      <input class="centerTextInput" type="number" [(ngModel)]="number" />
       <br><br>
-      <input type="text" class="centerTextCursor2" value="FACE:" [(ngModel)]="positioning" disabled="disabled">
-      <input class="centerTextInput" type="number" />
+      <input type="text" class="centerTextCursor2" value="FACE:" disabled="disabled">
+      <input class="centerTextInput" type="text" [(ngModel)]="orientation" />
       <br><br>
       <div class="centerText">
         <input class="centerAddButton" style="cursor:pointer" type="submit" value="ADD" (click)="doAddDesk()">
@@ -148,4 +164,35 @@
   <br>
   <button>Add</button>
   <button (click)="closePositionDialog()">Cancel</button>
+</dialog>
+
+<dialog id="reservationDialog">
+  <p>Fill in reservation information...</p>
+  <input type="date" name="startDay" [(ngModel)]="startDay">
+  <br>
+  <br>
+  <input type="date" name="endDay" [(ngModel)]="endDay">
+  <br>
+  <br>
+  <input type="time" name="startHour" [(ngModel)]="startHour">
+  <br>
+  <br>
+  <input type="time" name="endHour" [(ngModel)]="endHour">
+  <br>
+  <br>
+  <input type="checkbox" name="isPermanent" [(ngModel)]="isPermanent">
+  <label for="isPermanent"> Is permanent?</label>
+  <br>
+  <button (click)="doMakeReservation()">Save</button>
+  <button (click)="closeReservationDialog()">Cancel</button>
+</dialog>
+
+<dialog id="timeDialog">
+  <p>Please select reservation time</p>
+  <input type="text" class="time_input" [(ngModel)]="Input1" placeholder="From...">
+  <br>
+  <input type="timeUntil" class="time_input" [(ngModel)]="Input2" placeholder="Until...">
+  <br>
+  <button>OK</button>
+  <button (click)="closeTimeDialog()">Cancel</button>
 </dialog>
