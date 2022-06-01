@@ -95,8 +95,14 @@
       <input type="text" class="centerTextCursor2" value="NR:" disabled="disabled">
       <input class="centerTextInput" type="number" [(ngModel)]="number" />
       <br><br>
-      <input type="text" class="centerTextCursor2" value="FACE:" disabled="disabled">
-      <input class="centerTextInput" type="text" [(ngModel)]="orientation" />
+      <input type="text" class="centerTextCursor2" value="FACING:" disabled="disabled">
+      <input class="centerTextInput" list="orientation">
+      <datalist class="centerTextInput" id="orientation" value="NORTH">
+        <option value="NORTH">
+        <option value="EAST">
+        <option value="SOUTH">
+        <option value="WEST">
+      </datalist>
       <br><br>
       <div class="centerText">
         <input class="centerAddButton" style="cursor:pointer" type="submit" value="ADD" (click)="doAddDesk()">
