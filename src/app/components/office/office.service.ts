@@ -43,4 +43,9 @@ export class OfficeService {
     return this.http.post(`https://ripple-hot-seat-backend-app.herokuapp.com/rooms/save`, JSON.stringify(post), httpOptions)
   }
 
+  //adds a dot on top of the background image
+  addDot(officeId: string) {
+    return this.http.get(`https://ripple-hot-seat-backend-app.herokuapp.com/rooms/byOfficeId/${officeId}`);
+  }
+
 }

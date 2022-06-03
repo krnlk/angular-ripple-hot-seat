@@ -1,3 +1,8 @@
+<ul>
+<li *ngFor="let ob of obj">
+    {{ob.officeId}}
+</ul>
+
 <div class="centerAll">
 
   <span class="officeLeft"> Biuro Placeholder </span>
@@ -67,6 +72,12 @@
       <div (mousemove)="mouseMoved($event)">
         <img class="centerImage" [src]="imageToShow" alt="Place image title" *ngIf="!isImageLoading;">
       </div>
+      
+      <!--Print dots on the room image-->
+      <div *ngFor="let ob of obj">
+      <img class = "dot" [style.width.px]="50" [style.top.px]="ob.positionY" [style.left.px]="ob.positionX" src="assets/Logo.png"/>
+      </div>
+
       <!--text bar in case there is no image for the level-->
       <!--
 <div>

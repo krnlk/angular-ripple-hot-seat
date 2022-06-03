@@ -4,6 +4,7 @@ import { HttpClient, HttpClientModule, HttpHeaders } from '@angular/common/http'
 import { OfficeService } from './office.service';
 import { OnInit } from '@angular/core';
 import { formatDate } from '@angular/common';
+import { JsonPipe } from '@angular/common';
 
 
 
@@ -65,6 +66,9 @@ export class OfficeComponent {
   cursorX!: number;
   cursorY!: number;
 
+  // object stores the json response
+  obj: any;
+
   //file to be uploaded
   //selectedFile: File;
 
@@ -77,8 +81,8 @@ export class OfficeComponent {
 
   // mostly for testing - it shouldn't download all offices in the future, just one
   ngOnInit(): void{
-    this.getImageFromService();  //powinien byc obrazek dla tego konkretnego pietra, w kazdym razie 
-
+    //this.getImageFromService();  //powinien byc obrazek dla tego konkretnego pietra, w kazdym razie 
+    this.doAddDot();
     //poproszę officeId, wszystkie dane z tego piętra
   }
 
@@ -171,7 +175,39 @@ getImageFromService() {
   
   //adds a dot on the image, the dot will signify how many desks are taken
   doAddDot(){
-    
+    console.log('Trying to add dots...');
+    //later change it to officeId or getOfficeId
+    this.service.addDot("629718f651a28f41bf39ed02").subscribe(
+      response=> {
+        console.log('Response: ');
+        console.log('Dots have been added.');
+        console.log(response);
+
+
+        this.obj = response;
+        
+        /*
+        //loops and saves position X, position Y variables
+        this.obj.forEach(function (myvalue : any) {
+          console.log(myvalue.officeId);
+        });
+        */
+       
+        //let json = JSON.parse(response);
+        /*
+        Object.entries(response).forEach((entry) => {
+          const [key, value] = entry;
+          console.log(`${key}: ${value}`);
+          console.log(`${entry.positionX}`);
+        }
+        )*/
+      },
+      error => {
+        console.log('Error: ');
+        console.log('Adding dots failed.');
+        console.log(error);
+      }
+    )
   }
 
   //https://www.youtube.com/watch?v=YkvqLNcJz3Y - uploading files

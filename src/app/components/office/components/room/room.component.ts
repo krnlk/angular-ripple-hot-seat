@@ -63,7 +63,7 @@ export class RoomComponent implements OnInit {
 
   // mostly for testing - it shouldn't download all offices in the future, just one
   ngOnInit(): void {
-    this.getImageFromService();
+    //this.getImageFromService();
   }
 
   //makes a reservation

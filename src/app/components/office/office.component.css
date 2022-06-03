@@ -209,3 +209,7 @@
     cursor: pointer;
 }
 
+/* Used by dots on the image */
+.dot {
+    position:absolute;
+}
