@@ -96,8 +96,8 @@ export class OfficeComponent {
   // mostly for testing - it shouldn't download all offices in the future, just one
   ngOnInit(): void{
     //this.getImageFromService();  //powinien byc obrazek dla tego konkretnego pietra, w kazdym razie 
-    //this.doAddDot();
-    this.doGetOffices();
+    this.doAddDot();
+    //this.doGetOffices();
     //this.doGetLevels();
     //poproszę officeId, wszystkie dane z tego piętra
   }

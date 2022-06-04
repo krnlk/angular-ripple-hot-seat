@@ -15,7 +15,7 @@ export class RoomService {
 
   constructor(private http: HttpClient) { }
 
-  makeReservation(post: {startTime: string; endTime: string; deskId: string; userId: string; isPermanent: boolean}) {
+  makeReservation(post: { startTime: string; endTime: string; deskId: string; userId: string; isPermanent: boolean }) {
     const httpOptions = {
       headers: new HttpHeaders({ 'Content-Type': 'application/json' }),
       responseType: 'text' as const
@@ -58,8 +58,24 @@ export class RoomService {
     return this.http.post(`https://ripple-hot-seat-backend-app.herokuapp.com/desks/save`, JSON.stringify(post), httpOptions)
   }
 
+  // update this desk's data
+  updateDesk(patch: { roomId: string; positionX: number; positionY: number; orientation: string; number: number }) {
+    const httpOptions = {
+      headers: new HttpHeaders({ 'Content-Type': 'application/json' }),
+      responseType: 'text' as const
+    }
+    
+    return this.http.patch(`https://ripple-hot-seat-backend-app.herokuapp.com/desks/update/${patch.roomId}`, JSON.stringify(patch), httpOptions)
+  }
+
+  // remove this desk
+  deleteDesk(roomId: string) {
+    return this.http.delete(`https://ripple-hot-seat-backend-app.herokuapp.com/desks/delete/${roomId}`)
+  }
+
   // get all the desks of that room
   getDesks(roomId: string) {
-    return this.http.get(`https://ripple-hot-seat-backend-app.herokuapp.com/desk/byRoomId/`)
+    return this.http.get(`https://ripple-hot-seat-backend-app.herokuapp.com/desks/byRoomId/${roomId}`)
   }
+
 }

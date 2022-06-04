@@ -148,3 +148,13 @@
     margin:0;
     padding:0;
 }
+
+/* Used by desks on the image */
+.desk {
+    position:absolute;
+}
+
+.desk:hover {
+    box-shadow: 0 0 8px white;
+    cursor: pointer;
+}
