@@ -1,10 +1,12 @@
 "use strict";
-import { Component } from '@angular/core';
+import { Component, Input } from '@angular/core';
 import { HttpClient, HttpClientModule, HttpHeaders } from '@angular/common/http'
 import { OfficeService } from './office.service';
 import { OnInit } from '@angular/core';
 import { formatDate } from '@angular/common';
-import { JsonPipe } from '@angular/common';
+import { Router } from '@angular/router';
+import { Injectable } from '@angular/core';
+import { Subject } from 'rxjs';
 
 
 
@@ -30,6 +32,7 @@ let DateCurrent = new Date();
 dateFormat(DateCurrent, "dddd, mmmm dS, yyyy, h:MM:ss TT");
 */
 
+@Injectable()
 export class OfficeComponent {
   // skradzione z https://www.youtube.com/watch?v=Oz6zuhjrMi4
 
@@ -51,7 +54,10 @@ export class OfficeComponent {
   timeUntil = '15:00';
 
   //variables for posting a room
-  officeId: string = '629718f651a28f41bf39ed02'; //bandaid
+  //officeId: string = '629718f651a28f41bf39ed02'; //bandaid
+  public officeId: any;
+  officeIdChange: Subject<string> = new Subject<string>();
+
   positionX!: number;
   positionY!: number;
   number!: number;
@@ -66,8 +72,14 @@ export class OfficeComponent {
   cursorX!: number;
   cursorY!: number;
 
-  // object stores the json response
+  // object stores the list of dots/rooms
   obj: any;
+
+  // stores the list of offices
+  offices: any;
+
+  // stores the list of levels of that office
+  levels : any;
 
   //file to be uploaded
   //selectedFile: File;
@@ -77,13 +89,49 @@ export class OfficeComponent {
   {
     this.dateFrom = formatDate(this.DateCurrent, 'dd-MM-yyyy', 'en-US', '+0530');
     this.dateUntil = this.dateFrom;
+    this.officeId = '629718f651a28f41bf39ed02'; //bandaid
+    //console.log(this.getOfficeId());
   }
 
   // mostly for testing - it shouldn't download all offices in the future, just one
   ngOnInit(): void{
     //this.getImageFromService();  //powinien byc obrazek dla tego konkretnego pietra, w kazdym razie 
-    this.doAddDot();
+    //this.doAddDot();
+    this.doGetOffices();
+    //this.doGetLevels();
     //poproszę officeId, wszystkie dane z tego piętra
+  }
+
+ //returns all offices that exist
+  doGetOffices() {
+    this.service.getOffices().subscribe(
+      response=> {
+        console.log('Response: ');
+        console.log(response);
+
+        this.offices = response;
+      },
+      error => {
+        console.log('Error: ');
+        console.log(error);
+      }
+    )
+  }
+
+  //returns all levels in the current office
+  doGetLevels() {
+    this.service.getLevels().subscribe(
+      response=> {
+        console.log('Response: ');
+        console.log(response);
+
+        this.levels = response;
+      },
+      error => {
+        console.log('Error: ');
+        console.log(error);
+      }
+    )
   }
 
   //do what you want cuz being a pirate is free, you are a pirate!
@@ -183,24 +231,8 @@ getImageFromService() {
         console.log('Dots have been added.');
         console.log(response);
 
-
         this.obj = response;
         
-        /*
-        //loops and saves position X, position Y variables
-        this.obj.forEach(function (myvalue : any) {
-          console.log(myvalue.officeId);
-        });
-        */
-       
-        //let json = JSON.parse(response);
-        /*
-        Object.entries(response).forEach((entry) => {
-          const [key, value] = entry;
-          console.log(`${key}: ${value}`);
-          console.log(`${entry.positionX}`);
-        }
-        )*/
       },
       error => {
         console.log('Error: ');
@@ -311,6 +343,22 @@ getImageFromService() {
     closeTimeDialog() {
       let timeDialog:any = <any>document.getElementById("timeDialog");
       timeDialog.close();
+    }
+
+    //functions for sharing data with other components
+
+    // updates officeId
+    setOfficeId(officeId : any) {
+      this.officeId = officeId;
+      this.officeIdChange.next(this.officeId);
+      //sessionStorage.setItem('officeId', this.officeId);
+      console.log(officeId);
+      console.log(this.officeId);
+    }
+
+    // gets officeId
+    getOfficeId() {
+      return this.officeId;
     }
 
   title = 'jakakolwiek-nazwa';

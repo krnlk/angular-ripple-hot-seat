@@ -1,14 +1,15 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, Input, OnInit } from '@angular/core';
 import { HttpClient, HttpClientModule, HttpHeaders } from '@angular/common/http'
 import { RoomService } from './room.service';
 import { formatDate } from '@angular/common';
 import { BindingScope } from '@angular/compiler/src/render3/view/template';
 import { Element } from '@angular/compiler';
+import { OfficeComponent } from '../../office.component';
 
 @Component({
   selector: 'app-room',
   templateUrl: './room.component.html',
-  styleUrls: ['./room.component.css']
+  styleUrls: ['./room.component.css'],
 })
 export class RoomComponent implements OnInit {
 
@@ -55,15 +56,63 @@ export class RoomComponent implements OnInit {
   //file to be uploaded
   //selectedFile: File;
 
+  // officeId that's shared from OfficeComponent
+  @Input() public officeId!: any;
 
-  constructor(private service: RoomService, public http: HttpClient) {
+  // stores the desks of this room
+  desks: any;
+
+  //subscription for updating officeId
+  private _subscription: any;
+
+  constructor(private service: RoomService, public _office: OfficeComponent, public http: HttpClient) {
     this.dateNow = formatDate(this.DateCurrent, 'dd-MM-yyyy', 'en-US', '+0530');
     //chyba two way data bindindg przy dacie
+
+    /*
+    console.log(this.officeId);
+    this.officeId = sessionStorage.getItem('officeId');
+    console.log(this.officeId);
+    */
+
+    //getting arguments from uri - giving up for now, swapping to sessionstorage
+    
+    this.officeId = _office.officeId;
+    this._subscription = _office.officeIdChange.subscribe((value) => {
+      this.officeId = value;
+    })
+    
+    //this.officeId = _office.officeId;
+    console.log(this._office.getOfficeId());
+    console.log(this.officeId);
+    
   }
 
   // mostly for testing - it shouldn't download all offices in the future, just one
   ngOnInit(): void {
     //this.getImageFromService();
+  }
+
+  // stolen from https://stackoverflow.com/questions/34714462/updating-variable-changes-in-components-from-a-service-with-angular2
+  ngOnDestroy() {
+    //prevent memory leak when component destroyed
+     this._subscription.unsubscribe();
+   }
+ 
+
+  // return desks that exist for this particular room
+  doGetDesks() {
+    this.service.getDesks(this.officeId).subscribe(
+      response=> {
+        console.log('Response: ');
+        console.log(response);
+        this.desks = response;
+      },
+      error => {
+        console.log('Error: ');
+        console.log(error);
+      }
+    )
   }
 
   //makes a reservation

@@ -1,11 +1,16 @@
-<ul>
-<li *ngFor="let ob of obj">
-    {{ob.officeId}}
-</ul>
+<div *ngFor="let office of offices">{{office.name}}</div>
 
 <div class="centerAll">
 
   <span class="officeLeft"> Biuro Placeholder </span>
+
+  <!--Prints a list of all available levels in that office-->
+  <form>
+    <select id="offices" [(ngModel)]="officeId" name="officeId">
+      <option *ngFor="let office of offices" value="{{office.id}}">{{office.name}}</option>
+    </select>
+    <input type="submit" value="Submit" (click)="setOfficeId(officeId)">
+  </form>
 
   <!--Replace normal text stuff with input type date later-->
   <div class="dateCenter">
@@ -48,34 +53,37 @@
     <br>
 
     <!--Prints a list of all available levels in that office-->
-    <input list="cars">
-    <datalist id="cars" value="Volkswagen">
-      <option value="BMW">
-      <option value="Bentley">
-      <option value="Mercedes">
-      <option value="Audi">
-      <option value="Volkswagen">
+    <form>
+      <select id="cars" value="Volkswagen">
+        <option value="BMW">Level BMW</option>
+        <option value="Bentley">
+        <option value="Mercedes">
+        <option value="Audi">
+        <option value="Volkswagen">
 
-        <!--Once there's something to load from backend
+          <!--Once there's something to load from backend
     <div *ngFor="let ticket of customer.ticket">
     {{ ticket.ticketId }}
     {{ ticket.place }}
   </div>
           -->
-    </datalist>
-
-    <button (click)="openEditDeskDialog()">Edit desk</button>
-    <button (click)="openPositionDialog()">Change position</button>
+      </select>
+      <input type="submit" value="Submit">
+    </form>
 
     <div class="leftUser">
       <!--show room image-->
       <div (mousemove)="mouseMoved($event)">
         <img class="centerImage" [src]="imageToShow" alt="Place image title" *ngIf="!isImageLoading;">
       </div>
-      
+
       <!--Print dots on the room image-->
       <div *ngFor="let ob of obj">
-      <img class = "dot" [style.width.px]="50" [style.top.px]="ob.positionY" [style.left.px]="ob.positionX" src="assets/Logo.png"/>
+        <!--Add something past /room/ so you can reroute to a specific dot-->
+        <a href="office/room/">
+          <img class="dot" [style.width.px]="50" [style.top.px]="ob.positionY" [style.left.px]="ob.positionX"
+            src="assets/Kropka1.jpg" />
+        </a>
       </div>
 
       <!--text bar in case there is no image for the level-->
