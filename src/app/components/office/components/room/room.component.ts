@@ -46,7 +46,6 @@ export class RoomComponent implements OnInit {
   endDay!: string;
   startHour!: string;
   endHour!: string;
-  deskId: string = "6276a23174ea2f51b016c7a9";
   userId: string = "62769a0b74ea2f51b016c7a4";
   isPermanent!: boolean;
 
@@ -59,8 +58,16 @@ export class RoomComponent implements OnInit {
   // officeId that's shared from OfficeComponent
   @Input() public officeId!: any;
 
+  // desk info
   // stores the desks of this room
   desks: any;
+  deskId!: string;
+  deskPositionX!: number;
+  deskPositionY!: number;
+  deskNumber!: number;
+  deskOrientation!: string;
+  deskIsFree!: boolean;
+  deskBeaconId!: string;
 
   //subscription for updating officeId
   private _subscription: any;
@@ -90,7 +97,8 @@ export class RoomComponent implements OnInit {
 
   // mostly for testing - it shouldn't download all offices in the future, just one
   ngOnInit(): void {
-    //this.getImageFromService();
+    this.getImageFromService();
+    this.doGetDesks();
   }
 
   // stolen from https://stackoverflow.com/questions/34714462/updating-variable-changes-in-components-from-a-service-with-angular2
@@ -102,7 +110,7 @@ export class RoomComponent implements OnInit {
 
   // return desks that exist for this particular room
   doGetDesks() {
-    this.service.getDesks(this.officeId).subscribe(
+    this.service.getDesks(this.roomId).subscribe(
       response=> {
         console.log('Response: ');
         console.log(response);
@@ -216,6 +224,47 @@ export class RoomComponent implements OnInit {
     )
   }
 
+  // update a desk's information
+  doUpdateDesk() {
+    let patch = {
+      roomId: this.roomId,
+      positionX: this.positionX,
+      positionY: this.positionY,
+      orientation: this.orientation,
+      number: this.number
+    };
+
+    //do the passwords match?
+    this.service.updateDesk(patch).subscribe(
+      (data) => {
+        console.log('Desk\'s data has been updated.');
+        console.log('Data: ');
+        console.log(data);
+
+      },
+      (error) => {
+        console.log('Error while updating the desk: ');
+        console.log(error);
+      }
+    )
+  }
+
+  // delete a desk
+  doDeleteDesk(deskId : any) {
+    this.service.deleteDesk(deskId).subscribe(
+      (data) => {
+        console.log('A desk has been removed.');
+        console.log('Data: ');
+        console.log(data);
+
+      },
+      (error) => {
+        console.log('Error while adding a desk: ');
+        console.log(error);
+      }
+    )
+  }
+
   //upload's the room file to the database
   doUploadRoomFile() {
 
@@ -300,7 +349,7 @@ export class RoomComponent implements OnInit {
     removeDeskSureDialog.close();
   }
 
-  // edit desk
+  // edit desk with that id
   openEditDeskDialog() {
     let editDeskDialog: any = <any>document.getElementById("editDeskDialog");
     editDeskDialog.showModal();
@@ -353,6 +402,18 @@ export class RoomComponent implements OnInit {
     let reservationDialog: any = <any>document.getElementById("reservationDialog");
     reservationDialog.close();
   }
+
+  //changes current deskId
+  currentDeskId(desk: any) {
+    this.deskId = desk.id;
+    this.deskPositionX = desk.number;
+    this.deskPositionY = desk.number;
+    this.deskNumber = desk.number;
+    this.deskOrientation = desk.string;
+    this.deskIsFree = desk.boolean;
+    this.deskBeaconId = desk.string;
+  }
+  
 
   title = 'jakakolwiek-nazwa';
 }
