@@ -43,6 +43,16 @@ export class OfficeService {
     return this.http.post(`https://ripple-hot-seat-backend-app.herokuapp.com/rooms/save`, JSON.stringify(post), httpOptions)
   }
 
+  //returns all existing office names
+  getOffices() {
+    return this.http.get(`https://ripple-hot-seat-backend-app.herokuapp.com/offices`)
+  }
+
+  //returns all existing levels in that office
+  getLevels() {
+    return this.http.get(`https://ripple-hot-seat-backend-app.herokuapp.com/`)
+  }
+
   //adds a dot on top of the background image
   addDot(officeId: string) {
     return this.http.get(`https://ripple-hot-seat-backend-app.herokuapp.com/rooms/byOfficeId/${officeId}`);

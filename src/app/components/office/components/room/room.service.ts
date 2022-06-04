@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { Injectable } from '@angular/core';
-import { HttpClient, HttpResponse, HttpHeaders } from '@angular/common/http';
+import { HttpClient, HttpResponse, HttpHeaders, HttpParams } from '@angular/common/http';
 import { HttpClientModule } from '@angular/common/http';
 import { User } from 'src/app/classes/user';
 import { Observable } from 'rxjs';
@@ -56,5 +56,10 @@ export class RoomService {
 
     console.log("Trying to add a new desk...");
     return this.http.post(`https://ripple-hot-seat-backend-app.herokuapp.com/desks/save`, JSON.stringify(post), httpOptions)
+  }
+
+  // get all the desks of that room
+  getDesks(roomId: string) {
+    return this.http.get(`https://ripple-hot-seat-backend-app.herokuapp.com/desk/byRoomId/`)
   }
 }

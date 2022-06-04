@@ -213,3 +213,8 @@
 .dot {
     position:absolute;
 }
+
+.dot:hover {
+    box-shadow: 0 0 8px white;
+    cursor: pointer;
+}

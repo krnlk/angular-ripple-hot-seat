@@ -60,7 +60,7 @@ import { RoomComponent } from './components/office/components/room/room.componen
     HttpClientModule,
     MatIconModule
   ],
-  providers: [RestapiService, LoginService, ReservationsService, OfficeService, RegisterService, 
+  providers: [RestapiService, LoginService, ReservationsService, OfficeService, OfficeComponent, RegisterService, 
   {
     provide: HTTP_INTERCEPTORS,
     useClass: TokenInterceptorService,
