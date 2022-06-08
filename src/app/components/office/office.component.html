@@ -1,5 +1,3 @@
-<div *ngFor="let office of offices">{{office.name}}</div>
-
 <div class="centerAll">
 
   <span class="officeLeft"> Biuro Placeholder </span>
@@ -74,7 +72,7 @@
     <div class="leftUser">
       <!--show room image-->
       <div (mousemove)="mouseMoved($event)">
-        <img class="centerImage" [src]="imageToShow" alt="Place image title" *ngIf="!isImageLoading;">
+        <img class="centerImage" [src]="imageToShow" alt="Place image title" *ngIf="!isImageLoading && imageLoaded">
       </div>
 
       <!--Print dots on the room image-->
@@ -103,9 +101,8 @@
         <input class="centerAddButton" style="cursor:pointer" type="submit" value="Search" (click)="doSearch()">
       </div>
     </div>
-    <!--Button that lets an ADMIN ONLY KEEP THAT IN MIND PLEASE PLEASE PLEASE add dots to an image on the site?-->
     <!--This should only load in for the admin...-->
-    <div class="rightAdmin">
+    <div class="rightAdmin" *ngIf="login.isAdmin()">
       <span class="centerText">Current cursor position:</span>
       <br>
       <input type="text" class="centerTextCursor1" value="X:" disabled="disabled">

@@ -18,6 +18,8 @@ export class LoginComponent implements OnInit {
   password!: string;
   message: any
 
+  dataResponse: any;
+
   constructor(private http: LoginService, private router: Router) { }
 
   ngOnInit(): void {
@@ -29,7 +31,10 @@ export class LoginComponent implements OnInit {
   //1. przy logowaniu: albo dostajemy jsona is admin, login, password
   //2. do serwera zapytanie o usera (isAdmin, email etc)
   doLogin() {
-    //this.http.get<any>(`http://localhost:8080/login?username=${this.username}&password=${this.password}`)
+    this.doGetLogin();
+  }
+
+  doGetLogin() {
     this.http.getLogin(this.username, this.password).subscribe(
       response => {
         console.log('Response: ');
@@ -40,13 +45,34 @@ export class LoginComponent implements OnInit {
 
         //user info
         localStorage.setItem('username', this.username);
-        //localStorage.setItem('isAdmin', response);
 
-
+        // get userId and isAdmin
+        this.doGetUserInfo();
 
         //po udanym zalogowaniu przenosi na strone glowna
         this.router.navigateByUrl('');
         this.showMatToolbar();
+      },
+      error => {
+        console.log('Error: ');
+        console.log(error);
+      }
+    )
+  }
+
+  doGetUserInfo () {
+    this.http.getUserInfo(this.username).subscribe(
+      response => {
+        console.log('Response: ');
+        console.log(response);
+
+        //var arrg = JSON.parse(response);
+
+        this.dataResponse = response;
+
+        // user info
+        localStorage.setItem('userId', this.dataResponse.id);
+        localStorage.setItem('isAdmin', this.dataResponse.isAdmin);
       },
       error => {
         console.log('Error: ');

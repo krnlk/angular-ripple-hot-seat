@@ -8,30 +8,38 @@
     <table class="table">
       <thead>
         <tr>
+          <th>date</th>
           <th>time</th>
           <th>office</th>
-          <th>room number</th>
-          <th>desk number</th>
+          <th>room</th>
+          <th>desk</th>
+          <th>is permanent?</th>
         </tr>
       </thead>
+      
       <tbody>
         <tr *ngFor="let reservation of reservations">
-          <td>{{ reservation.time }}</td>
-          <td>{{ 'office '+ reservation.office }}</td>
-          <td>{{ 'room ' + reservation.roomNumber }}</td>
-          <td>{{ 'desk ' + reservation.deskNumber }}</td>
-        </tr>
-      </tbody>
-      <tbody>
-        <tr>
-        <!--Filler text for testing-->
-        <td> | Lalalala</td>
-        <td> Lalalala</td>
-        <td> Lalalala</td>
-        <td> Lalalala</td>
+          <td>{{ reservation.startTime | date }}</td>
+          <td>{{ reservation.startTime | date:'hh:mm' }} - {{ reservation.endTime | date:'hh:mm' }}</td>
+          <td>{{ reservation.startTime  }}</td>
+          <td> room {{ reservation.endTime }}</td>
+          <td> desk {{ reservation.deskId }}</td>
+          <td>
+          <div *ngIf="reservation.isPermanent; else notPermanent">yes</div>
+          <ng-template #notPermanent>no</ng-template>
+          </td>
         </tr>
       </tbody>
     </table>
     </div>
   </div>
 </div>
+
+<md-paginator #paginator
+                [length]="length"
+                [pageIndex]="pageIndex"
+                [pageSize]="pageSize"
+                [pageSizeOptions]="[5, 10, 25, 100]"
+                (page)="pageEvent = getServerData($event)"
+                >
+ </md-paginator>
