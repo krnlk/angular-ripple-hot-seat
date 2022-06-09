@@ -2,9 +2,9 @@ import { Component, Input, OnInit } from '@angular/core';
 import { HttpClient, HttpClientModule, HttpHeaders } from '@angular/common/http'
 import { RoomService } from './room.service';
 import { formatDate } from '@angular/common';
-import { BindingScope } from '@angular/compiler/src/render3/view/template';
-import { Element } from '@angular/compiler';
 import { OfficeComponent } from '../../office.component';
+import { LoginService } from '../../../login/login.service';
+import { ActivatedRoute } from '@angular/router';
 
 @Component({
   selector: 'app-room',
@@ -19,6 +19,8 @@ export class RoomComponent implements OnInit {
 
   imageToShow: any;
   isImageLoading!: boolean;
+  imageLoaded!: boolean;
+
   DateCurrent: Date = new Date();
   dateNow!: any;
   timeNow!: any;
@@ -46,7 +48,6 @@ export class RoomComponent implements OnInit {
   endDay!: string;
   startHour!: string;
   endHour!: string;
-  userId: string = "62769a0b74ea2f51b016c7a4";
   isPermanent!: boolean;
 
   startTime!: string;
@@ -72,46 +73,45 @@ export class RoomComponent implements OnInit {
   //subscription for updating officeId
   private _subscription: any;
 
-  constructor(private service: RoomService, public _office: OfficeComponent, public http: HttpClient) {
+  constructor(private service: RoomService, public _login: LoginService, public _office: OfficeComponent, public route: ActivatedRoute, public http: HttpClient) {
     this.dateNow = formatDate(this.DateCurrent, 'dd-MM-yyyy', 'en-US', '+0530');
     //chyba two way data bindindg przy dacie
 
-    /*
     console.log(this.officeId);
     this.officeId = sessionStorage.getItem('officeId');
     console.log(this.officeId);
-    */
 
     //getting arguments from uri - giving up for now, swapping to sessionstorage
-    
+
     this.officeId = _office.officeId;
     this._subscription = _office.officeIdChange.subscribe((value) => {
       this.officeId = value;
     })
-    
+
     //this.officeId = _office.officeId;
     console.log(this._office.getOfficeId());
     console.log(this.officeId);
-    
   }
 
   // mostly for testing - it shouldn't download all offices in the future, just one
   ngOnInit(): void {
     this.getImageFromService();
     this.doGetDesks();
+    //this.roomId = this.route.snapshot.params['roomId'];
+    //console.log(this.roomId);
   }
 
   // stolen from https://stackoverflow.com/questions/34714462/updating-variable-changes-in-components-from-a-service-with-angular2
   ngOnDestroy() {
     //prevent memory leak when component destroyed
-     this._subscription.unsubscribe();
-   }
- 
+    this._subscription.unsubscribe();
+  }
+
 
   // return desks that exist for this particular room
   doGetDesks() {
     this.service.getDesks(this.roomId).subscribe(
-      response=> {
+      response => {
         console.log('Response: ');
         console.log(response);
         this.desks = response;
@@ -124,13 +124,13 @@ export class RoomComponent implements OnInit {
   }
 
   //makes a reservation
-  doMakeReservation(){
+  doMakeReservation() {
     let post = {
       //startTime: this.startTime,
-      startTime: this.startDay+"T"+this.startHour,
-      endTime: this.endDay+"T"+this.endHour,
+      startTime: this.startDay + "T" + this.startHour,
+      endTime: this.endDay + "T" + this.endHour,
       deskId: this.deskId,
-      userId: this.userId,
+      userId: localStorage.getItem('userId') || '{}',
       isPermanent: this.isPermanent
     };
 
@@ -167,8 +167,10 @@ export class RoomComponent implements OnInit {
     this.service.getImage(this.imgUrl).subscribe(data => {
       this.createImageFromBlob(data);
       this.isImageLoading = false;
+      this.imageLoaded = true;
     }, error => {
       this.isImageLoading = false;
+      this.imageLoaded = false;
       console.log(error);
     });
   }
@@ -228,14 +230,14 @@ export class RoomComponent implements OnInit {
   doUpdateDesk() {
     let patch = {
       roomId: this.roomId,
-      positionX: this.positionX,
-      positionY: this.positionY,
+      positionX: this.deskPositionX,
+      positionY: this.deskPositionY,
       orientation: this.orientation,
-      number: this.number
+      number: this.deskNumber
     };
 
     //do the passwords match?
-    this.service.updateDesk(patch).subscribe(
+    this.service.updateDesk(patch, this.deskId).subscribe(
       (data) => {
         console.log('Desk\'s data has been updated.');
         console.log('Data: ');
@@ -250,7 +252,7 @@ export class RoomComponent implements OnInit {
   }
 
   // delete a desk
-  doDeleteDesk(deskId : any) {
+  doDeleteDesk(deskId: any) {
     this.service.deleteDesk(deskId).subscribe(
       (data) => {
         console.log('A desk has been removed.');
@@ -289,7 +291,6 @@ export class RoomComponent implements OnInit {
     let addRoomDialog: any = <any>document.getElementById("addRoomDialog");
     addRoomDialog.close();
   }
-
 
 
   //get coordinates of the mouse
@@ -403,17 +404,19 @@ export class RoomComponent implements OnInit {
     reservationDialog.close();
   }
 
-  //changes current deskId
+  //gets currently clicked on desk's info
   currentDeskId(desk: any) {
     this.deskId = desk.id;
-    this.deskPositionX = desk.number;
-    this.deskPositionY = desk.number;
+    this.deskPositionX = desk.positionX;
+    this.deskPositionY = desk.positionY;
     this.deskNumber = desk.number;
-    this.deskOrientation = desk.string;
-    this.deskIsFree = desk.boolean;
-    this.deskBeaconId = desk.string;
+    this.deskOrientation = desk.orientation;
+    this.deskIsFree = desk.isFree;
+    this.deskBeaconId = desk.beaconId;
+
+    console.log(this.deskPositionX);
   }
-  
+
 
   title = 'jakakolwiek-nazwa';
 }

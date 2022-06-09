@@ -7,17 +7,9 @@ import { formatDate } from '@angular/common';
 import { Router } from '@angular/router';
 import { Injectable } from '@angular/core';
 import { Subject } from 'rxjs';
+import { LoginService } from '../login/login.service';
+import { ActivatedRoute } from '@angular/router';
 
-
-
-/*
-interface Room {
-  id: string;
-  number: string;
-  level: string;
-  office: string;
-  picture: string;
-}*/
 
 @Component({
   selector: 'office-component',
@@ -46,6 +38,7 @@ export class OfficeComponent {
   
   imageToShow: any;
   isImageLoading!: boolean;
+  imageLoaded!: boolean;
 
   //for queries
   dateFrom!: string;
@@ -85,21 +78,19 @@ export class OfficeComponent {
   //selectedFile: File;
 
 
-  constructor(private service: OfficeService, public http: HttpClient) 
+  constructor(private service: OfficeService, public login: LoginService, public http: HttpClient) 
   {
     this.dateFrom = formatDate(this.DateCurrent, 'dd-MM-yyyy', 'en-US', '+0530');
     this.dateUntil = this.dateFrom;
     this.officeId = '629718f651a28f41bf39ed02'; //bandaid
-    //console.log(this.getOfficeId());
   }
 
   // mostly for testing - it shouldn't download all offices in the future, just one
   ngOnInit(): void{
-    //this.getImageFromService();  //powinien byc obrazek dla tego konkretnego pietra, w kazdym razie 
+    this.getImageFromService();  //powinien byc obrazek dla tego konkretnego pietra, w kazdym razie 
     this.doAddDot();
-    //this.doGetOffices();
-    //this.doGetLevels();
-    //poproszę officeId, wszystkie dane z tego piętra
+    this.doGetOffices();
+    this.doGetLevels();
   }
 
  //returns all offices that exist
@@ -152,8 +143,10 @@ getImageFromService() {
   this.service.getImage(this.imgUrl).subscribe(data => {
     this.createImageFromBlob(data);
     this.isImageLoading = false;
+    this.imageLoaded = true;
   }, error => {
     this.isImageLoading = false;
+    this.imageLoaded = false;
     console.log(error);
   });
 }
@@ -351,7 +344,7 @@ getImageFromService() {
     setOfficeId(officeId : any) {
       this.officeId = officeId;
       this.officeIdChange.next(this.officeId);
-      //sessionStorage.setItem('officeId', this.officeId);
+      sessionStorage.setItem('officeId', this.officeId);
       console.log(officeId);
       console.log(this.officeId);
     }

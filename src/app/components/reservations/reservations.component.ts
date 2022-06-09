@@ -3,6 +3,9 @@ import { Component, OnInit } from '@angular/core';
 import { ReservationsService } from './reservations.service';
 import { Reservation } from "src/app/classes/reservation";
 import { NgForm } from '@angular/forms';
+import { MatPaginator, PageEvent } from '@angular/material/paginator';
+import { ViewChild } from '@angular/core';
+import { stringify } from '@angular/compiler/src/util';
 
 /*
 interface reservation {
@@ -21,48 +24,90 @@ interface reservation {
 })
 
 export class ReservationsComponent implements OnInit {
-  columns!: ["time", "officeName", "roomNumber", "deskNumber"];
+  //columns!: ["time", "officeName", "roomNumber", "deskNumber"];
 
-  reservations: Reservation[] = [];
+  // stores list of reservations
+  reservations: any;
 
-  /*
+  // attributes of a reservation
   id!: String;
   startTime!: String;
+
+  //splitting startTime into date and time, also formats it
+  startDay!: String;
+  startHour!: String;
+
   endTime!: String;
+
+  //splitting endTime into date and time, also formats it
+  //endDay!: String = this.endTime.substr(8, 2)+this.endTime.substr(5, 2);
+  //endDay: String = this.endTime.substr(0, 10);
+  endhour!: String;
+
   deskId!: String;
   userId!: String;
-  */
+  isPermanent!: boolean;  
+
+  // pagination
+  pageEvent!: PageEvent;
+datasource!: null;
+pageIndex!:number;
+pageSize!:number;
+length!:number;
 
   constructor(public service:ReservationsService){
-
   }
 
 
-  ngOnInit() {
-    //testing css
-    /*
-    console.log("Reservations are being properly shown.");
-    //console.log(this.reservations);
-    //this.service.getReservations();
+  // pagination
+  @ViewChild(MatPaginator) paginator!: MatPaginator;
 
-    this.service.getReservations().subscribe(
+  ngOnInit() {
+    this.service.getReservations(localStorage.getItem('userId') || '{}').subscribe(
       response=> {
+        console.log("Reservations are being properly shown.");
         console.log('Response: ');
         console.log(response);
+
+        // przekopiowanie rezerwacji do zmiennej lokalnej
+        this.reservations = response;
+        this.reservations.paginator = this.paginator;
       },
       error => {
+        console.log("Error while loading reservations.");
         console.log('Error: ');
         console.log(error);
       }
     )
-  }
+    //this.getServerData();
 
+  }
+  /*
+  public getServerData(event?:PageEvent){
+    this.service.getReservations(event).subscribe(
+      response =>{
+        if(response.error) {
+          // handle error
+        } else {
+          this.datasource = response.data;
+          this.pageIndex = response.pageIndex;
+          this.pageSize = response.pageSize;
+          this.length = response.length;
+        }
+      },
+      error =>{
+        // handle error
+      }
+    );
+    return event;
+  }*/
+
+  // ???????????
   doGetReservations(){
     console.log("Reservations are being properly shown.");
     //console.log(this.reservations);
-    this.service.getReservations();
+    this.service.getReservations("a");
     }
-*/
-}
 
 }
+

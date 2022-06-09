@@ -6,13 +6,16 @@
       <h1>Ripple Hot Seat</h1>
 
       <div id="mar">
-        <span class="l_navbar" style="cursor:pointer" routerLink="/" routerLinkActive="active" (click)="showMatToolbar()">
+        <span class="l_navbar" style="cursor:pointer" routerLink="/" routerLinkActive="active"
+          (click)="showMatToolbar()">
           Home page
         </span>
-        <span class="l_navbar" style="cursor:pointer" routerLink="/office" routerLinkActive="active" (click)="showMatToolbar()">
+        <span class="l_navbar" style="cursor:pointer" routerLink="/office" routerLinkActive="active"
+          (click)="showMatToolbar()">
           Office
         </span>
-        <span class="l_navbar" style="curysor:pointer" routerLink="/reservations" routerLinkActive="active" (click)="showMatToolbar()">
+        <span class="l_navbar" style="cursor:pointer" routerLink="/reservations" routerLinkActive="active"
+          (click)="showMatToolbar()">
           Reservations
         </span>
       </div>
@@ -24,19 +27,27 @@
   Tak samo niezalogowany uzytkownik nie powinien byc w stanie wyswietlic informacji o koncie.-->
 
       <div>
-        <span class="r_navbar" style="cursor:pointer" *ngIf="!_loginService.isLoggedIn()" routerLink="/login" routerLinkActive="active" (click)="hideMatToolbar()">
+        <span class="r_navbar" style="cursor:pointer" *ngIf="!_loginService.isLoggedIn()" routerLink="/login"
+          routerLinkActive="active" (click)="hideMatToolbar()">
           Login
         </span>
-        <span class="r_navbar" style="cursor:pointer" *ngIf="!_loginService.isLoggedIn()" routerLink="/register" routerLinkActive="active" (click)="hideMatToolbar()">
+        <span class="r_navbar" style="cursor:pointer" *ngIf="!_loginService.isLoggedIn()" routerLink="/register"
+          routerLinkActive="active" (click)="hideMatToolbar()">
           Register
         </span>
-        <span class="r_navbar" style="cursor:pointer" *ngIf="_loginService.isLoggedIn()" routerLink="/account" routerLinkActive="active" (click)="showMatToolbar()">
-          {{_loginService.getUsername()}}
+        <span class="r_navbar" style="cursor:pointer" *ngIf="_loginService.isLoggedIn()" routerLink="/account"
+          routerLinkActive="active" (click)="showMatToolbar()">
+          <span *ngIf="_loginService.isAdmin(); else notAdmin">
+            <span class="admin">{{_loginService.getUsername()}}</span>
+          </span>
+          <ng-template #notAdmin>{{_loginService.getUsername()}}</ng-template>
         </span>
-        <span class="r_navbar" style="cursor:pointer" *ngIf="_loginService.isLoggedIn()" routerLink="/reset-password" routerLinkActive="active" (click)="hideMatToolbar()">
+        <span class="r_navbar" style="cursor:pointer" *ngIf="_loginService.isLoggedIn()" routerLink="/reset-password"
+          routerLinkActive="active" (click)="hideMatToolbar()">
           Reset Password
         </span>
-        <span class="r_navbar" style="cursor:pointer" *ngIf="_loginService.isLoggedIn()" (click)="_loginService.logoutUser(); showMatToolbar();">
+        <span class="r_navbar" style="cursor:pointer" *ngIf="_loginService.isLoggedIn()"
+          (click)="_loginService.logoutUser(); showMatToolbar();">
           Logout
         </span>
       </div>

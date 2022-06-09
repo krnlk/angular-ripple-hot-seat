@@ -3,7 +3,7 @@
   <span class="officeLeft"> Biuro Placeholder </span>
 
   <div class="background">
-    <div class="skipLeft">
+    <div class="skipLeft" *ngIf="imageLoaded; else noImage">
       <span>Room Placeholder:</span>
 
       <span class="material-icons" (click)="openRemoveRoomDialog()">
@@ -40,20 +40,14 @@
         <option value="Mercedes">
         <option value="Audi">
         <option value="Volkswagen">
-
-          <!--Once there's something to load from backend
-    <div *ngFor="let ticket of customer.ticket">
-    {{ ticket.ticketId }}
-    {{ ticket.place }}
-  </div>
-          -->
       </datalist>
-
     </div>
+
+
     <div class="leftUser">
       <!--show room image-->
       <div class="centerImage" (mousemove)="mouseMoved($event)">
-        <img [src]="imageToShow" alt="Place image title" *ngIf="!isImageLoading;">
+        <img [src]="imageToShow" alt="Place image title" *ngIf="!isImageLoading && imageLoaded">
 
         <!--It might be needed to move out desk generation out of here later-->
         <!--Print desks on the room image-->
@@ -80,14 +74,11 @@
       </div>
     -->
 
-      <input type="file">
-      <input type="submit" (click)="doUploadRoomFile">
-
       <!--search for the rooms fulfilling the date & time criteria-->
     </div>
-    <!--Button that lets an ADMIN ONLY KEEP THAT IN MIND PLEASE PLEASE PLEASE add dots to an image on the site?-->
     <!--This should only load in for the admin...-->
-    <div class="rightAdmin">
+    <!--For adding a room-->
+    <div class="rightAdmin" *ngIf="_login.isAdmin()">
       <span class="centerText">Current cursor position:</span>
       <br>
       <input type="text" class="centerTextCursor1" value="X:" disabled="disabled">
@@ -124,6 +115,19 @@
     <!--End of things that should only load for the admin...-->
 
   </div>
+
+  <!--Renders a file input for an admin if the room is missing a room image-->
+  <ng-template #noImage>
+    <div class="skipLeft" *ngIf="_login.isAdmin()">
+      <div class="leftUser">
+        <div class="centerImage">
+          <span>This room doesn't have an image associated with it yet.</span>
+          <input type="file">
+          <input type="submit" (click)="doUploadRoomFile">
+        </div>
+      </div>
+    </div>
+  </ng-template>
 </div>
 
 <dialog id="addRoomDialog">

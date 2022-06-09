@@ -15,17 +15,8 @@ export class ReservationsService{
 
 //na razie kazdy powinien miec do tego dostep (bez jwt i autoryzacji), zeby testowac
 
-getReservations() {
-    const httpOptions = {
-    headers: new HttpHeaders({
-        'Content-Type': 'application/json',
-        'Access-Control-Allow-Origin': '*',
-        'Access-Control-Allow-Credentials': 'true'
-})
-    };
-    console.log("Getting reservations...");
-    //return this.http.get<any>(`http://localhost:8080/reservations`, httpOptions)
-    return this.http.get<any>(`https://ripple-hot-seat-backend-app.herokuapp.com/reservations`, httpOptions)
+getReservations(userId: string) {
+    return this.http.get(`https://ripple-hot-seat-backend-app.herokuapp.com/reservations/byUserId/${userId}`)
 }
 
 /*

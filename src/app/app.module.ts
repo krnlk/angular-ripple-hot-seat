@@ -12,6 +12,7 @@ import { FormsModule } from '@angular/forms';
 import { NgMaterialModule } from './ng-material/ng-material.module';
 import { HttpClientModule, HTTP_INTERCEPTORS} from '@angular/common/http'
 import { MatIconModule } from '@angular/material/icon';
+import { MatPaginatorModule } from '@angular/material/paginator';
 
 import { AppComponent } from './app.component';
 import { OfficeComponent } from './components/office/office.component';
@@ -58,7 +59,8 @@ import { RoomComponent } from './components/office/components/room/room.componen
     MatButtonModule,
     MatDialogModule,
     HttpClientModule,
-    MatIconModule
+    MatIconModule,
+    MatPaginatorModule
   ],
   providers: [RestapiService, LoginService, ReservationsService, OfficeService, OfficeComponent, RegisterService, 
   {

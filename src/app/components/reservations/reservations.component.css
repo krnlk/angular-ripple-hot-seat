@@ -27,6 +27,8 @@
 
 /* Stolen from https://www.w3docs.com/tools/editor/4282 */
 table {
+    position: absolute;
+    table-layout: fixed;
     width: 100%;
     border-collapse: collapse;
 }
@@ -34,8 +36,14 @@ table {
 th,
 td,
 tbody {
+    position: relative;
+    width: 100%;
     text-align: center;
     padding: 10px;
+}
+
+th, td {
+    word-wrap: break-word;
 }
 
 /* Define the hover highlight color for the table row */

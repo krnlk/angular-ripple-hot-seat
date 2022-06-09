@@ -26,6 +26,8 @@ export class LoginService{
     logoutUser() {
       localStorage.removeItem('username')
       localStorage.removeItem('token')
+      localStorage.removeItem('isAdmin')
+      localStorage.removeItem('userId')
       this.router.navigate(['/'])
     }
 
@@ -47,31 +49,13 @@ export class LoginService{
       else return '' 
     }
 
-    getIsAdmin(){
-
+    isAdmin () {
+      if(localStorage.getItem('isAdmin')==="true") return true;
+      else return false;
     }
 
-/*
-getLogin(username: string, password: string) {
-    console.log("Trying to log in...");
-    return this.http.get<any>(`http://localhost:8080/login?username=${username}&password=${password}`, {
-  observe: 'body', responseType: 'text'
-})
-        .subscribe(
-        response=>{
-            console.log('Response: ');
-            console.log(response);
-            localStorage.setItem('tokenData', JSON.stringify(response));
-            //localStorage.setItem('token', response.token)
-            this.router.navigateByUrl('/home');
-        },
-        error => {
-            console.log('Error: ');
-            console.log(error);
-          }
-        //bearer token nie jest nigdzie przechowywany
-        // https://dev-academy.com/angular-jwt/
-    )
-}
-*/
+    getUserInfo(username: string){
+      return this.http.get(`https://ripple-hot-seat-backend-app.herokuapp.com/users/byLogin/${username}`)
+    }
+
 }

@@ -6,7 +6,8 @@
       <br>
       <input class="login_input" type="password" name="password" [(ngModel)]="password" id="password" placeholder="password">
       <br>
-      <input id="login_btn" style="cursor:pointer" type="submit" name="Login" value="Login" (click)="doLogin()">
+      <!--Key up enter doesn't work for some reason-->
+      <input id="login_btn" style="cursor:pointer" type="submit" name="Login" value="Login" (click)="doLogin()" (keyup.enter)="doLogin()">
       <div id="text">
         <a>No account yet? </a>
         <b id="link" style="cursor:pointer" routerLink="../register" routerLinkActive="active">Login account</b>

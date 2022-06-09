@@ -59,13 +59,13 @@ export class RoomService {
   }
 
   // update this desk's data
-  updateDesk(patch: { roomId: string; positionX: number; positionY: number; orientation: string; number: number }) {
+  updateDesk(patch: { roomId: string; positionX: number; positionY: number; orientation: string; number: number }, deskId: string) {
     const httpOptions = {
       headers: new HttpHeaders({ 'Content-Type': 'application/json' }),
       responseType: 'text' as const
     }
     
-    return this.http.patch(`https://ripple-hot-seat-backend-app.herokuapp.com/desks/update/${patch.roomId}`, JSON.stringify(patch), httpOptions)
+    return this.http.patch(`https://ripple-hot-seat-backend-app.herokuapp.com/desks/update/${deskId}`, JSON.stringify(patch), httpOptions)
   }
 
   // remove this desk
