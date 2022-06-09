@@ -82,7 +82,8 @@ export class OfficeComponent {
   {
     this.dateFrom = formatDate(this.DateCurrent, 'dd-MM-yyyy', 'en-US', '+0530');
     this.dateUntil = this.dateFrom;
-    this.officeId = '629718f651a28f41bf39ed02'; //bandaid
+    //this.officeId = '629718f651a28f41bf39ed02'; //bandaid
+    console.log(this.officeId);
   }
 
   // mostly for testing - it shouldn't download all offices in the future, just one
@@ -218,7 +219,7 @@ getImageFromService() {
   doAddDot(){
     console.log('Trying to add dots...');
     //later change it to officeId or getOfficeId
-    this.service.addDot("629718f651a28f41bf39ed02").subscribe(
+    this.service.addDot(this.officeId).subscribe(
       response=> {
         console.log('Response: ');
         console.log('Dots have been added.');
@@ -347,6 +348,9 @@ getImageFromService() {
       sessionStorage.setItem('officeId', this.officeId);
       console.log(officeId);
       console.log(this.officeId);
+
+      // after a new office is loaded, image along with the dots should be loaded
+      this.doAddDot();
     }
 
     // gets officeId

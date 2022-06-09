@@ -29,8 +29,8 @@ export class RoomComponent implements OnInit {
   Input1!: string;
   Input2!: string;
   Input3!: string;
-  //roomId!: string;
-  roomId: string = '6276a0a274ea2f51b016c7a6'; //bandaid
+  roomId!: string;
+  //roomId: string = '6276a0a274ea2f51b016c7a6'; //bandaid
   positionX!: number;
   positionY!: number;
   number!: number;
@@ -96,8 +96,8 @@ export class RoomComponent implements OnInit {
   // mostly for testing - it shouldn't download all offices in the future, just one
   ngOnInit(): void {
     this.getImageFromService();
+    this.roomId = this.route.snapshot.params['roomId'];
     this.doGetDesks();
-    //this.roomId = this.route.snapshot.params['roomId'];
     //console.log(this.roomId);
   }
 
@@ -210,6 +210,9 @@ export class RoomComponent implements OnInit {
       orientation: this.orientation,
       number: this.number
     };
+
+    console.log(this.roomId);
+
 
     //do the passwords match?
     this.service.addDesk(post).subscribe(
