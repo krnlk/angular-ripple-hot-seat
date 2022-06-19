@@ -27,6 +27,7 @@ export class TokenInterceptorService implements HttpInterceptor {
           const modReq = req.clone({
               setHeaders: {
                   'Authorization': "Bearer " + this.token
+
               }
           });
           return next.handle(modReq);
