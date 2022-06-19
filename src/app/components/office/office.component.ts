@@ -63,7 +63,7 @@ export class OfficeComponent {
   percentDone!: number;
   uploadSuccess!: boolean;
 
-  hieght!: number;
+  height!: number;
   width!: number;
 
 
@@ -127,8 +127,9 @@ createImageFromBlob(image: Blob) {
    let reader = new FileReader();
    reader.addEventListener("load", () => {
       this.imageToShow = reader.result;
-      this.hieght = this.imageToShow.hieght;
+      this.height = this.imageToShow.height;
       this.width = this.imageToShow.width;
+      console.log(this.height, this.width);
    }, false);
 
    if (image) {

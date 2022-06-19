@@ -65,12 +65,10 @@
 
     <div class="leftUser">
       <!--show room image-->
-      <div (mousemove)="mouseMoved($event)">
-<!--        <button (click)="upLoadFile">Submit</button>-->
-        <input #imageInput type="file" accept="image/*" (change)="processFile(imageInput)">
-        <div>
-          <img class="centerImage" [src]="imageToShow" alt="Place image title" *ngIf="!isImageLoading;">
-        </div>
+<!--      <button (click)="upLoadFile">Submit</button>-->
+      <input #imageInput type="file" accept="image/*" (change)="processFile(imageInput)">
+      <div [style.height]="height" [style.width]="width" (mousemove)="mouseMoved($event)">
+        <img class="centerImage" [src]="imageToShow" alt="Place image title" *ngIf="!isImageLoading;">
       </div>
       <!--text bar in case there is no image for the level-->
 
