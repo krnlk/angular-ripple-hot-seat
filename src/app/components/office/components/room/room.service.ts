@@ -1,8 +1,5 @@
-import { Component, OnInit } from '@angular/core';
 import { Injectable } from '@angular/core';
 import { HttpClient, HttpResponse, HttpHeaders, HttpParams } from '@angular/common/http';
-import { HttpClientModule } from '@angular/common/http';
-import { User } from 'src/app/classes/user';
 import { Observable } from 'rxjs';
 
 @Injectable({

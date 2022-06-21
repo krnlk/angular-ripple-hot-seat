@@ -4,7 +4,6 @@ import { HttpClient, HttpClientModule, HttpHeaders } from '@angular/common/http'
 import { OfficeService } from './office.service';
 import { OnInit } from '@angular/core';
 import { formatDate } from '@angular/common';
-import { Router } from '@angular/router';
 import { Injectable } from '@angular/core';
 import { Subject } from 'rxjs';
 import { LoginService } from '../login/login.service';
@@ -29,7 +28,9 @@ export class OfficeComponent {
   // skradzione z https://www.youtube.com/watch?v=Oz6zuhjrMi4
 
   //a bunch of data for inputs n stuff
-  imgUrl: string = '6276a11274ea2f51b016c7a8';
+  //bandaid
+  //imgUrl: string = '6276a11274ea2f51b016c7a8';
+  imgUrl!: string;
 
   rooms: any;
   DateCurrent: Date = new Date();
@@ -47,7 +48,6 @@ export class OfficeComponent {
   timeUntil = '15:00';
 
   //variables for posting a room
-  //officeId: string = '629718f651a28f41bf39ed02'; //bandaid
   public officeId: any;
   officeIdChange: Subject<string> = new Subject<string>();
 
@@ -82,8 +82,7 @@ export class OfficeComponent {
   {
     this.dateFrom = formatDate(this.DateCurrent, 'dd-MM-yyyy', 'en-US', '+0530');
     this.dateUntil = this.dateFrom;
-    //this.officeId = '629718f651a28f41bf39ed02'; //bandaid
-    console.log(this.officeId);
+    console.log("tralala");
   }
 
   // mostly for testing - it shouldn't download all offices in the future, just one

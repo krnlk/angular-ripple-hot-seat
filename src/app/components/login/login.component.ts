@@ -20,16 +20,15 @@ export class LoginComponent implements OnInit {
 
   dataResponse: any;
 
-  constructor(private http: LoginService, private router: Router) { }
-
-  ngOnInit(): void {
-
+  constructor(public app: AppComponent, private http: LoginService, private router: Router) 
+  { 
+    //unlike in appservice, this does work in constructor - might cause issues later down the line
+    this.app.hideMatToolbar();
   }
 
-  //pozycja w kontekście https://stackoverflow.com/questions/3972014/get-contenteditable-caret-position
+  ngOnInit(): void {
+  }
 
-  //1. przy logowaniu: albo dostajemy jsona is admin, login, password
-  //2. do serwera zapytanie o usera (isAdmin, email etc)
   doLogin() {
     this.doGetLogin();
   }
@@ -40,10 +39,10 @@ export class LoginComponent implements OnInit {
         console.log('Response: ');
         console.log(response);
 
-        //przetrzymywanie JWT
+        // storing JWT
         localStorage.setItem('token', response);
 
-        //user info
+        // storing user info
         localStorage.setItem('username', this.username);
 
         // get userId and isAdmin
@@ -51,7 +50,7 @@ export class LoginComponent implements OnInit {
 
         //po udanym zalogowaniu przenosi na strone glowna
         this.router.navigateByUrl('');
-        this.showMatToolbar();
+        this.app.showMatToolbar();
       },
       error => {
         console.log('Error: ');
@@ -81,10 +80,11 @@ export class LoginComponent implements OnInit {
     )
   }
 
+  /*
   showMatToolbar() {
     let matToolbar: any = <any>document.getElementById("matToolbar");
     matToolbar.classList.remove("hidden");
-  }
+  }*/
 
 }
 

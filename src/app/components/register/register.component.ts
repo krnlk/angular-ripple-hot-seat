@@ -15,16 +15,13 @@ export class RegisterComponent implements OnInit {
   password!: string
   password2!: string
 
-  /*
-  postData = {
-    username: '${username}'
+  constructor(public app: AppComponent, public http: RegisterService, public router: Router) 
+  { 
+    // unlike in appservice, this does work in constructor - might cause issues later down the line
+    this.app.hideMatToolbar();
   }
-  */
-
-  constructor(public app: AppComponent, public http: RegisterService, public router: Router) { }
 
   ngOnInit(): void {
-    this.app.hideMatToolbar();
   }
 
   doRegister() {

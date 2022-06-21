@@ -13,7 +13,9 @@ import { ActivatedRoute } from '@angular/router';
 })
 export class RoomComponent implements OnInit {
 
-  imgUrl: string = '6276a11274ea2f51b016c7a8';
+  // bandaid
+  //imgUrl: string = '6276a11274ea2f51b016c7a8';
+  imgUrl!: string;
 
   rooms: any;
 
@@ -178,7 +180,7 @@ export class RoomComponent implements OnInit {
 
   //read a room image
   doGetRoomImage() {
-    this.service.getRoomImage("6276a11274ea2f51b016c7a8").subscribe(
+    this.service.getRoomImage(this.roomId).subscribe(
       response => {
         console.log('Response: ');
         console.log(response);

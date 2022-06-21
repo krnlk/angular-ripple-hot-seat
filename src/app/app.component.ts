@@ -1,8 +1,4 @@
 import { Component, HostListener } from '@angular/core';
-import { ICountry } from '../assets/country.model';
-import { MatSelectionListChange } from '@angular/material/list';
-import { FormBuilder } from '@angular/forms';
-import { SelectionModel } from '@angular/cdk/collections';
 import { LoginService } from './components/login/login.service';
 import { OnInit } from '@angular/core';
 
@@ -24,6 +20,8 @@ export class AppComponent implements OnInit {
 
   //username = localStorage.getItem('username')
   ngOnInit(): void {
+    // doesn't work in constructor
+    this.showMatToolbar();
   }
 
   constructor(public _loginService: LoginService) {
@@ -55,8 +53,6 @@ export class AppComponent implements OnInit {
       }
     )
   }
-  
-  // checks if the currently logged user is an admin
   
 }
 
