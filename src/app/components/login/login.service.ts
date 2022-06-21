@@ -17,9 +17,7 @@ export class LoginService{
 
     getLogin(username: string, password: string) {
         console.log("Trying to log in...");
-        //return this.http.get(`http://localhost:8080/login?username=${username}&password=${password}`, {responseType: 'text'})
         return this.http.get(`https://ripple-hot-seat-backend-app.herokuapp.com/login?username=${username}&password=${password}`, {responseType: 'text'})
-        //return this.http.get(`http://localhost:8080/login?username=${username}&password=${password}`, {responseType: 'text'})
     }
 
     // Log the user off and remove any cookies/localStorage items (username, token, isAdmin etc)

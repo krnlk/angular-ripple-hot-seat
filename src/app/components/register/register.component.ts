@@ -1,6 +1,7 @@
 "use strict";
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
+import { AppComponent } from 'src/app/app.component';
 import { RegisterService } from './register.service';
 
 @Component({
@@ -9,7 +10,7 @@ import { RegisterService } from './register.service';
   styleUrls: ['./register.component.css']
 })
 export class RegisterComponent implements OnInit {
-  login!: string
+  username!: string
   email!: string
   password!: string
   password2!: string
@@ -20,16 +21,15 @@ export class RegisterComponent implements OnInit {
   }
   */
 
-  constructor(public http: RegisterService, public router: Router) { }
+  constructor(public app: AppComponent, public http: RegisterService, public router: Router) { }
 
   ngOnInit(): void {
+    this.app.hideMatToolbar();
   }
 
   doRegister() {
-    //this.http.get<any>(`http://localhost:8080/login?username=${this.username}&password=${this.password}`)
-
     let post = {
-      login: this.login,
+      username: this.username,
       password: this.password,
       isAdmin: 'false'
     };
@@ -44,7 +44,6 @@ export class RegisterComponent implements OnInit {
 
           //po udanym zalogowaniu powinno przeniesc na strone z info o tym, ze wyslano maila?
           this.router.navigateByUrl('');
-          this.showMatToolbar();
         },
         (error) => {
           console.log('Error: ');
@@ -57,10 +56,10 @@ export class RegisterComponent implements OnInit {
       console.log('Your passwords do not match.');
     }
   }
-
+  /*
   showMatToolbar() {
     let matToolbar: any = <any>document.getElementById("matToolbar");
     matToolbar.classList.remove("hidden");
-  }
+  }*/
 
 }
