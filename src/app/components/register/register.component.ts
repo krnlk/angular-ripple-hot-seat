@@ -1,4 +1,5 @@
 "use strict";
+import { HostListener } from '@angular/core';
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { AppComponent } from 'src/app/app.component';
@@ -26,7 +27,7 @@ export class RegisterComponent implements OnInit {
 
   doRegister() {
     let post = {
-      username: this.username,
+      username: this.username + "@comarch.com",
       password: this.password,
       isAdmin: 'false'
     };
@@ -53,6 +54,15 @@ export class RegisterComponent implements OnInit {
       console.log('Your passwords do not match.');
     }
   }
+
+  // pressing enter is the same as clicking register key
+  @HostListener('document:keypress', ['$event'])
+  keyEvent(event: KeyboardEvent) {
+    if (event.key === "Enter") {
+      this.doRegister();
+    }
+  }
+  
   /*
   showMatToolbar() {
     let matToolbar: any = <any>document.getElementById("matToolbar");

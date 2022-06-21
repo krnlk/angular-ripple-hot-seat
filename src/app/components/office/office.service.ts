@@ -21,6 +21,7 @@ export class OfficeService {
 
     formData.append('image', image);
 
+    //change later
     return this.http.post<Response>('https://ripple-hot-seat-backend-app.herokuapp.com/rooms/image/62769a0b74ea2f51b016c7a5', formData);
   }
 

@@ -4,9 +4,6 @@
       <h1 class="text_box2">Register account</h1>
       <input class="register_input" [(ngModel)]="username" placeholder="Username">
       <br>
-      <!--<input class="register_input" placeholder="E-mail address">
-      <br>
-      -->
       <input type="password" class="register_input" [(ngModel)]="password" placeholder="Password">
       <br>
       <input type="password" class="register_input" [(ngModel)]="password2" placeholder="Confirm password">
@@ -14,7 +11,7 @@
       <button id="register_btn" style="cursor:pointer" (click)="doRegister()">Register account</button>
       <div id="text">
         <a>Already have an account? </a>
-        <b id="link" style="cursor:pointer" routerLink="../login" routerLinkActive="active">Login</b>
+        <b id="link" style="cursor:pointer" routerLink="../login" routerLinkActive="active" (click)="this.app.showMatToolbar()">Login</b>
       </div>
       <div id="text">
         <b id="link" routerLink="" routerLinkActive="active" (click)="this.app.showMatToolbar()">Back to the main page</b>

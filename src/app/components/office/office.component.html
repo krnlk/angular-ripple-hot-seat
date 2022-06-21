@@ -3,29 +3,23 @@
   <span class="officeLeft"> Biuro Placeholder </span>
 
   <!--Prints a list of all available levels in that office-->
-  <form>
-    <select id="offices" [(ngModel)]="officeId" name="officeId">
-      <option *ngFor="let office of offices" value="{{office.id}}">{{office.name}}</option>
-    </select>
-    <input type="submit" value="Submit" (click)="setOfficeId(officeId)">
-  </form>
+  <select id="offices" [(ngModel)]="officeId" name="officeId">
+    <option *ngFor="let office of offices" value="{{office.id}}">{{office.name}}</option>
+  </select>
+  <input type="submit" value="Submit" (click)="setOfficeId(officeId)">
 
   <!--Replace normal text stuff with input type date later-->
   <div class="dateCenter">
-    <input class="dateBox" type="date" value="2022-05-06" [(ngModel)]="dateFrom">
-    <a> {{dateFrom}} </a>
-    <span (click)="openDateDialog()" class="material-icons">
-      date_range
-    </span>
+    <input class="dateBox" type="date" [(ngModel)]="dateFrom">
     <a> - </a>
     <input class="dateBox" type="date" [(ngModel)]="dateUntil">
-    <a> {{dateUntil}} </a>
-    <span (click)="openDateDialog()" class="material-icons">
-      date_range
-    </span>
   </div>
 
   <div class="timeRight">
+    <input class="timeBox" type="time" [(ngModel)]="timeFrom">
+    <a> - </a>
+    <input class="timeBox" type="time" [(ngModel)]="timeUntil">
+    <!--
     <a> {{timeFrom}} </a>
     <span (click)="openTimeDialog()" class="material-icons">
       date_range
@@ -35,52 +29,30 @@
     <span (click)="openTimeDialog()" class="material-icons">
       date_range
     </span>
+  -->
   </div>
 
   <div class="background">
-    <span class="officeLeft"> Biuro Placeholder </span>
-
     <!--Replace normal text stuff with input type date later-->
-    <div class="dateCenter">
-      <!--    <input class="dateBox" type="date" value="2022-05-06" [(ngModel)]="dateFrom">-->
-      <a> {{dateFrom}} </a>
-      <span (click)="openDateDialog()" class="material-icons">
-      date_range
-      </span>
-        <a> - </a>
-        <!--    <input class="dateBox" type="date" [(ngModel)]="dateUntil">-->
-        <a> {{dateUntil}} </a>
-        <span (click)="openDateDialog()" class="material-icons">
-        date_range
-      </span>
-    </div>
 
+    <!--
     <div class="timeRight">
       <a> {{timeFrom}} </a>
       <span (click)="openTimeDialog()" class="material-icons">
-      date_range
+        date_range
       </span>
-        <a> - </a>
-        <a> {{timeUntil}} </a>
-        <span (click)="openTimeDialog()" class="material-icons">
+      <a> - </a>
+      <a> {{timeUntil}} </a>
+      <span (click)="openTimeDialog()" class="material-icons">
         date_range
       </span>
     </div>
-    <br>
+  -->
+
     <span>Level Placeholder</span>
 
-    <span class="material-icons" (click)="openAddRoomDialog()">
-      add
-    </span>
-
-    <span class="material-icons" (click)="openRemoveRoomDialog()">
-      remove
-    </span>
-
-    <br>
-
     <!--Prints a list of all available levels in that office-->
-    <form>
+    <form style="display: inline;">
       <select id="cars" value="Volkswagen">
         <option value="BMW">Level BMW</option>
         <option value="Bentley">
@@ -98,12 +70,26 @@
       <input type="submit" value="Submit">
     </form>
 
+    <span class="material-icons" (click)="openAddRoomDialog()">
+      add
+    </span>
+
+    <span class="material-icons" (click)="openRemoveRoomDialog()">
+      remove
+    </span>
+
     <div class="leftUser">
       <!--show room image-->
-<!--      <button (click)="upLoadFile">Submit</button>-->
-      <input #imageInput type="file" accept="image/*" (change)="processFile(imageInput)">
+      <!--      <button (click)="upLoadFile">Submit</button>-->
+      <!--Only admin should be able to see the option for adding a file-->
+      <div *ngIf="login.isAdmin()">
+        <input #imageInput type="file" accept="image/*" (change)="processFile(imageInput)">
+      </div>
       <div [style.height]="height" [style.width]="width" (mousemove)="mouseMoved($event)">
         <img class="centerImage" [src]="imageToShow" alt="Place image title" *ngIf="!isImageLoading;">
+        <div class="centerText">
+          <input class="centerAddButton" style="cursor:pointer" type="submit" value="Search" (click)="doSearch()">
+        </div>
       </div>
 
       <!--Print dots on the room image-->
@@ -117,19 +103,16 @@
 
       <!--text bar in case there is no image for the level-->
 
-<!--      <div class="centerText">-->
-<!--      <input type="file" (change)="selectLevelFile($event)" #fileInput placeholder="Select file with a level plan in png format" />-->
-<!--      <span (click)="selectLevelFile()" class="material-icons">-->
-<!--        date_range-->
-<!--      </span>-->
-<!--      <button type="button" (click)="fileInput.click()">Pick File</button>-->
-<!--      <input id="login_btn" style="cursor:pointer" type="submit" value="Send" (click)="uploadLevelFile()">-->
-<!--      </div>-->
+      <!--      <div class="centerText">-->
+      <!--      <input type="file" (change)="selectLevelFile($event)" #fileInput placeholder="Select file with a level plan in png format" />-->
+      <!--      <span (click)="selectLevelFile()" class="material-icons">-->
+      <!--        date_range-->
+      <!--      </span>-->
+      <!--      <button type="button" (click)="fileInput.click()">Pick File</button>-->
+      <!--      <input id="login_btn" style="cursor:pointer" type="submit" value="Send" (click)="uploadLevelFile()">-->
+      <!--      </div>-->
 
       <!--search for the rooms fulfilling the date & time criteria-->
-      <div class="centerText">
-        <input class="centerAddButton" style="cursor:pointer" type="submit" value="Search" (click)="doSearch()">
-      </div>
     </div>
     <!--This should only load in for the admin...-->
     <div class="rightAdmin" *ngIf="login.isAdmin()">
@@ -226,7 +209,7 @@
   <p>Please select reservation time</p>
   <input type="text" class="time_input" [(ngModel)]="Input1" placeholder="From...">
   <br>
-  <input type="timeUntil" class="time_input" [(ngModel)]="Input2" placeholder="Until...">
+  <input type="text" class="time_input" [(ngModel)]="Input2" placeholder="Until...">
   <br>
   <button (click)="updateTimeQuery()">OK</button>
   <button (click)="closeTimeDialog()">Cancel</button>

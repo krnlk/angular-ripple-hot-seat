@@ -12,15 +12,6 @@ import { Router } from '@angular/router';
 
 export class RegisterService {
     constructor(private http: HttpClient) { }
-    /*
-    post = {
-        username: 'Ron',
-        password: 'Weasley',
-        isAdmin: 'false'
-      };
-*/
-
-
 
     postRegister(post: { username: string; password: string; isAdmin: string; }) {
 

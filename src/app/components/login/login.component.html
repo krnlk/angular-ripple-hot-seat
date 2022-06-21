@@ -1,4 +1,4 @@
-<div class="login">
+<div class="login" (keyup.enter)="doLogin()">
   <div class="login_box">
     <div class="login_mar">
       <h1 class="text_box">Login to your account</h1>
@@ -6,11 +6,10 @@
       <br>
       <input class="login_input" type="password" name="password" [(ngModel)]="password" id="password" placeholder="password">
       <br>
-      <!--Key up enter doesn't work for some reason-->
-      <input id="login_btn" style="cursor:pointer" type="submit" name="Login" value="Login" (click)="doLogin()" (keyup.enter)="doLogin()">
+      <input id="login_btn" style="cursor:pointer" type="submit" name="Login" value="Login" (click)="doLogin()">
       <div id="text">
         <a>No account yet? </a>
-        <b id="link" style="cursor:pointer" routerLink="../register" routerLinkActive="active">Register account</b>
+        <b id="link" style="cursor:pointer" routerLink="../register" routerLinkActive="active" (click)="this.app.showMatToolbar()">Register account</b>
       </div>
       <div id="text">
         <b id="link" routerLink="" routerLinkActive="active" (click)="this.app.showMatToolbar()">Back to the main page</b>

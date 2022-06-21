@@ -46,16 +46,16 @@ export class ReservationsComponent implements OnInit {
 
   deskId!: String;
   userId!: String;
-  isPermanent!: boolean;  
+  isPermanent!: boolean;
 
   // pagination
   pageEvent!: PageEvent;
-datasource!: null;
-pageIndex!:number;
-pageSize!:number;
-length!:number;
+  datasource!: null;
+  pageIndex!: number;
+  pageSize!: number;
+  length!: number;
 
-  constructor(public service:ReservationsService){
+  constructor(public service: ReservationsService) {
   }
 
 
@@ -64,7 +64,7 @@ length!:number;
 
   ngOnInit() {
     this.service.getReservations(localStorage.getItem('userId') || '{}').subscribe(
-      response=> {
+      response => {
         console.log("Reservations are being properly shown.");
         console.log('Response: ');
         console.log(response);
@@ -103,11 +103,11 @@ length!:number;
   }*/
 
   // ???????????
-  doGetReservations(){
+  doGetReservations() {
     console.log("Reservations are being properly shown.");
     //console.log(this.reservations);
     this.service.getReservations("a");
-    }
+  }
 
 }
 

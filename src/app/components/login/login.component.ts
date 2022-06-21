@@ -6,6 +6,7 @@ import { Router } from '@angular/router';
 import { HttpClient } from '@angular/common/http';
 import { LoginService } from './login.service';
 import { AppComponent } from 'src/app/app.component';
+import { HostListener } from '@angular/core';
 
 @Component({
   selector: 'app-login',
@@ -20,8 +21,7 @@ export class LoginComponent implements OnInit {
 
   dataResponse: any;
 
-  constructor(public app: AppComponent, private http: LoginService, private router: Router) 
-  { 
+  constructor(public app: AppComponent, private http: LoginService, private router: Router) {
     //unlike in appservice, this does work in constructor - might cause issues later down the line
     this.app.hideMatToolbar();
   }
@@ -59,7 +59,7 @@ export class LoginComponent implements OnInit {
     )
   }
 
-  doGetUserInfo () {
+  doGetUserInfo() {
     this.http.getUserInfo(this.username).subscribe(
       response => {
         console.log('Response: ');
@@ -78,6 +78,14 @@ export class LoginComponent implements OnInit {
         console.log(error);
       }
     )
+  }
+
+   // pressing enter is the same as clicking register key
+  @HostListener('document:keypress', ['$event'])
+  keyEvent(event: KeyboardEvent) {
+    if (event.key === "Enter") {
+      this.doLogin();
+    }
   }
 
   /*
