@@ -38,6 +38,35 @@
   </div>
 
   <div class="background">
+    <span class="officeLeft"> Biuro Placeholder </span>
+
+    <!--Replace normal text stuff with input type date later-->
+    <div class="dateCenter">
+      <!--    <input class="dateBox" type="date" value="2022-05-06" [(ngModel)]="dateFrom">-->
+      <a> {{dateFrom}} </a>
+      <span (click)="openDateDialog()" class="material-icons">
+      date_range
+      </span>
+        <a> - </a>
+        <!--    <input class="dateBox" type="date" [(ngModel)]="dateUntil">-->
+        <a> {{dateUntil}} </a>
+        <span (click)="openDateDialog()" class="material-icons">
+        date_range
+      </span>
+    </div>
+
+    <div class="timeRight">
+      <a> {{timeFrom}} </a>
+      <span (click)="openTimeDialog()" class="material-icons">
+      date_range
+      </span>
+        <a> - </a>
+        <a> {{timeUntil}} </a>
+        <span (click)="openTimeDialog()" class="material-icons">
+        date_range
+      </span>
+    </div>
+    <br>
     <span>Level Placeholder</span>
 
     <span class="material-icons" (click)="openAddRoomDialog()">
@@ -71,8 +100,10 @@
 
     <div class="leftUser">
       <!--show room image-->
-      <div (mousemove)="mouseMoved($event)">
-        <img class="centerImage" [src]="imageToShow" alt="Place image title" *ngIf="!isImageLoading && imageLoaded">
+<!--      <button (click)="upLoadFile">Submit</button>-->
+      <input #imageInput type="file" accept="image/*" (change)="processFile(imageInput)">
+      <div [style.height]="height" [style.width]="width" (mousemove)="mouseMoved($event)">
+        <img class="centerImage" [src]="imageToShow" alt="Place image title" *ngIf="!isImageLoading;">
       </div>
 
       <!--Print dots on the room image-->
@@ -85,16 +116,15 @@
       </div>
 
       <!--text bar in case there is no image for the level-->
-      <!--
-<div>
-<input type="file" (change)="selectLevelFile($event)" #fileI nput placeholder="Select file with a level plan in png format" />
-<span (click)="selectLevelFile()" class="material-icons">
-  date_range
-</span>
-<button type="button" (click)="fileInput.click()">Pick File</button>
-<input id="login_btn" style="cursor:pointer" type="submit" value="Send" (click)="uploadLevelFile()">
-</div>
--->
+
+<!--      <div class="centerText">-->
+<!--      <input type="file" (change)="selectLevelFile($event)" #fileInput placeholder="Select file with a level plan in png format" />-->
+<!--      <span (click)="selectLevelFile()" class="material-icons">-->
+<!--        date_range-->
+<!--      </span>-->
+<!--      <button type="button" (click)="fileInput.click()">Pick File</button>-->
+<!--      <input id="login_btn" style="cursor:pointer" type="submit" value="Send" (click)="uploadLevelFile()">-->
+<!--      </div>-->
 
       <!--search for the rooms fulfilling the date & time criteria-->
       <div class="centerText">

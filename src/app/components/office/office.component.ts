@@ -9,6 +9,9 @@ import { Subject } from 'rxjs';
 import { LoginService } from '../login/login.service';
 import { ActivatedRoute } from '@angular/router';
 
+class ImageSnippet {
+  constructor(public src: string, public file: File) {}
+}
 
 @Component({
   selector: 'office-component',
@@ -36,7 +39,7 @@ export class OfficeComponent {
   DateCurrent: Date = new Date();
   jstoday = '';
   room_id: any;
-  
+
   imageToShow: any;
   isImageLoading!: boolean;
   imageLoaded!: boolean;
@@ -64,6 +67,12 @@ export class OfficeComponent {
   //cursor's current coordinates on the image (?)
   cursorX!: number;
   cursorY!: number;
+  percentDone!: number;
+  uploadSuccess!: boolean;
+
+  height!: number;
+  width!: number;
+
 
   // object stores the list of dots/rooms
   obj: any;
@@ -77,6 +86,7 @@ export class OfficeComponent {
   //file to be uploaded
   //selectedFile: File;
 
+  selectedFile!: ImageSnippet;
 
   constructor(private service: OfficeService, public login: LoginService, public http: HttpClient) 
   {
@@ -84,6 +94,20 @@ export class OfficeComponent {
     this.dateUntil = this.dateFrom;
     console.log("tralala");
   }
+
+  processFile(imageInput: any) {
+    const file: File = imageInput.files[0];
+    const reader = new FileReader();
+    reader.addEventListener('load', (event: any) => {
+      this.selectedFile = new ImageSnippet(event.target.result, file);
+      this.service.uploadImage(this.selectedFile.file).subscribe();
+    });
+    reader.readAsDataURL(file);
+  }
+
+  // upLoadFile(){
+  //   this.service.uploadImage(this.selectedFile.file).subscribe();
+  // }
 
   // mostly for testing - it shouldn't download all offices in the future, just one
   ngOnInit(): void{
@@ -130,6 +154,9 @@ createImageFromBlob(image: Blob) {
    let reader = new FileReader();
    reader.addEventListener("load", () => {
       this.imageToShow = reader.result;
+      this.height = this.imageToShow.height;
+      this.width = this.imageToShow.width;
+      console.log(this.height, this.width);
    }, false);
 
    if (image) {
@@ -176,7 +203,7 @@ getImageFromService() {
 
   }
 
-  //update dates for showing desks 
+  //update dates for showing desks
   updateDateQuery(){
     this.dateFrom = this.Input1;
     this.dateUntil = this.Input2;
@@ -332,7 +359,7 @@ getImageFromService() {
       let timeDialog:any = <any>document.getElementById("timeDialog");
       timeDialog.showModal();
     }
-  
+
     closeTimeDialog() {
       let timeDialog:any = <any>document.getElementById("timeDialog");
       timeDialog.close();

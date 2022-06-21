@@ -15,6 +15,15 @@ export class OfficeService {
 
   constructor(private http: HttpClient) { }
 
+
+  public uploadImage(image: File): Observable<Response> {
+    const formData = new FormData();
+
+    formData.append('image', image);
+
+    return this.http.post<Response>('https://ripple-hot-seat-backend-app.herokuapp.com/rooms/image/62769a0b74ea2f51b016c7a5', formData);
+  }
+
   getImage(imageUrl: string): Observable<Blob> {
     return this.http.get(`https://ripple-hot-seat-backend-app.herokuapp.com/rooms/image/${imageUrl}`, { responseType: 'blob' });
   }
