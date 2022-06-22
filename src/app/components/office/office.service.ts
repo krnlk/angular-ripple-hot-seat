@@ -43,7 +43,7 @@ export class OfficeService {
 
   }
 
-  addRoom(post: { number: number; level: number; officeId: string; positionX: number; positionY: number;}) {
+  addRoom(post: { levelId: string, number: number; positionX: number; positionY: number;}) {
     const httpOptions = {
       headers: new HttpHeaders({ 'Content-Type': 'application/json' }),
       responseType: 'text' as const
@@ -53,14 +53,49 @@ export class OfficeService {
     return this.http.post(`https://ripple-hot-seat-backend-app.herokuapp.com/rooms/save`, JSON.stringify(post), httpOptions)
   }
 
+  // removes a room
+  removeRoom(roomId: string) {
+    return this.http.delete(`https://ripple-hot-seat-backend-app.herokuapp.com/rooms/delete/${roomId}`)
+  }
+
   //returns all existing office names
   getOffices() {
     return this.http.get(`https://ripple-hot-seat-backend-app.herokuapp.com/offices`)
   }
 
+   // adds a new office
+   addOffice(post: { name: string;}) {
+    const httpOptions = {
+      headers: new HttpHeaders({ 'Content-Type': 'application/json' }),
+      responseType: 'text' as const
+    }
+
+    return this.http.post('https://ripple-hot-seat-backend-app.herokuapp.com/offices/save', JSON.stringify(post), httpOptions)
+  }
+
+  // removes an office
+  removeOffice(officeId: string) {
+    return this.http.delete(`https://ripple-hot-seat-backend-app.herokuapp.com/offices/delete/${officeId}`)
+  }
+
   //returns all existing levels in that office
-  getLevels() {
-    return this.http.get(`https://ripple-hot-seat-backend-app.herokuapp.com/`)
+  getLevels(officeId: string) {
+    return this.http.get(`https://ripple-hot-seat-backend-app.herokuapp.com/levels/byOfficeId/${officeId}`)
+  }
+
+   // adds a new level in an office
+   addLevel( post: {officeId: string; number: number;}) {
+    const httpOptions = {
+      headers: new HttpHeaders({ 'Content-Type': 'application/json' }),
+      responseType: 'text' as const
+    }
+
+    return this.http.post('https://ripple-hot-seat-backend-app.herokuapp.com/levels/save', JSON.stringify(post), httpOptions)
+  }
+
+  // removes a level 
+  removeLevel(levelId: string) {
+    return this.http.delete(`https://ripple-hot-seat-backend-app.herokuapp.com/levels/delete/${levelId}`)
   }
 
   //adds a dot on top of the background image

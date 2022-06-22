@@ -86,8 +86,14 @@
 .centerAddButton {
     background-color: rgb(37, 150, 190);
     color: white;
-    width: 30%;
+    width: 20%;
     height: 10%;
+}
+
+/* Box for submit HTML tag */
+.submitButton {
+    background-color: rgb(37, 150, 190);
+    color: white;
 }
 
 /* Puts the office name on the left */
@@ -105,8 +111,10 @@
     padding: 10px;
 }
 
+/* Box for options HTML tag */
 .optionBox {
-    background-color: transparaent;
+    background-color: transparent;
+    border: none;
 }
 
 /* Puts the time filter on the right */
@@ -114,6 +122,7 @@
     text-align: right;
     display: inline;
     float: right;
+    width: 20%;
 }
 
 .timeBox {
@@ -135,7 +144,7 @@
 }
 
 .material-icons {
-    display: inline;
+    display:inline;
 }
 
 .material-icons:hover {

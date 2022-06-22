@@ -46,6 +46,7 @@
 
 .login_mar{
   margin: 75px 75px;
+  max-width: 100%;
 }
 
 #text{
@@ -63,3 +64,9 @@ b:hover{
   cursor: pointer;
  }
 
+ /* Big, red, fat error message */
+ .errorText{
+  text-align: center;
+  color: red;
+  width: 100%;
+ }

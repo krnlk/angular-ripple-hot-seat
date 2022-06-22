@@ -53,7 +53,6 @@ export class LoginService{
     }
 
     getUserInfo(username: string){
-      return this.http.get(`https://ripple-hot-seat-backend-app.herokuapp.com/users/byLogin/${username}`)
+      return this.http.get(`https://ripple-hot-seat-backend-app.herokuapp.com/users/byUsername/${username}`)
     }
-
 }

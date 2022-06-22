@@ -136,7 +136,6 @@ export class RoomComponent implements OnInit {
       isPermanent: this.isPermanent
     };
 
-    //do the passwords match?
     this.service.makeReservation(post).subscribe(
       (data) => {
         console.log('A reservation has been made succesfully.');
@@ -215,8 +214,6 @@ export class RoomComponent implements OnInit {
 
     console.log(this.roomId);
 
-
-    //do the passwords match?
     this.service.addDesk(post).subscribe(
       (data) => {
         console.log('A desk has been added.');
@@ -241,7 +238,6 @@ export class RoomComponent implements OnInit {
       number: this.deskNumber
     };
 
-    //do the passwords match?
     this.service.updateDesk(patch, this.deskId).subscribe(
       (data) => {
         console.log('Desk\'s data has been updated.');

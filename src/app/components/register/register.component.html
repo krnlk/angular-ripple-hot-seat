@@ -8,6 +8,21 @@
       <br>
       <input type="password" class="register_input" [(ngModel)]="password2" placeholder="Confirm password">
       <br>
+
+      <!--Error messages-->
+      <div class="errorText" *ngIf="registerErrorNoData">
+        <span>Username and password are required.</span>
+      </div>
+      <div class="errorText" *ngIf="registerErrorUserTaken">
+        <span>Username is already taken.</span>
+      </div>
+      <div class="errorText" *ngIf="registerErrorPassShort">
+        <span>Your password must be at least 6 characters long.</span>
+      </div>
+      <div class="errorText" *ngIf="registerErrorNoMatch">
+        <span>Your passwords do not match.</span>
+      </div>
+
       <button id="register_btn" style="cursor:pointer" (click)="doRegister()">Register account</button>
       <div id="text">
         <a>Already have an account? </a>
