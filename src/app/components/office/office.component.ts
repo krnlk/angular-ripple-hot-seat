@@ -118,10 +118,10 @@ export class OfficeComponent {
   // mostly for testing - it shouldn't download all offices in the future, just one
   ngOnInit(): void {
     console.log(this.dateFrom);
-    //this.getImageFromService();  //powinien byc obrazek dla tego konkretnego pietra, w kazdym razie 
-    this.doAddDot();
+    this.getImageFromService();  //powinien byc obrazek dla tego konkretnego pietra, w kazdym razie 
     this.doGetOffices();
     this.doGetLevels();
+    this.doAddDot();
   }
 
   //returns all offices that exist
@@ -148,6 +148,8 @@ export class OfficeComponent {
         console.log(response);
 
         this.levels = response;
+        // after a level is loaded, load all the dots
+        this.doAddDot();
       },
       error => {
         console.log('Error: ');
@@ -207,7 +209,16 @@ export class OfficeComponent {
 
   //makes a request to the database regarding the reservations that fit so and so criteria
   doSearch() {
-
+    this.service.search(this.levelId).subscribe( 
+      response => {
+        console.log('Response: ');
+        console.log(response);
+      },
+      error => {
+        console.log('Error: ');
+        console.log(error);
+      }
+    )
   }
 
   //update dates for showing desks
@@ -292,14 +303,13 @@ export class OfficeComponent {
   //adds a dot on the image, the dot's color will signify how many desks are taken
   doAddDot() {
     console.log('Trying to add dots...');
-    //later change it to officeId or getOfficeId
-    this.service.addDot(this.officeId).subscribe(
+    this.service.addDot(this.levelId).subscribe(
       response => {
         console.log('Response: ');
         console.log('Dots have been added.');
         console.log(response);
 
-        this.obj = response;
+        this.obj = response; 
 
       },
       error => {
