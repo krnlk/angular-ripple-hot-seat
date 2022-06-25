@@ -98,9 +98,13 @@ export class OfficeService {
     return this.http.delete(`https://ripple-hot-seat-backend-app.herokuapp.com/levels/delete/${levelId}`)
   }
 
-  //adds a dot on top of the background image
-  addDot(officeId: string) {
-    return this.http.get(`https://ripple-hot-seat-backend-app.herokuapp.com/rooms/byOfficeId/${officeId}`);
+  // adds a dot on top of the background image
+  addDot(levelId: string) {
+    return this.http.get(`https://ripple-hot-seat-backend-app.herokuapp.com/rooms/byLevelId/${levelId}`);
   }
 
+  // searches all rooms on this level and returns the percentages (marked by dot colour) of seats available in said timeframe
+  search(levelId: string) {
+    return this.http.get(`https://ripple-hot-seat-backend-app.herokuapp.com/levels/percentage/${levelId}`);
+  }
 }
