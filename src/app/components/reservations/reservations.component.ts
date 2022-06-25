@@ -25,9 +25,15 @@ interface reservation {
 
 export class ReservationsComponent implements OnInit {
   //columns!: ["time", "officeName", "roomNumber", "deskNumber"];
-
   // stores list of reservations
+
+  @ViewChild(MatPaginator) paginator!: MatPaginator;
+
   reservations: any;
+
+  displayColumns: string[] = ['data', 'time', 'office', 'room', 'desk', 'is permanent?'];
+  pnDisabled=true;
+  pgIndex=2;
 
   // attributes of a reservation
   id!: String;
@@ -58,11 +64,8 @@ export class ReservationsComponent implements OnInit {
   constructor(public service: ReservationsService) {
   }
 
-
-  // pagination
-  @ViewChild(MatPaginator) paginator!: MatPaginator;
-
   ngOnInit() {
+
     this.service.getReservations(localStorage.getItem('userId') || '{}').subscribe(
       response => {
         console.log("Reservations are being properly shown.");
@@ -70,6 +73,7 @@ export class ReservationsComponent implements OnInit {
         console.log(response);
 
         // przekopiowanie rezerwacji do zmiennej lokalnej
+        //rezygnujemy z paginacji -> scrol
         this.reservations = response;
         this.reservations.paginator = this.paginator;
       },
@@ -109,5 +113,9 @@ export class ReservationsComponent implements OnInit {
     this.service.getReservations("a");
   }
 
+  onChangePage(pe: PageEvent) {
+    console.log(pe.pageIndex);
+    console.log(pe.pageSize);
+  }
 }
 

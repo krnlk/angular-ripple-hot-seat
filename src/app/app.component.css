@@ -62,6 +62,7 @@ p {
 
 .background_img{
   background-image: url(/jakakolwiek-nazwa/src/assets/biuro.jpg);
+  height: 100%;
 }
 
 .text_area1
@@ -95,7 +96,7 @@ p {
   }
 }
 
-@media all and (max-width: 1000px){
+@media all and (max-width: 700px){
   .app_name{
     font-size: 15px;
     margin-right: 20px;

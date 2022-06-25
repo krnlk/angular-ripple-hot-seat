@@ -43,8 +43,8 @@ export class LoginService{
     //Gets the values from localStorage, making it so it isn't neccessary to refresh the page before seeing the changes take effect
     getUsername(){
       //If you are logged in, get the username
-      if(this.isLoggedIn()) return localStorage.getItem('username') 
-      else return '' 
+      if(this.isLoggedIn()) return localStorage.getItem('username')
+      else return ''
     }
 
     isAdmin () {
@@ -53,7 +53,7 @@ export class LoginService{
     }
 
     getUserInfo(username: string){
-      return this.http.get(`https://ripple-hot-seat-backend-app.herokuapp.com/users/byLogin/${username}`)
+      return this.http.get(`https://ripple-hot-seat-backend-app.herokuapp.com/users/byUsername/${username}`)
     }
 
 }

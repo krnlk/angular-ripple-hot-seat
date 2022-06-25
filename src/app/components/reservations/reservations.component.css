@@ -31,6 +31,7 @@ table {
     table-layout: fixed;
     width: 100%;
     border-collapse: collapse;
+    background-color: transparent;
 }
 
 th,
@@ -50,4 +51,8 @@ th, td {
 .table tr:hover {
     background-color: white;
     color: black;
+}
+
+.centerHeader {
+  text-align: center;
 }
