@@ -20,7 +20,7 @@
 .background {
     background-color: rgba(0,0,0,.7);
     position: absolute;
-    height: 96%;
+    height: 100%;
     width: 100%;
 }
 
@@ -36,9 +36,8 @@
 .centerImage {
     position:relative;
     background: pink;
-    width: 20%;
-    margin: 40%;    
-    height: 20%;
+    width: 100%;   
+    height: 100%;
 }
 
 /* Positioning stuff on the left and middle of the background */
@@ -121,6 +120,7 @@
     text-align: right;
     display: inline;
     float: right;
+    background: transparent;
 }
 
 /* Makes input type box prettier */

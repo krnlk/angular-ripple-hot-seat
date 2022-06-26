@@ -1,29 +1,23 @@
 <div class="centerAll">
-
-  <span class="officeLeft"> Biuro Placeholder </span>
+  <span class="officeLeft"> Office </span>
 
   <div class="background">
-    <div class="skipLeft" *ngIf="imageLoaded; else noImage">
-      <span>Room Placeholder:</span>
+    <!--*ngIf="imageLoaded"; else #noImage-->
+    <div class="skipLeft">
+      <span> Room </span>
 
       <span class="material-icons" (click)="openRemoveRoomDialog()">
         remove
       </span>
 
-      <!--Date input-->
       <div class="dateCenter">
-        <input class="dateBox" type="date" value="2022-05-06" [(ngModel)]="dateNow">
-        <a> {{dateNow}} </a>
+        <input class="dateBox" type="date" [(ngModel)]="dateNow">
       </div>
-
-      <!--Time input-->
+  
       <div class="timeRight">
-        <a> {{timeNow}} </a>
-        <input type="time">
-        <span (click)="openTimeDialog()" class="material-icons">
-          date_range
-        </span>
+        <input class="timeBox" type="time" [(ngModel)]="timeNow">
       </div>
+    </div>
 
       <br>
 
@@ -32,51 +26,26 @@
           (click)="openReservationDialog()">
       </div>
 
-      <!--Prints a list of all available levels in that office-->
-      <input list="cars">
-      <datalist id="cars" value="Volkswagen">
-        <option value="BMW">
-        <option value="Bentley">
-        <option value="Mercedes">
-        <option value="Audi">
-        <option value="Volkswagen">
-      </datalist>
-    </div>
-
     
     <div class="leftUser">
       <!--show room image-->
       <div class="centerImage" (mousemove)="mouseMoved($event)">
-        <img [src]="imageToShow" alt="Place image title" *ngIf="!isImageLoading && imageLoaded">
+        <img [src]="imageToShow" [style.width.px]="600" [style.height.px]="500" alt="Place image title" *ngIf="!isImageLoading && imageLoaded">
 
         <!--It might be needed to move out desk generation out of here later-->
         <!--Print desks on the room image-->
         <div *ngFor="let desk of desks">
           <!--Display every desk with its number next to it on the room's image, changes deskId to the desk that was clicked-->
-          <img class="desk" [style.width.px]="50" [style.top.px]="desk.positionY" [style.left.px]="desk.positionX"
-            src="assets/Kropka1.jpg" (click)="currentDeskId(desk); openEditDeskDialog();" />
+          <img class="desk" [style.width.px]="25" [style.top.px]="desk.positionY" [style.left.px]="desk.positionX"
+            src="assets/desks/desk_black.png" (click)="currentDeskId(desk); openEditDeskDialog();" />
         </div>
       </div>
       <!--text bar in case there is no image for the level-->
 
-
-
-      <!--
-      <div>
-        <input type="file" (change)="selectRoomFile($event)" #fileInput
-          placeholder="Select file with a level plan in png format" />
-        <span (click)="selectRoomFile()" class="material-icons">
-          date_range
-        </span>
-        <button type="button" (click)="fileInput.click()">Pick File</button>
-        <input id="login_btn" style="cursor:pointer" type="submit" value="Send" (click)="doUploadRoomFile()">
-      </div>
-    -->
-
       <!--search for the rooms fulfilling the date & time criteria-->
     </div>
     <!--This should only load in for the admin...-->
-    <!--For adding a room-->
+    <!--For adding a desk-->
     <div class="rightAdmin" *ngIf="_login.isAdmin()">
       <span class="centerText">Current cursor position:</span>
       <br>
@@ -129,18 +98,18 @@
   </ng-template>
 </div>
 
-<dialog id="addRoomDialog">
-  <p>Add a new level</p>
-  <input type="text" name="number" id="whatever" placeholder="...">
-  <br>
-  <button>Add</button>
-  <button (click)="closeAddRoomDialog()">Cancel</button>
-</dialog>
-
 <dialog id="removeRoomDialog">
-  <p>Remove room</p>
+  <p>Remove this room</p>
   <button (click)="openRemoveRoomSureDialog()">Remove</button>
   <button (click)="closeRemoveRoomDialog()">Cancel</button>
+</dialog>
+
+<dialog id="removeRoomSureDialog">
+  <p>Are you sure you want to remove this room?</p>
+  <br>
+  <p>This action is irreversible!</p>
+  <button (click)="closeRemoveRoomSureDialog();closeRemoveRoomDialog()">Remove</button>
+  <button (click)="closeRemoveRoomSureDialog();closeRemoveRoomDialog()">Cancel</button>
 </dialog>
 
 <dialog id="removeDeskSureDialog">
@@ -150,14 +119,6 @@
   <button
     (click)="doDeleteDesk(deskId); closeRemoveDeskSureDialog(); closeRemoveDeskDialog(); closeEditDeskDialog();">Remove</button>
   <button (click)="closeRemoveDeskSureDialog();closeRemoveDeskDialog();closeEditDeskDialog()">Cancel</button>
-</dialog>
-
-<dialog id="removeRoomSureDialog">
-  <p>Are you sure you want to remove this room?</p>
-  <br>
-  <p>This action is irreversible!</p>
-  <button>Remove</button>
-  <button (click)="closeRemoveRoomSureDialog();closeRemoveRoomDialog()">Cancel</button>
 </dialog>
 
 <dialog id="editDeskDialog">

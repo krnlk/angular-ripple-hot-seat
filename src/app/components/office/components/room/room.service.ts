@@ -23,12 +23,14 @@ export class RoomService {
   }
 
   getImage(imageUrl: string): Observable<Blob> {
-    return this.http.get(`https://ripple-hot-seat-backend-app.herokuapp.com/rooms/image/${imageUrl}`, { responseType: 'blob' });
+    //return this.http.get(`https://ripple-hot-seat-backend-app.herokuapp.com/rooms/image/${room_id}`, { responseType: 'blob' })
+    return this.http.get(`https://ripple-hot-seat-backend-app.herokuapp.com/rooms/image/62b1bc6d8f9ca074a2b9aa66`, { responseType: 'blob' })
   }
 
   //gets the room image from the server
   getRoomImage(room_id: string) {
-    return this.http.get(`https://ripple-hot-seat-backend-app.herokuapp.com/rooms/image/${room_id}`, { responseType: 'blob' })
+    //return this.http.get(`https://ripple-hot-seat-backend-app.herokuapp.com/rooms/image/${room_id}`, { responseType: 'blob' })
+    return this.http.get(`https://ripple-hot-seat-backend-app.herokuapp.com/rooms/image/62b1bc6d8f9ca074a2b9aa66`, { responseType: 'blob' })
   }
 
   //adds the room image to the server
@@ -37,11 +39,16 @@ export class RoomService {
   }
 
 
-  getRoom() {
+  getRoomData(roomId: string) {
+    return this.http.get(`https://ripple-hot-seat-backend-app.herokuapp.com/rooms/byId/${roomId}`)
   }
 
   uploadRoomFile(image_id: string) {
     return this.http.post(`https://ripple-hot-seat-backend-app.herokuapp.com/rooms/image/${image_id}`, { responseType: 'blob' })
+  }
+
+  removeRoom(roomId: string) {
+    return this.http.delete(`https://ripple-hot-seat-backend-app.herokuapp.com/rooms/delete/${roomId}`)
   }
 
   //adds a desk to the server
