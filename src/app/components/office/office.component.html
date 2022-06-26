@@ -50,8 +50,10 @@
       </div>
     -->
       <div id="aroundImage">
-        <div class="centerText" (mousemove)="mouseMoved($event)">
-          <img class="centerImage" [src]="imageToShow" alt="Place image title" *ngIf="!isImageLoading;">
+        <div class="centerText">
+          <div class="centerImage" (mousemove)="mouseMoved($event)">
+            <img id="imagestyle" [src]="imageToShow" alt="Place image title" *ngIf="!isImageLoading;">
+          </div>
         </div>
 
         <!--Print dots on the room image-->

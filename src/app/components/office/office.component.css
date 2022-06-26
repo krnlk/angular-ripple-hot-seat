@@ -25,7 +25,14 @@
 }
 
 .centerAll {
-    margin: 3% 10% 0% 10%;
+    /*margin: 3% 20% 0% 20%;*/
+    top: 50%;
+    left: 50%;
+    width: 60em;
+    height: 44em;
+    margin-top: -22em;
+    margin-left: -30em;
+    position: fixed;
     color: white;
 }
 
@@ -43,8 +50,9 @@
 
 /* Center an image in the middle */
 .centerImage {
-    margin: 20%;
-    height: 60%;
+    justify-content: center;
+    display: flex;
+    align-items: center;
 }
 
 /* Positioning stuff on the left and middle of the background */
@@ -165,4 +173,9 @@
   justify-content: center;
   align-items: center;
   display: flex;
+}
+
+#imagestyle{
+  width: 200px;
+  height: 200px;
 }
