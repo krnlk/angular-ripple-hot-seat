@@ -1,7 +1,7 @@
 <div class="centerAll">
 
   <div id="aboveBackground">
-    <span class="officeLeft"> Biuro Placeholder </span>
+    <span class="officeLeft"> Office </span>
     <!--Prints a list of all available levels in that office-->
     <select id="offices" [(ngModel)]="officeId" name="officeId">
       <option class="optionBox" *ngFor="let office of offices" value="{{office.id}}">{{office.name}}</option>
@@ -28,8 +28,9 @@
 
   <div class="background">
     <div id="insideBackgroundTop">
-      <span>Level Placeholder</span>
-    <!--Prints a list of all available levels in that office-->
+      <span> Level </span>
+
+      <!--Prints a list of all available levels in that office-->
       <select id="levels" [(ngModel)]="levelId" name="levelId">
         <option class="optionBox" *ngFor="let level of levels" value="{{level.id}}">{{level.number}}</option>
       </select>
@@ -52,18 +53,17 @@
         <div class="centerText" (mousemove)="mouseMoved($event)">
           <img class="centerImage" [src]="imageToShow" alt="Place image title" *ngIf="!isImageLoading;">
         </div>
+
+        <!--Print dots on the room image-->
+<!--         <div *ngFor="let ob of obj"> -->
+          <!--Add something past /room/ so you can reroute to a specific dot-->
+<!--           <a href="office/room/{{ob.id}}">
+            <img class="dot" [style.width.px]="50" [style.top.px]="ob.positionY" [style.left.px]="ob.positionX" src="assets/Kropka1.jpg" (click)="getRoomData(ob.number)" />
+          </a>
+        </div> -->
         <div class="centerText">
           <input class="centerAddButton" style="cursor:pointer" type="submit" value="Search" (click)="doSearch()">
         </div>
-      </div>
-
-      <!--Print dots on the room image-->
-      <div *ngFor="let ob of obj">
-        <!--Add something past /room/ so you can reroute to a specific dot-->
-        <a href="office/room/{{ob.id}}">
-          <img class="dot" [style.width.px]="50" [style.top.px]="ob.positionY" [style.left.px]="ob.positionX"
-            src="assets/Kropka1.jpg" />
-        </a>
       </div>
 
       <div class="rightAdmin" *ngIf="login.isAdmin()">
@@ -79,7 +79,7 @@
           <input class="centerTextInput" type="number" value="{{cursorY}}" readonly="readonly" />
         </div>
         <br>
-        <span class="centerText">Add number/name of a room:</span>
+        <span class="centerText">Add a room:</span>
         <br>
         <div class="centerText">
           <input type="text" class="centerTextCursor2" value="X:" disabled="disabled">
@@ -120,7 +120,7 @@
 
 <dialog id="removeOfficeDialog">
   <p>Remove this office?</p>
-  <button (click)="openRemoveSureDialog()">Remove</button>
+  <button (click)="openRemoveOfficeSureDialog()">Remove</button>
   <button (click)="closeRemoveOfficeDialog()">Cancel</button>
 </dialog>
 
@@ -133,8 +133,8 @@
 </dialog>
 
 <dialog id="removeLevelDialog">
-  <p>Remove this room?</p>
-  <button (click)="openRemoveSureDialog()">Remove</button>
+  <p>Remove this level?</p>
+  <button (click)="openRemoveLevelSureDialog()">Remove</button>
   <button (click)="closeRemoveLevelDialog()">Cancel</button>
 </dialog>
 
@@ -154,6 +154,22 @@
   <button (click)="closeRemoveRoomDialog()">Cancel</button>
 </dialog>
 
+
+<dialog id="removeOfficeSureDialog">
+  <p>Are you sure you want to remove this office?</p>
+  <br>
+  <p>This action is irreversible!</p>
+  <button (click)="doRemoveOffice();closeRemoveOfficeSureDialog(); closeRemoveOfficeDialog()">Remove</button>
+  <button (click)="closeRemoveOfficeSureDialog();closeRemoveRoomDialog();closeEditDeskDialog()">Cancel</button>
+</dialog>
+
+<dialog id="removeLevelSureDialog">
+  <p>Are you sure you want to remove this level?</p>
+  <br>
+  <p>This action is irreversible!</p>
+  <button (click)="doRemoveLevel();closeRemoveLevelSureDialog(); closeRemoveLevelDialog()">Remove</button>
+  <button (click)="closeRemoveLevelSureDialog();closeRemoveLevelDialog();closeEditDeskDialog()">Cancel</button>
+</dialog>
 
 <dialog id="removeSureDialog">
   <p>Are you sure you want to remove this desk?</p>

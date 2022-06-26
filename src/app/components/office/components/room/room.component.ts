@@ -5,6 +5,7 @@ import { formatDate } from '@angular/common';
 import { OfficeComponent } from '../../office.component';
 import { LoginService } from '../../../login/login.service';
 import { ActivatedRoute } from '@angular/router';
+import { DatePipe } from '@angular/common';
 
 @Component({
   selector: 'app-room',
@@ -18,6 +19,11 @@ export class RoomComponent implements OnInit {
   imgUrl!: string;
 
   rooms: any;
+  // info about the room
+  roomInfo: any;
+  officeName!: string;
+  roomNumber!: number;
+
 
   imageToShow: any;
   isImageLoading!: boolean;
@@ -31,8 +37,9 @@ export class RoomComponent implements OnInit {
   Input1!: string;
   Input2!: string;
   Input3!: string;
+
+
   roomId!: string;
-  //roomId: string = '6276a0a274ea2f51b016c7a6'; //bandaid
   positionX!: number;
   positionY!: number;
   number!: number;
@@ -72,35 +79,29 @@ export class RoomComponent implements OnInit {
   deskIsFree!: boolean;
   deskBeaconId!: string;
 
-  //subscription for updating officeId
+  // subscription for updating officeId
   private _subscription: any;
 
   constructor(private service: RoomService, public _login: LoginService, public _office: OfficeComponent, public route: ActivatedRoute, public http: HttpClient) {
-    this.dateNow = formatDate(this.DateCurrent, 'dd-MM-yyyy', 'en-US', '+0530');
-    //chyba two way data bindindg przy dacie
+    this.dateNow = formatDate(this.DateCurrent, 'yyyy-MM-dd', 'en-US', '+0530');
+    this.timeNow = formatDate(this.DateCurrent, 'hh:mm', 'en-US', '+0530');
+    // chyba two way data bindindg przy dacie
 
-    console.log(this.officeId);
     this.officeId = sessionStorage.getItem('officeId');
-    console.log(this.officeId);
 
-    //getting arguments from uri - giving up for now, swapping to sessionstorage
+    // getting arguments from uri - giving up for now, swapping to sessionstorage
 
     this.officeId = _office.officeId;
     this._subscription = _office.officeIdChange.subscribe((value) => {
       this.officeId = value;
     })
-
-    //this.officeId = _office.officeId;
-    console.log(this._office.getOfficeId());
-    console.log(this.officeId);
   }
 
-  // mostly for testing - it shouldn't download all offices in the future, just one
   ngOnInit(): void {
-    this.getImageFromService();
     this.roomId = this.route.snapshot.params['roomId'];
+    this.doGetRoomData;
+    this.getImageFromService();
     this.doGetDesks();
-    //console.log(this.roomId);
   }
 
   // stolen from https://stackoverflow.com/questions/34714462/updating-variable-changes-in-components-from-a-service-with-angular2
@@ -125,7 +126,7 @@ export class RoomComponent implements OnInit {
     )
   }
 
-  //makes a reservation
+  // makes a reservation
   doMakeReservation() {
     let post = {
       //startTime: this.startTime,
@@ -150,7 +151,7 @@ export class RoomComponent implements OnInit {
     )
   }
 
-  //do what you want cuz being a pirate is free, you are a pirate!
+  // do what you want cuz being a pirate is free, you are a pirate!
   createImageFromBlob(image: Blob) {
     let reader = new FileReader();
     reader.addEventListener("load", () => {
@@ -191,18 +192,52 @@ export class RoomComponent implements OnInit {
     )
   }
 
-  //add a room image
+  // add a room image
   doPostRoomImage() {
 
   }
 
-  //makes a request to the database regarding the reservations that fit so and so criteria
+  // get info about the room
+  doGetRoomData() {
+    this.service.getRoomData(this.roomId).subscribe(
+      response => {
+        console.log('Response: ');
+        console.log(response);
+
+        this.roomInfo = response;
+        console.log(this.roomInfo)
+
+        //this.officeName = this.roomInfo.officeName;
+        //this.roomNumber = this.roomInfo.number;
+      },
+      error => {
+        console.log('Error: ');
+        console.log(error);
+      }
+    )
+  }
+
+  // makes a request to the database regarding the reservations that fit so and so criteria
   doSearch() {
 
   }
 
+  // delete a desk
+  doRemoveRoom(roomId: any) {
+    this.service.deleteDesk(roomId).subscribe(
+      (data) => {
+        console.log('The room has been removed.');
+        // reroute back to office
 
-  //posts a desk to the database & then forces gets all the desks on the image again
+      },
+      (error) => {
+        console.log('Error while removing the room: ');
+        console.log(error);
+      }
+    )
+  }
+
+  // posts a desk to the database & then forces gets all the desks on the image again
   doAddDesk() {
     let post = {
       roomId: this.roomId,
@@ -211,8 +246,6 @@ export class RoomComponent implements OnInit {
       orientation: this.orientation,
       number: this.number
     };
-
-    console.log(this.roomId);
 
     this.service.addDesk(post).subscribe(
       (data) => {
@@ -257,9 +290,6 @@ export class RoomComponent implements OnInit {
     this.service.deleteDesk(deskId).subscribe(
       (data) => {
         console.log('A desk has been removed.');
-        console.log('Data: ');
-        console.log(data);
-
       },
       (error) => {
         console.log('Error while adding a desk: ');
@@ -303,7 +333,6 @@ export class RoomComponent implements OnInit {
 
     if (this.cursorX < 0) this.cursorX = 0;
     if (this.cursorY < 0) this.cursorY = 0;
-
   }
 
   // remove room
@@ -414,8 +443,6 @@ export class RoomComponent implements OnInit {
     this.deskOrientation = desk.orientation;
     this.deskIsFree = desk.isFree;
     this.deskBeaconId = desk.beaconId;
-
-    console.log(this.deskPositionX);
   }
 
 

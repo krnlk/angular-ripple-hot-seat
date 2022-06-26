@@ -25,8 +25,9 @@ export class OfficeService {
     return this.http.post<Response>('https://ripple-hot-seat-backend-app.herokuapp.com/rooms/image/62769a0b74ea2f51b016c7a5', formData);
   }
 
-  getImage(imageUrl: string): Observable<Blob> {
-    return this.http.get(`https://ripple-hot-seat-backend-app.herokuapp.com/rooms/image/${imageUrl}`, { responseType: 'blob' });
+  getImage(levelId: string): Observable<Blob> {
+    //return this.http.get(`https://ripple-hot-seat-backend-app.herokuapp.com/levels/image/${levelId}`, { responseType: 'blob' });
+    return this.http.get(`https://ripple-hot-seat-backend-app.herokuapp.com/levels/image/62b1bc6d8f9ca074a2b9aa64`, { responseType: 'blob' });
   }
 
   //gets the room image from the server
