@@ -2,30 +2,23 @@
 
   <div id="aboveBackground">
     <span class="officeLeft"> Office </span>
-
     <!--Prints a list of all available levels in that office-->
     <select id="offices" [(ngModel)]="officeId" name="officeId">
       <option class="optionBox" *ngFor="let office of offices" value="{{office.id}}">{{office.name}}</option>
     </select>
     <input type="submit" class="submitButton" value="Submit" (click)="setOfficeId(officeId)">
-
     <!--Adding an office, only admin should be able to see it-->
     <div *ngIf="login.isAdmin()" style="display: inline-block">
-      <span class="material-icons" (click)="openAddOfficeDialog()">
-        add
-      </span>
-
-      <span class="material-icons" (click)="openRemoveOfficeDialog()">
-        remove
-      </span>
+      <span class="material-icons" (click)="openAddOfficeDialog()">add</span>
+      <span class="material-icons" (click)="openRemoveOfficeDialog()">remove</span>
     </div>
-
+    <!--Replace normal text stuff with input type date later-->
+    <div class="example-fill-remaining-space"></div>
     <div class="dateCenter">
       <input class="dateBox" type="date" [(ngModel)]="dateFrom">
       <a> - </a>
       <input class="dateBox" type="date" [(ngModel)]="dateUntil">
     </div>
-
     <div class="timeRight">
       <input class="timeBox" type="time" [(ngModel)]="timeFrom">
       <a> - </a>
@@ -42,16 +35,10 @@
         <option class="optionBox" *ngFor="let level of levels" value="{{level.id}}">{{level.number}}</option>
       </select>
       <input type="submit" class="submitButton" value="Submit" (click)="setLevel(levelId, levelNumber)">
-
-      <!--Adding a level in one particular office, only admin should be able to see it-->
+    <!--Adding a level in one particular office, only admin should be able to see it-->
       <div *ngIf="login.isAdmin()" style="display: inline-block">
-        <span class="material-icons" (click)="openAddLevelDialog()">
-          add
-        </span>
-
-        <span class="material-icons" (click)="openRemoveLevelDialog()">
-          remove
-        </span>
+        <span class="material-icons" (click)="openAddLevelDialog()">add</span>
+        <span class="material-icons" (click)="openRemoveLevelDialog()">remove</span>
       </div>
     </div>
 
@@ -62,17 +49,18 @@
         <input #imageInput type="file" accept="image/*" (change)="processFile(imageInput)">
       </div>
     -->
-      <div id="aroundImage" (mousemove)="mouseMoved($event)">
-        <img class="centerImage" [src]="imageToShow" alt="Place image title" *ngIf="!isImageLoading;">
-
-        <!--Print dots on the room image-->
-        <div *ngFor="let ob of obj">
-          <!--Add something past /room/ so you can reroute to a specific dot-->
-          <a href="office/room/{{ob.id}}">
-            <img class="dot" [style.width.px]="50" [style.top.px]="ob.positionY" [style.left.px]="ob.positionX" src="assets/Kropka1.jpg" (click)="getRoomData(ob.number)" />
-          </a>
+      <div id="aroundImage">
+        <div class="centerText" (mousemove)="mouseMoved($event)">
+          <img class="centerImage" [src]="imageToShow" alt="Place image title" *ngIf="!isImageLoading;">
         </div>
 
+        <!--Print dots on the room image-->
+<!--         <div *ngFor="let ob of obj"> -->
+          <!--Add something past /room/ so you can reroute to a specific dot-->
+<!--           <a href="office/room/{{ob.id}}">
+            <img class="dot" [style.width.px]="50" [style.top.px]="ob.positionY" [style.left.px]="ob.positionX" src="assets/Kropka1.jpg" (click)="getRoomData(ob.number)" />
+          </a>
+        </div> -->
         <div class="centerText">
           <input class="centerAddButton" style="cursor:pointer" type="submit" value="Search" (click)="doSearch()">
         </div>
@@ -81,34 +69,44 @@
       <div class="rightAdmin" *ngIf="login.isAdmin()">
         <span class="centerText">Current cursor position:</span>
         <br>
-        <input type="text" class="centerTextCursor1" value="X:" disabled="disabled">
-        <input class="centerTextInput" type="number" value="{{cursorX}}" readonly="readonly" />
-        <br><br>
-        <input type="text" class="centerTextCursor1" value="Y:" disabled="disabled">
-        <input class="centerTextInput" type="number" value="{{cursorY}}" readonly="readonly" />
-        <br><br>
+        <div class="centerText">
+          <input type="text" class="centerTextCursor1" value="X:" disabled="disabled">
+          <input class="centerTextInput" type="number" value="{{cursorX}}" readonly="readonly" />
+        </div>
+        <br>
+        <div class="centerText">
+          <input type="text" class="centerTextCursor1" value="Y:" disabled="disabled">
+          <input class="centerTextInput" type="number" value="{{cursorY}}" readonly="readonly" />
+        </div>
+        <br>
         <span class="centerText">Add a room:</span>
         <br>
-        <input type="text" class="centerTextCursor2" value="X:" disabled="disabled">
-        <input class="centerTextInput" type="number" />
-        <br><br>
-        <input type="text" class="centerTextCursor2" value="Y:" disabled="disabled">
-        <input class="centerTextInput" type="number" />
-        <br><br>
-        <input type="text" class="centerTextCursor2" value="NR:" disabled="disabled">
-        <input class="centerTextInput" type="number" />
-        <br><br>
+        <div class="centerText">
+          <input type="text" class="centerTextCursor2" value="X:" disabled="disabled">
+          <input class="centerTextInput" type="number" />
+        </div>
+        <br>
+        <div class="centerText">
+          <input type="text" class="centerTextCursor2" value="Y:" disabled="disabled">
+          <input class="centerTextInput" type="number" />
+        </div>
+        <br>
+        <div class="centerText">
+          <input type="text" class="centerTextCursor2" value="NR/NAME:" disabled="disabled">
+          <input class="centerTextInput" type="number" />
+        </div>
+        <br>
         <div class="centerText">
           <input class="centerAddButton" style="cursor:pointer" type="submit" value="ADD" (click)="doAddRoom()">
         </div>
       </div>
       <!--End of things that should only load for the admin...-->
-
       <!--search for the rooms fulfilling the date & time criteria-->
     </div>
     <!--This should only load in for the admin...-->
-
   </div>
+
+  <div></div>
 </div>
 
 <!--Pop up window zone-->
