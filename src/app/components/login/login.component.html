@@ -4,15 +4,21 @@
       <h1 class="text_box">Login to your account</h1>
       <input class="login_input" type="text" name="username" [(ngModel)]="username" id="email" placeholder="username">
       <br>
-      <input class="login_input" type="password" name="password" [(ngModel)]="password" id="password" placeholder="password">
+      <input class="login_input" type="password" name="password" [(ngModel)]="password" id="password"
+        placeholder="password">
       <br>
+      <div class="errorText" *ngIf="loginError">
+        <span>Your credentials are incorrect. Correct your login/password and try again.</span>
+      </div>
       <input id="login_btn" style="cursor:pointer" type="submit" name="Login" value="Login" (click)="doLogin()">
       <div id="text">
         <a>No account yet? </a>
-        <b id="link" style="cursor:pointer" routerLink="../register" routerLinkActive="active" (click)="this.app.showMatToolbar()">Register account</b>
+        <b id="link" style="cursor:pointer" routerLink="../register" routerLinkActive="active"
+          (click)="this.app.showMatToolbar()">Register account</b>
       </div>
       <div id="text">
-        <b id="link" routerLink="" routerLinkActive="active" (click)="this.app.showMatToolbar()">Back to the main page</b>
+        <b id="link" routerLink="" routerLinkActive="active" (click)="this.app.showMatToolbar()">Back to the main
+          page</b>
       </div>
     </div>
   </div>

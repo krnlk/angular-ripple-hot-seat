@@ -1,92 +1,57 @@
 <div class="centerAll">
 
-  <span class="officeLeft"> Biuro Placeholder </span>
-
-  <!--Prints a list of all available levels in that office-->
-  <select id="offices" [(ngModel)]="officeId" name="officeId">
-    <option *ngFor="let office of offices" value="{{office.id}}">{{office.name}}</option>
-  </select>
-  <input type="submit" value="Submit" (click)="setOfficeId(officeId)">
-
-  <!--Replace normal text stuff with input type date later-->
-  <div class="dateCenter">
-    <input class="dateBox" type="date" [(ngModel)]="dateFrom">
-    <a> - </a>
-    <input class="dateBox" type="date" [(ngModel)]="dateUntil">
-  </div>
-
-  <div class="timeRight">
-    <input class="timeBox" type="time" [(ngModel)]="timeFrom">
-    <a> - </a>
-    <input class="timeBox" type="time" [(ngModel)]="timeUntil">
-    <!--
-    <a> {{timeFrom}} </a>
-    <span (click)="openTimeDialog()" class="material-icons">
-      date_range
-    </span>
-    <a> - </a>
-    <a> {{timeUntil}} </a>
-    <span (click)="openTimeDialog()" class="material-icons">
-      date_range
-    </span>
-  -->
+  <div id="aboveBackground">
+    <span class="officeLeft"> Biuro Placeholder </span>
+    <!--Prints a list of all available levels in that office-->
+    <select id="offices" [(ngModel)]="officeId" name="officeId">
+      <option class="optionBox" *ngFor="let office of offices" value="{{office.id}}">{{office.name}}</option>
+    </select>
+    <input type="submit" class="submitButton" value="Submit" (click)="setOfficeId(officeId)">
+    <!--Adding an office, only admin should be able to see it-->
+    <div *ngIf="login.isAdmin()" style="display: inline-block">
+      <span class="material-icons" (click)="openAddOfficeDialog()">add</span>
+      <span class="material-icons" (click)="openRemoveOfficeDialog()">remove</span>
+    </div>
+    <!--Replace normal text stuff with input type date later-->
+    <div class="example-fill-remaining-space"></div>
+    <div class="dateCenter">
+      <input class="dateBox" type="date" [(ngModel)]="dateFrom">
+      <a> - </a>
+      <input class="dateBox" type="date" [(ngModel)]="dateUntil">
+    </div>
+    <div class="timeRight">
+      <input class="timeBox" type="time" [(ngModel)]="timeFrom">
+      <a> - </a>
+      <input class="timeBox" type="time" [(ngModel)]="timeUntil">
+    </div>
   </div>
 
   <div class="background">
-    <!--Replace normal text stuff with input type date later-->
-
-    <!--
-    <div class="timeRight">
-      <a> {{timeFrom}} </a>
-      <span (click)="openTimeDialog()" class="material-icons">
-        date_range
-      </span>
-      <a> - </a>
-      <a> {{timeUntil}} </a>
-      <span (click)="openTimeDialog()" class="material-icons">
-        date_range
-      </span>
-    </div>
-  -->
-
-    <span>Level Placeholder</span>
-
+    <div id="insideBackgroundTop">
+      <span>Level Placeholder</span>
     <!--Prints a list of all available levels in that office-->
-    <form style="display: inline;">
-      <select id="cars" value="Volkswagen">
-        <option value="BMW">Level BMW</option>
-        <option value="Bentley">
-        <option value="Mercedes">
-        <option value="Audi">
-        <option value="Volkswagen">
-
-          <!--Once there's something to load from backend
-    <div *ngFor="let ticket of customer.ticket">
-    {{ ticket.ticketId }}
-    {{ ticket.place }}
-  </div>
-          -->
+      <select id="levels" [(ngModel)]="levelId" name="levelId">
+        <option class="optionBox" *ngFor="let level of levels" value="{{level.id}}">{{level.number}}</option>
       </select>
-      <input type="submit" value="Submit">
-    </form>
-
-    <span class="material-icons" (click)="openAddRoomDialog()">
-      add
-    </span>
-
-    <span class="material-icons" (click)="openRemoveRoomDialog()">
-      remove
-    </span>
+      <input type="submit" class="submitButton" value="Submit" (click)="setLevel(levelId, levelNumber)">
+    <!--Adding a level in one particular office, only admin should be able to see it-->
+      <div *ngIf="login.isAdmin()" style="display: inline-block">
+        <span class="material-icons" (click)="openAddLevelDialog()">add</span>
+        <span class="material-icons" (click)="openRemoveLevelDialog()">remove</span>
+      </div>
+    </div>
 
     <div class="leftUser">
-      <!--show room image-->
-      <!--      <button (click)="upLoadFile">Submit</button>-->
       <!--Only admin should be able to see the option for adding a file-->
+      <!--
       <div *ngIf="login.isAdmin()">
         <input #imageInput type="file" accept="image/*" (change)="processFile(imageInput)">
       </div>
-      <div [style.height]="height" [style.width]="width" (mousemove)="mouseMoved($event)">
-        <img class="centerImage" [src]="imageToShow" alt="Place image title" *ngIf="!isImageLoading;">
+    -->
+      <div id="aroundImage">
+        <div class="centerText" (mousemove)="mouseMoved($event)">
+          <img class="centerImage" [src]="imageToShow" alt="Place image title" *ngIf="!isImageLoading;">
+        </div>
         <div class="centerText">
           <input class="centerAddButton" style="cursor:pointer" type="submit" value="Search" (click)="doSearch()">
         </div>
@@ -101,62 +66,94 @@
         </a>
       </div>
 
-      <!--text bar in case there is no image for the level-->
-
-      <!--      <div class="centerText">-->
-      <!--      <input type="file" (change)="selectLevelFile($event)" #fileInput placeholder="Select file with a level plan in png format" />-->
-      <!--      <span (click)="selectLevelFile()" class="material-icons">-->
-      <!--        date_range-->
-      <!--      </span>-->
-      <!--      <button type="button" (click)="fileInput.click()">Pick File</button>-->
-      <!--      <input id="login_btn" style="cursor:pointer" type="submit" value="Send" (click)="uploadLevelFile()">-->
-      <!--      </div>-->
-
+      <div class="rightAdmin" *ngIf="login.isAdmin()">
+        <span class="centerText">Current cursor position:</span>
+        <br>
+        <div class="centerText">
+          <input type="text" class="centerTextCursor1" value="X:" disabled="disabled">
+          <input class="centerTextInput" type="number" value="{{cursorX}}" readonly="readonly" />
+        </div>
+        <br>
+        <div class="centerText">
+          <input type="text" class="centerTextCursor1" value="Y:" disabled="disabled">
+          <input class="centerTextInput" type="number" value="{{cursorY}}" readonly="readonly" />
+        </div>
+        <br>
+        <span class="centerText">Add number/name of a room:</span>
+        <br>
+        <div class="centerText">
+          <input type="text" class="centerTextCursor2" value="X:" disabled="disabled">
+          <input class="centerTextInput" type="number" />
+        </div>
+        <br>
+        <div class="centerText">
+          <input type="text" class="centerTextCursor2" value="Y:" disabled="disabled">
+          <input class="centerTextInput" type="number" />
+        </div>
+        <br>
+        <div class="centerText">
+          <input type="text" class="centerTextCursor2" value="NR/NAME:" disabled="disabled">
+          <input class="centerTextInput" type="number" />
+        </div>
+        <br>
+        <div class="centerText">
+          <input class="centerAddButton" style="cursor:pointer" type="submit" value="ADD" (click)="doAddRoom()">
+        </div>
+      </div>
+      <!--End of things that should only load for the admin...-->
       <!--search for the rooms fulfilling the date & time criteria-->
     </div>
     <!--This should only load in for the admin...-->
-    <div class="rightAdmin" *ngIf="login.isAdmin()">
-      <span class="centerText">Current cursor position:</span>
-      <br>
-      <input type="text" class="centerTextCursor1" value="X:" disabled="disabled">
-      <input class="centerTextInput" type="number" value="{{cursorX}}" readonly="readonly" />
-      <br><br>
-      <input type="text" class="centerTextCursor1" value="Y:" disabled="disabled">
-      <input class="centerTextInput" type="number" value="{{cursorY}}" readonly="readonly" />
-      <br><br>
-      <span class="centerText">Add number/name of a room:</span>
-      <br>
-      <input type="text" class="centerTextCursor2" value="X:" disabled="disabled">
-      <input class="centerTextInput" type="number" />
-      <br><br>
-      <input type="text" class="centerTextCursor2" value="Y:" disabled="disabled">
-      <input class="centerTextInput" type="number" />
-      <br><br>
-      <input type="text" class="centerTextCursor2" value="NR/NAME:" disabled="disabled">
-      <input class="centerTextInput" type="number" />
-      <br><br>
-      <div class="centerText">
-        <input class="centerAddButton" style="cursor:pointer" type="submit" value="ADD" (click)="doAddRoom()">
-      </div>
-    </div>
-    <!--End of things that should only load for the admin...-->
-
   </div>
+
+  <div></div>
 </div>
 
-<dialog id="addRoomDialog">
-  <p>Add a new level</p>
-  <input type="text" name="number" id="whatever" placeholder="...">
+<!--Pop up window zone-->
+<dialog id="addOfficeDialog">
+  <p>Add a new office</p>
+  <input type="text" placeholder="New office's name..." [(ngModel)]="officeName">
   <br>
-  <button>Add</button>
+  <button (click)="doAddOffice();closeAddOfficeDialog()">Add</button>
+  <button (click)="closeAddOfficeDialog()">Cancel</button>
+</dialog>
+
+<dialog id="removeOfficeDialog">
+  <p>Remove this office?</p>
+  <button (click)="openRemoveSureDialog()">Remove</button>
+  <button (click)="closeRemoveOfficeDialog()">Cancel</button>
+</dialog>
+
+<dialog id="addLevelDialog">
+  <p>Add a new level</p>
+  <input type="number" placeholder="New level's number..." [(ngModel)]="levelNumber">
+  <br>
+  <button (click)="doAddLevel();closeAddLevelDialog()">Add</button>
+  <button (click)="closeAddLevelDialog()">Cancel</button>
+</dialog>
+
+<dialog id="removeLevelDialog">
+  <p>Remove this room?</p>
+  <button (click)="openRemoveSureDialog()">Remove</button>
+  <button (click)="closeRemoveLevelDialog()">Cancel</button>
+</dialog>
+
+<!--This shouldn't even exist...-->
+<dialog id="addRoomDialog">
+  <p>Add a new room</p>
+  <input type="number" placeholder="New room's number ">
+  <br>
+  <button (click)="closeAddRoomDialog()">Add</button>
   <button (click)="closeAddRoomDialog()">Cancel</button>
 </dialog>
 
+<!--This should exist, but in rooms only I think?-->
 <dialog id="removeRoomDialog">
-  <p>Remove a room</p>
+  <p>Remove this room?</p>
   <button (click)="openRemoveSureDialog()">Remove</button>
   <button (click)="closeRemoveRoomDialog()">Cancel</button>
 </dialog>
+
 
 <dialog id="removeSureDialog">
   <p>Are you sure you want to remove this desk?</p>

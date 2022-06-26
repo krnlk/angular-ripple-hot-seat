@@ -16,6 +16,16 @@ export class RegisterComponent implements OnInit {
   password!: string
   password2!: string
 
+  // error message logic!
+  // no username or password 
+  registerErrorNoData: boolean = false;
+  // if the username is already taken
+  registerErrorUserTaken: boolean = false;
+  // if the password is too short
+  registerErrorPassShort: boolean = false;
+  // if the passwords do not match
+  registerErrorNoMatch: boolean = false;
+
   constructor(public app: AppComponent, public http: RegisterService, public router: Router) 
   { 
     // unlike in appservice, this does work in constructor - might cause issues later down the line
@@ -34,6 +44,9 @@ export class RegisterComponent implements OnInit {
 
     //do the passwords match?
     if (this.password == this.password2) {
+      // disable an error message for non-matching passwords
+      this.registerErrorNoMatch = false;
+
       this.http.postRegister(post).subscribe(
         (data) => {
           console.log('Registered succesfully.');
@@ -42,16 +55,20 @@ export class RegisterComponent implements OnInit {
 
           //po udanym zalogowaniu powinno przeniesc na strone z info o tym, ze wyslano maila?
           this.router.navigateByUrl('');
+          this.app.showMatToolbar();
         },
         (error) => {
           console.log('Error: ');
           console.log(error);
+          this.handleRegisterError(error);
         }
       )
     }
 
+    // if the passwords do not match
     else {
       console.log('Your passwords do not match.');
+      this.registerErrorNoMatch = true;
     }
   }
 
@@ -69,4 +86,12 @@ export class RegisterComponent implements OnInit {
     matToolbar.classList.remove("hidden");
   }*/
 
+  handleRegisterError(error: any){
+    if(error.error == "'username' and 'password' are required" ) this.registerErrorNoData = true;
+    else this.registerErrorNoData = false;
+    if(error.error == "'username' must be unique" ) this.registerErrorUserTaken = true;
+    else this.registerErrorUserTaken = false;
+    if(error.error == "'password' should be longer than 5 characters" ) this.registerErrorPassShort = true;
+    else this.registerErrorPassShort = false;
+  }
 }

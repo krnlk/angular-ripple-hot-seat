@@ -7,6 +7,7 @@ import { HttpClient } from '@angular/common/http';
 import { LoginService } from './login.service';
 import { AppComponent } from 'src/app/app.component';
 import { HostListener } from '@angular/core';
+import { TOUCH_BUFFER_MS } from '@angular/cdk/a11y/input-modality/input-modality-detector';
 
 @Component({
   selector: 'app-login',
@@ -20,6 +21,9 @@ export class LoginComponent implements OnInit {
   message: any
 
   dataResponse: any;
+
+  //if login fails
+  loginError: boolean = false;
 
   constructor(public app: AppComponent, private http: LoginService, private router: Router) {
     //unlike in appservice, this does work in constructor - might cause issues later down the line
@@ -53,8 +57,10 @@ export class LoginComponent implements OnInit {
         this.app.showMatToolbar();
       },
       error => {
+        // if an error happens, show a red message
         console.log('Error: ');
         console.log(error);
+        this.handleLoginError();
       }
     )
   }
@@ -72,6 +78,7 @@ export class LoginComponent implements OnInit {
         // user info
         localStorage.setItem('userId', this.dataResponse.id);
         localStorage.setItem('isAdmin', this.dataResponse.isAdmin);
+        //this.app.showMatToolbar()
       },
       error => {
         console.log('Error: ');
@@ -86,6 +93,11 @@ export class LoginComponent implements OnInit {
     if (event.key === "Enter") {
       this.doLogin();
     }
+  }
+
+  // handles login error
+  handleLoginError() {
+    this.loginError = true;
   }
 
   /*
