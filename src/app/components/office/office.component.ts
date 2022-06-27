@@ -71,8 +71,8 @@ export class OfficeComponent {
   height!: number;
   width!: number;
 
-  // object stores the list of dots/rooms
-  obj: any;
+  // stores the list of dots/rooms
+  dots: any;
 
   // stores the list of offices
   offices: any;
@@ -114,17 +114,22 @@ export class OfficeComponent {
 
   // upLoadFile(){
   //   this.service.uploadImage(this.selectedFile.file).subscribe();
-  // }
+  // }  
 
-  // mostly for testing - it shouldn't download all offices in the future, just one
   ngOnInit(): void {
     this.doGetOffices();
-    this.doGetLevels();
-    //this.doAddDot();
   }
 
   // returns all offices that exist
   doGetOffices() {
+    // in case this method has been called before - reloading
+    if (this.offices != undefined) {
+      if (this.offices.length === 0) {
+        // turning an array into a null array
+        this.offices.length = 0;
+      }
+    }
+
     this.service.getOffices().subscribe(
       response => {
         console.log('Response: ');
@@ -141,6 +146,14 @@ export class OfficeComponent {
 
   // returns all levels in the current office
   doGetLevels() {
+    // in case this method has been called before - reloading
+    if (this.levels != undefined) {
+      if (this.levels.length === 0) {
+        // turning an array into a null array
+        this.levels.length = 0;
+      }
+    }
+
     this.service.getLevels(this.officeId).subscribe(
       response => {
         console.log('Response: ');
@@ -157,7 +170,7 @@ export class OfficeComponent {
 
   // a dumb way to pass office name and room number to the room's page
   getRoomData(number: string) {
-    sessionStorage.setItem('roomNumber', number); 
+    sessionStorage.setItem('roomNumber', number);
   }
 
   // do what you want cuz being a pirate is free, you are a pirate!
@@ -175,7 +188,7 @@ export class OfficeComponent {
     }
   }
 
-  // basically loads an image
+  // loads an image
   getImageFromService() {
     this.isImageLoading = true;
     this.service.getImage(this.levelId).subscribe(data => {
@@ -189,9 +202,10 @@ export class OfficeComponent {
     });
   }
 
-  // erases the current image when you switch levels
+  // unloads an image
   noImageFromService() {
-
+    this.imageToShow = undefined;
+    this.imageLoaded = false;
   }
 
   //read a room image
@@ -215,7 +229,7 @@ export class OfficeComponent {
 
   //makes a request to the database regarding the reservations that fit so and so criteria
   doSearch() {
-    this.service.search(this.levelId).subscribe( 
+    this.service.search(this.levelId).subscribe(
       response => {
         console.log('Response: ');
         console.log(response);
@@ -252,7 +266,8 @@ export class OfficeComponent {
         console.log('An office has been added.');
         console.log('Data: ');
         console.log(data);
-
+        // load the new office
+        this.doGetOffices();
       },
       (error) => {
         console.log('Error while adding an office.');
@@ -270,6 +285,11 @@ export class OfficeComponent {
         console.log('Data: ');
         console.log(data);
         sessionStorage.removeItem(this.officeId);
+
+        // remove the office from the list without having to reload
+        this.doGetOffices();
+        // unload image
+        this.noImageFromService();
       },
       (error) => {
         console.log('Error while removing an office.');
@@ -291,6 +311,8 @@ export class OfficeComponent {
         console.log('Data: ');
         console.log(data);
 
+        // load the new level
+        this.doGetLevels();
       },
       (error) => {
         console.log('Error while adding a level: ');
@@ -307,6 +329,11 @@ export class OfficeComponent {
         console.log('Data: ');
         console.log(data);
         sessionStorage.removeItem(this.levelId);
+
+        // remove the level without having to reload
+        this.doGetLevels();
+        // unload image
+        this.noImageFromService();
       },
       (error) => {
         console.log('Error while removing a level.');
@@ -320,15 +347,17 @@ export class OfficeComponent {
   doAddRoom() {
     let post = {
       levelId: this.levelId,
-      number: this.roomNumber,
+      number: this.number,
       positionX: this.positionX,
       positionY: this.positionY
     };
+
     this.service.addRoom(post).subscribe(
       (data) => {
         console.log('A level in an office has been added.');
         console.log('Data: ');
         console.log(data);
+        this.doAddDot();
 
       },
       (error) => {
@@ -340,14 +369,21 @@ export class OfficeComponent {
 
   //adds a dot on the image, the dot's color will signify how many desks are taken
   doAddDot() {
-    console.log('Trying to add dots...');
+     // in case this method has been called before - reloading
+     if (this.dots != undefined) {
+      if (this.dots.length === 0) {
+        // turning an array into a null array
+        this.dots.length = 0;
+      }
+    }
+
     this.service.addDot(this.levelId).subscribe(
       response => {
         console.log('Response: ');
         console.log('Dots have been added.');
         console.log(response);
 
-        this.obj = response; 
+        this.dots = response;
 
       },
       error => {
@@ -356,6 +392,40 @@ export class OfficeComponent {
         console.log(error);
       }
     )
+  }
+
+   //functions for sharing data with other components
+
+  // updates officeId
+  setOfficeId(officeId: any) {
+    this.officeId = officeId;
+    this.officeIdChange.next(this.officeId);
+    sessionStorage.setItem('officeId', this.officeId);
+
+    // get levels for this particular office
+    this.doGetLevels();
+  }
+
+  // updates the current level in a particular office
+  setLevel(levelId: any, levelNumber: number) {
+    // if there is even an officeId to work with in the first place
+    if (this.officeId != undefined) {
+      this.levelId = levelId;
+      this.levelNumber = levelNumber;
+      sessionStorage.setItem('levelId', this.levelId);
+      //sessionStorage.setItem('levelNumber', this.levelNumber.toString());
+      //console.log(this.levelNumber.toString());
+
+      // load image for this particular level in the office
+      this.getImageFromService();
+      // after a new office is loaded and a level is selected, image along with the dots should be loaded
+      this.doAddDot();
+    }
+  }
+
+  // gets officeId
+  getOfficeId() {
+    return this.officeId;
   }
 
   //get coordinates of a mouse
@@ -370,8 +440,8 @@ export class OfficeComponent {
   }
 
   // POP UP WINDOWS SPAM HURRAY
-   // add office
-   openAddOfficeDialog() {
+  // add office
+  openAddOfficeDialog() {
     let addOfficeDialog: any = <any>document.getElementById("addOfficeDialog");
     addOfficeDialog.showModal();
   }
@@ -381,8 +451,8 @@ export class OfficeComponent {
     addOfficeDialog.close();
   }
 
-   // add level
-   openAddLevelDialog() {
+  // add level
+  openAddLevelDialog() {
     let addLevelDialog: any = <any>document.getElementById("addLevelDialog");
     addLevelDialog.showModal();
   }
@@ -436,8 +506,8 @@ export class OfficeComponent {
     removeRoomDialog.close();
   }
 
-   // remove office - are you sure?
-   openRemoveOfficeSureDialog() {
+  // remove office - are you sure?
+  openRemoveOfficeSureDialog() {
     let removeOfficeSureDialog: any = <any>document.getElementById("removeOfficeSureDialog");
     removeOfficeSureDialog.showModal();
   }
@@ -458,8 +528,8 @@ export class OfficeComponent {
     removeLevelSureDialog.close();
   }
 
-   // remove level - are you sure?
-   openRemoveSureDialog() {
+  // remove level - are you sure?
+  openRemoveSureDialog() {
     let removeSureDialog: any = <any>document.getElementById("removeSureDialog");
     removeSureDialog.showModal();
   }
@@ -511,40 +581,6 @@ export class OfficeComponent {
   closeTimeDialog() {
     let timeDialog: any = <any>document.getElementById("timeDialog");
     timeDialog.close();
-  }
-
-  //functions for sharing data with other components
-
-  // updates officeId
-  setOfficeId(officeId: any) {
-    this.officeId = officeId;
-    this.officeIdChange.next(this.officeId);
-    sessionStorage.setItem('officeId', this.officeId);
-
-    // get levels for this particular office
-    this.doGetLevels();
-  }
-
-  // updates the current level in a particular office
-  setLevel(levelId: any, levelNumber: number) {
-    // if there is even an officeId to work with in the first place
-    if (this.officeId != undefined) {
-      this.levelId = levelId;
-      this.levelNumber = levelNumber;
-      sessionStorage.setItem('levelId', this.levelId);
-      //sessionStorage.setItem('levelNumber', this.levelNumber.toString());
-      //console.log(this.levelNumber.toString());
-
-       // load image for this particular level in the office
-       this.getImageFromService();
-      // after a new office is loaded and a level is selected, image along with the dots should be loaded
-      this.doAddDot();
-    }
-  }
-
-  // gets officeId
-  getOfficeId() {
-    return this.officeId;
   }
 
   title = 'jakakolwiek-nazwa';

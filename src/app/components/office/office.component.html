@@ -4,7 +4,7 @@
     <span class="officeLeft"> Office </span>
 
     <!--Prints a list of all available levels in that office-->
-    <select id="offices" [(ngModel)]="officeId" name="officeId">
+    <select id="offices" [(ngModel)]="officeId" name="officeId" >
       <option class="optionBox" *ngFor="let office of offices" value="{{office.id}}">{{office.name}}</option>
     </select>
     <input type="submit" class="submitButton" value="Submit" (click)="setOfficeId(officeId)">
@@ -66,10 +66,10 @@
         <img class="centerImage" [src]="imageToShow" alt="Place image title" *ngIf="!isImageLoading;">
 
         <!--Print dots on the room image-->
-        <div *ngFor="let ob of obj">
+        <div *ngFor="let dot of dots">
           <!--Add something past /room/ so you can reroute to a specific dot-->
-          <a href="office/room/{{ob.id}}">
-            <img class="dot" [style.width.px]="50" [style.top.px]="ob.positionY" [style.left.px]="ob.positionX" src="assets/Kropka1.jpg" (click)="getRoomData(ob.number)" />
+          <a href="office/room/{{dot.id}}">
+            <img class="dot" [style.width.px]="50" [style.top.px]="dot.positionY" [style.left.px]="dot.positionX" src="assets/Kropka1.jpg" (click)="getRoomData(dot.number)" />
           </a>
         </div>
 
@@ -90,13 +90,13 @@
         <span class="centerText">Add a room:</span>
         <br>
         <input type="text" class="centerTextCursor2" value="X:" disabled="disabled">
-        <input class="centerTextInput" type="number" />
+        <input class="centerTextInput" type="number" [(ngModel)]="positionX" />
         <br><br>
         <input type="text" class="centerTextCursor2" value="Y:" disabled="disabled">
-        <input class="centerTextInput" type="number" />
+        <input class="centerTextInput" type="number" [(ngModel)]="positionY" />
         <br><br>
         <input type="text" class="centerTextCursor2" value="NR:" disabled="disabled">
-        <input class="centerTextInput" type="number" />
+        <input class="centerTextInput" type="number" [(ngModel)]="number" />
         <br><br>
         <div class="centerText">
           <input class="centerAddButton" style="cursor:pointer" type="submit" value="ADD" (click)="doAddRoom()">

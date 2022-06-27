@@ -84,8 +84,8 @@
 /* For the text box containing the coordinates of the cursor. */
 .centerTextInput {
     background-color: white;
-    border: rgb(37, 150, 190);
-    border-width: 1px;
+    border-color: rgb(37, 150, 190);
+    border-width: 2px;
     color: black;
     text-align: center;
     width: 50%;
@@ -123,6 +123,12 @@
     background: transparent;
 }
 
+.timeBox {
+    background-color: transparent;
+    border: none;
+    color: white;
+}
+
 /* Makes input type box prettier */
 .dateBox {
     background-color: transparent;
@@ -157,4 +163,24 @@
 .desk:hover {
     box-shadow: 0 0 8px white;
     cursor: pointer;
+}
+
+.dialogBox {
+    border-width: 5px;
+    border-color: rgb(37, 150, 190);
+    text-align: center;
+    justify-content: center;
+    align-items: center;
+}
+
+.normalButton {
+    background: rgb(37, 150, 190);
+    border-color: rgb(37, 150, 190);
+    color: white;
+}
+
+.removeButton {
+    background: red;
+    border-color: red;
+    color: white;
 }

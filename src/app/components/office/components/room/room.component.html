@@ -1,36 +1,41 @@
 <div class="centerAll">
-  <span class="officeLeft"> Office </span>
+  <span class="officeLeft" *ngIf="roomInfo != undefined"> Office {{roomInfo.officeName}} </span>
 
   <div class="background">
     <!--*ngIf="imageLoaded"; else #noImage-->
     <div class="skipLeft">
-      <span> Room </span>
+      <span *ngIf="roomInfo != undefined"> Room {{roomInfo.number}} </span>
 
-      <span class="material-icons" (click)="openRemoveRoomDialog()">
+      <span class="material-icons" (click)="openRemoveRoomDialog()" *ngIf="_login.isAdmin()">
         remove
       </span>
 
       <div class="dateCenter">
-        <input class="dateBox" type="date" [(ngModel)]="dateNow">
+        <input class="dateBox" type="date" [(ngModel)]="dateFrom">
+        <a> - </a>
+        <input class="dateBox" type="date" [(ngModel)]="dateUntil">
       </div>
-  
+
       <div class="timeRight">
-        <input class="timeBox" type="time" [(ngModel)]="timeNow">
+        <input class="timeBox" type="time" [(ngModel)]="timeFrom">
+        <a> - </a>
+        <input class="timeBox" type="time" [(ngModel)]="timeUntil">
       </div>
     </div>
 
-      <br>
+    <br>
 
-      <div class="centerText">
-        <input class="centerAddButton" style="cursor:pointer" type="submit" value="Make a reservation"
-          (click)="openReservationDialog()">
-      </div>
+    <div class="centerText">
+      <input class="centerAddButton" style="cursor:pointer" type="submit" value="Make a reservation"
+        (click)="openReservationDialog(); initialReservationInfo()">
+    </div>
 
-    
+
     <div class="leftUser">
       <!--show room image-->
       <div class="centerImage" (mousemove)="mouseMoved($event)">
-        <img [src]="imageToShow" [style.width.px]="600" [style.height.px]="500" alt="Place image title" *ngIf="!isImageLoading && imageLoaded">
+        <img [src]="imageToShow" [style.width.px]="600" [style.height.px]="500" alt="Place image title"
+          *ngIf="!isImageLoading && imageLoaded">
 
         <!--It might be needed to move out desk generation out of here later-->
         <!--Print desks on the room image-->
@@ -98,63 +103,63 @@
   </ng-template>
 </div>
 
-<dialog id="removeRoomDialog">
+<dialog id="removeRoomDialog" class="dialogBox">
   <p>Remove this room</p>
-  <button (click)="openRemoveRoomSureDialog()">Remove</button>
-  <button (click)="closeRemoveRoomDialog()">Cancel</button>
+  <button class="removeButton" (click)="openRemoveRoomSureDialog()">Remove</button>
+  <button class="normalButton" (click)="closeRemoveRoomDialog()">Cancel</button>
 </dialog>
 
-<dialog id="removeRoomSureDialog">
+<dialog id="removeRoomSureDialog" class="dialogBox">
   <p>Are you sure you want to remove this room?</p>
   <br>
   <p>This action is irreversible!</p>
-  <button (click)="closeRemoveRoomSureDialog();closeRemoveRoomDialog()">Remove</button>
-  <button (click)="closeRemoveRoomSureDialog();closeRemoveRoomDialog()">Cancel</button>
+  <button class="removeButton" (click)="closeRemoveRoomSureDialog();closeRemoveRoomDialog(); doRemoveRoom(roomId);">Remove</button>
+  <button class="normalButton" (click)="closeRemoveRoomSureDialog();closeRemoveRoomDialog()">Cancel</button>
 </dialog>
 
-<dialog id="removeDeskSureDialog">
+<dialog id="removeDeskSureDialog" class="dialogBox">
   <p>Are you sure you want to remove this desk?</p>
   <br>
   <p>This action is irreversible!</p>
-  <button
+  <button class="removeButton"
     (click)="doDeleteDesk(deskId); closeRemoveDeskSureDialog(); closeRemoveDeskDialog(); closeEditDeskDialog();">Remove</button>
-  <button (click)="closeRemoveDeskSureDialog();closeRemoveDeskDialog();closeEditDeskDialog()">Cancel</button>
+  <button class="normalButton" (click)="closeRemoveDeskSureDialog();closeRemoveDeskDialog();closeEditDeskDialog()">Cancel</button>
 </dialog>
 
-<dialog id="editDeskDialog">
-  <span class="centerText">Edit a desk</span>
+<dialog id="editDeskDialog" class="dialogBox">
+  <span class="centerText">Edit desk</span>
   <br>
-  <input type="text" class="centerTextCursor1" value="X:" disabled="disabled">
+  <input type="text" class="centerTextCursor2" value="X:" disabled="disabled">
   <input class="centerTextInput" type="number" placeholder="deskPositionX" [(ngModel)]="deskPositionX" />
   <br>
   <br>
-  <input type="text" class="centerTextCursor1" value="Y:" disabled="disabled">
+  <input type="text" class="centerTextCursor2" value="Y:" disabled="disabled">
   <input class="centerTextInput" type="number" placeholder="deskPositionY" [(ngModel)]="deskPositionY" />
   <br>
   <br>
-  <input type="text" class="centerTextCursor1" value="NR:" disabled="disabled">
+  <input type="text" class="centerTextCursor2" value="NR:" disabled="disabled">
   <input class="centerTextInput" type="number" placeholder="deskNumber" [(ngModel)]="deskNumber">
   <br>
   <br>
-  <input type="text" class="centerTextCursor1" value="ID:" disabled="disabled">
+  <input type="text" class="centerTextCursor2" value="ID:" disabled="disabled">
   <input class="centerTextInput" type="text" placeholder="deskId" [(ngModel)]="deskId">
   <br>
   <br>
-  <button (click)="doUpdateDesk(); closeEditDeskDialog();">Save</button>
-  <button (click)="closeEditDeskDialog()">Cancel</button>
+  <button class="normalButton" (click)="doUpdateDesk(); closeEditDeskDialog();">Save</button>
+  <button class="normalButton" (click)="closeEditDeskDialog()">Cancel</button>
   <br>
-  <button (click)="openRemoveDeskSureDialog()">Remove</button>
+  <button class="removeButton" (click)="openRemoveDeskSureDialog()">Remove</button>
 </dialog>
 
-<dialog id="positionDialog">
+<dialog id="positionDialog" class="dialogBox">
   <p>Add level</p>
   <input type="text" name="username" id="whatever" placeholder="...">
   <br>
   <button>Add</button>
-  <button (click)="closePositionDialog()">Cancel</button>
+  <button class="normalButton" (click)="closePositionDialog()">Cancel</button>
 </dialog>
 
-<dialog id="reservationDialog">
+<dialog id="reservationDialog" class="dialogBox">
   <p>Fill in reservation information...</p>
   <input type="date" name="startDay" [(ngModel)]="startDay">
   <br>
@@ -171,16 +176,16 @@
   <input type="checkbox" name="isPermanent" [(ngModel)]="isPermanent">
   <label for="isPermanent"> Is permanent?</label>
   <br>
-  <button (click)="doMakeReservation()">Save</button>
-  <button (click)="closeReservationDialog()">Cancel</button>
+  <button class="normalButton" (click)="doMakeReservation()">Save</button>
+  <button class="normalButton" (click)="closeReservationDialog()">Cancel</button>
 </dialog>
 
-<dialog id="timeDialog">
+<dialog id="timeDialog" class="dialogBox">
   <p>Please select reservation time</p>
   <input type="text" class="time_input" [(ngModel)]="Input1" placeholder="From...">
   <br>
   <input type="timeUntil" class="time_input" [(ngModel)]="Input2" placeholder="Until...">
   <br>
   <button>OK</button>
-  <button (click)="closeTimeDialog()">Cancel</button>
+  <button class="normalButton" (click)="closeTimeDialog()">Cancel</button>
 </dialog>

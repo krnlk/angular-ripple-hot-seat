@@ -17,10 +17,7 @@ import { RoomComponent } from './components/office/components/room/room.componen
 const routes: Routes = [
 { path: '', component: HomeComponent },
 { path: 'office', component: OfficeComponent },
-{ path: 'office/id', component: OfficeComponent },
-{ path: 'office/room', component: RoomComponent },
 { path: 'office/room/:roomId', component: RoomComponent },
-{ path: 'office/:officeId/room/:roomId', component: RoomComponent },
 { path: 'reservations', component: ReservationsComponent },
 { path: 'aboutus', component: AboutusComponent },
 { path: 'faq', component: FaqComponent },

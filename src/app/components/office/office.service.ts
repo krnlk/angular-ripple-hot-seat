@@ -76,7 +76,7 @@ export class OfficeService {
 
   // removes an office
   removeOffice(officeId: string) {
-    return this.http.delete(`https://ripple-hot-seat-backend-app.herokuapp.com/offices/delete/${officeId}`)
+    return this.http.delete(`https://ripple-hot-seat-backend-app.herokuapp.com/offices/delete/${officeId}`, { responseType: 'blob' })
   }
 
   //returns all existing levels in that office
@@ -96,7 +96,7 @@ export class OfficeService {
 
   // removes a level 
   removeLevel(levelId: string) {
-    return this.http.delete(`https://ripple-hot-seat-backend-app.herokuapp.com/levels/delete/${levelId}`)
+    return this.http.delete(`https://ripple-hot-seat-backend-app.herokuapp.com/levels/delete/${levelId}`, { responseType: 'text' })
   }
 
   // adds a dot on top of the background image

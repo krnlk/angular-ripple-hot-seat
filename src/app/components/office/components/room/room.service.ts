@@ -48,7 +48,7 @@ export class RoomService {
   }
 
   removeRoom(roomId: string) {
-    return this.http.delete(`https://ripple-hot-seat-backend-app.herokuapp.com/rooms/delete/${roomId}`)
+    return this.http.delete(`https://ripple-hot-seat-backend-app.herokuapp.com/rooms/delete/${roomId}`, {responseType: 'text'})
   }
 
   //adds a desk to the server
@@ -74,7 +74,7 @@ export class RoomService {
 
   // remove this desk
   deleteDesk(roomId: string) {
-    return this.http.delete(`https://ripple-hot-seat-backend-app.herokuapp.com/desks/delete/${roomId}`)
+    return this.http.delete(`https://ripple-hot-seat-backend-app.herokuapp.com/desks/delete/${roomId}`, {responseType: 'text'})
   }
 
   // get all the desks of that room

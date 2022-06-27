@@ -4,7 +4,7 @@ import { RoomService } from './room.service';
 import { formatDate } from '@angular/common';
 import { OfficeComponent } from '../../office.component';
 import { LoginService } from '../../../login/login.service';
-import { ActivatedRoute } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 import { DatePipe } from '@angular/common';
 
 @Component({
@@ -30,8 +30,11 @@ export class RoomComponent implements OnInit {
   imageLoaded!: boolean;
 
   DateCurrent: Date = new Date();
-  dateNow!: any;
-  timeNow!: any;
+  // parameters for date & time (when checking reservations and reserving)
+  dateFrom!: any;
+  dateUntil!: any;
+  timeFrom!: any;
+  timeUntil!: any;
 
   //for queries
   Input1!: string;
@@ -82,9 +85,11 @@ export class RoomComponent implements OnInit {
   // subscription for updating officeId
   private _subscription: any;
 
-  constructor(private service: RoomService, public _login: LoginService, public _office: OfficeComponent, public route: ActivatedRoute, public http: HttpClient) {
-    this.dateNow = formatDate(this.DateCurrent, 'yyyy-MM-dd', 'en-US', '+0530');
-    this.timeNow = formatDate(this.DateCurrent, 'hh:mm', 'en-US', '+0530');
+  constructor(private service: RoomService, public _login: LoginService, public _office: OfficeComponent, public route: ActivatedRoute, public router: Router, public http: HttpClient) {
+    this.dateFrom = formatDate(this.DateCurrent, 'yyyy-MM-dd', 'en-US', '+0530');
+    this.dateUntil = this.dateFrom;
+    this.timeFrom = formatDate(this.DateCurrent, 'hh:mm', 'en-US', '+0530');
+    this.timeUntil = '17:00';
     // chyba two way data bindindg przy dacie
 
     this.officeId = sessionStorage.getItem('officeId');
@@ -99,7 +104,7 @@ export class RoomComponent implements OnInit {
 
   ngOnInit(): void {
     this.roomId = this.route.snapshot.params['roomId'];
-    this.doGetRoomData;
+    this.doGetRoomData();
     this.getImageFromService();
     this.doGetDesks();
   }
@@ -110,9 +115,16 @@ export class RoomComponent implements OnInit {
     this._subscription.unsubscribe();
   }
 
-
   // return desks that exist for this particular room
   doGetDesks() {
+    // in case this method has been called before - redrawing
+    if (this.desks != undefined) {
+      if (this.desks.length === 0) {
+        // turning an array into a null array
+        this.desks.length = 0;
+      }
+    }
+
     this.service.getDesks(this.roomId).subscribe(
       response => {
         console.log('Response: ');
@@ -124,6 +136,15 @@ export class RoomComponent implements OnInit {
         console.log(error);
       }
     )
+  }
+
+  // fill reservation's initial info
+  initialReservationInfo ()
+  {
+    this.startDay = this.dateFrom;
+    this.endDay = this.dateUntil;
+    this.startHour = this.timeFrom;
+    this.endHour = this.timeUntil;
   }
 
   // makes a reservation
@@ -205,7 +226,6 @@ export class RoomComponent implements OnInit {
         console.log(response);
 
         this.roomInfo = response;
-        console.log(this.roomInfo)
 
         //this.officeName = this.roomInfo.officeName;
         //this.roomNumber = this.roomInfo.number;
@@ -224,11 +244,11 @@ export class RoomComponent implements OnInit {
 
   // delete a desk
   doRemoveRoom(roomId: any) {
-    this.service.deleteDesk(roomId).subscribe(
+    this.service.removeRoom(roomId).subscribe(
       (data) => {
         console.log('The room has been removed.');
         // reroute back to office
-
+        this.router.navigateByUrl('/office');
       },
       (error) => {
         console.log('Error while removing the room: ');
@@ -252,7 +272,8 @@ export class RoomComponent implements OnInit {
         console.log('A desk has been added.');
         console.log('Data: ');
         console.log(data);
-
+        // add the new desk
+        this.doGetDesks();
       },
       (error) => {
         console.log('Error while adding a desk: ');
@@ -277,6 +298,11 @@ export class RoomComponent implements OnInit {
         console.log('Data: ');
         console.log(data);
 
+        // delete the modified desk from its old spot
+
+        // draw the modified desk in its new spot
+        this.doGetDesks();
+
       },
       (error) => {
         console.log('Error while updating the desk: ');
@@ -290,9 +316,11 @@ export class RoomComponent implements OnInit {
     this.service.deleteDesk(deskId).subscribe(
       (data) => {
         console.log('A desk has been removed.');
+        //delete the modified desk from its old spot
+        this.doGetDesks();
       },
       (error) => {
-        console.log('Error while adding a desk: ');
+        console.log('Error while deleting a desk: ');
         console.log(error);
       }
     )
