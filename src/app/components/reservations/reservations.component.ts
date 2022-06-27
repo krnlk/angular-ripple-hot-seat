@@ -104,11 +104,11 @@ export class ReservationsComponent implements OnInit {
     return event;
   }*/
 
-  // ???????????
+  // gets reservations for this user
   doGetReservations() {
     console.log("Reservations are being properly shown.");
     //console.log(this.reservations);
-    this.service.getReservations("a");
+    this.service.getReservations("https://ripple-hot-seat-backend-app.herokuapp.com/reservations/byUserId/{");
   }
 
 }
