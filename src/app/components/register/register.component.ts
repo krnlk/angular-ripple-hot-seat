@@ -11,13 +11,13 @@ import { RegisterService } from './register.service';
   styleUrls: ['./register.component.css']
 })
 export class RegisterComponent implements OnInit {
-  username!: string
-  email!: string
-  password!: string
-  password2!: string
+  username!: string;
+  email!: string;
+  password!: string;
+  password2!: string;
 
   // error message logic!
-  // no username or password 
+  // no username or password
   registerErrorNoData: boolean = false;
   // if the username is already taken
   registerErrorUserTaken: boolean = false;
@@ -26,8 +26,8 @@ export class RegisterComponent implements OnInit {
   // if the passwords do not match
   registerErrorNoMatch: boolean = false;
 
-  constructor(public app: AppComponent, public http: RegisterService, public router: Router) 
-  { 
+  constructor(public app: AppComponent, public http: RegisterService, public router: Router)
+  {
     // unlike in appservice, this does work in constructor - might cause issues later down the line
     this.app.hideMatToolbar();
   }
@@ -79,7 +79,7 @@ export class RegisterComponent implements OnInit {
       this.doRegister();
     }
   }
-  
+
   /*
   showMatToolbar() {
     let matToolbar: any = <any>document.getElementById("matToolbar");
