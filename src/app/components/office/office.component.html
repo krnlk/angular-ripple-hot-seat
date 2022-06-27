@@ -52,7 +52,7 @@
       <div id="aroundImage">
         <div class="centerText">
           <div class="centerImage" (mousemove)="mouseMoved($event)">
-            <img class="centerImage" [src]="imageToShow" alt="Place image title" *ngIf="!isImageLoading;">
+            <img [src]="imageToShow" alt="Place image title" *ngIf="!isImageLoading;">
 
             <!--Print dots on the room image-->
             <div *ngFor="let dot of dots">
@@ -62,6 +62,7 @@
                   src="assets/Kropka1.jpg" (click)="getRoomData(dot.number)" />
               </a>
             </div>
+            
           </div>
         </div>
 
