@@ -5,32 +5,43 @@
   <!--Inside the background-->
   <div id="background">
     <div id="centerTable">
-    <table class="table">
-      <thead>
-        <tr>
-          <th>date</th>
-          <th>time</th>
-          <th>office</th>
-          <th>room</th>
-          <th>desk</th>
-          <th>is permanent?</th>
-        </tr>
-      </thead>
-      
-      <tbody>
-        <tr *ngFor="let reservation of reservations">
-          <td>{{ reservation.startTime | date }}</td>
-          <td>{{ reservation.startTime | date:'hh:mm' }} - {{ reservation.endTime | date:'hh:mm' }}</td>
-          <td>{{ reservation.startTime  }}</td>
-          <td> room {{ reservation.endTime }}</td>
-          <td> desk {{ reservation.deskId }}</td>
-          <td>
-          <div *ngIf="reservation.isPermanent; else notPermanent">yes</div>
-          <ng-template #notPermanent>no</ng-template>
+      <table mat-table [dataSource]="reservations" class="table">
+
+        <ng-container matColumnDef="date">
+          <th mat-header-cell *matHeaderCellDef style="text-align: center;">date</th>
+          <td mat-cell *matCellDef="let element"> {{ element.startTime | date }} </td>
+        </ng-container>
+
+        <ng-container matColumnDef="time">
+          <th mat-header-cell *matHeaderCellDef style="text-align: center;">time</th>
+          <td mat-cell *matCellDef="let element"> {{ element.startTime | date:'hh:mm' }} - {{ element.endTime | date:'hh:mm' }} </td>
+        </ng-container>
+
+        <ng-container matColumnDef="office">
+          <th mat-header-cell *matHeaderCellDef style="text-align: center;">office</th>
+          <td mat-cell *matCellDef="let element"> {{ element.startTime  }} </td>
+        </ng-container>
+
+        <ng-container matColumnDef="room">
+          <th mat-header-cell *matHeaderCellDef style="text-align: center;">room</th>
+          <td mat-cell *matCellDef="let element"> {{ element.endTime }} </td>
+        </ng-container>
+
+        <ng-container matColumnDef="desk">
+          <th mat-header-cell *matHeaderCellDef style="text-align: center;">desk</th>
+          <td mat-cell *matCellDef="let element"> {{ element.deskId }} </td>
+        </ng-container>
+
+        <ng-container matColumnDef="isPermanent">
+          <th mat-header-cell *matHeaderCellDef style="text-align: center;">is permanent?</th>
+          <td mat-cell *matCellDef="let element">
+            <div *ngIf="element.isPermanent; else notPermanent">yes</div>
+            <ng-template #notPermanent>no</ng-template>
           </td>
-        </tr>
-      </tbody>
-    </table>
+        </ng-container>
+        <tr mat-header-row *matHeaderRowDef="displayedColumnes; sticky: true"></tr>
+        <tr mat-row *matRowDef="let row; columns: displayedColumnes"></tr>
+      </table>
     </div>
   </div>
 </div>
