@@ -169,13 +169,13 @@
     cursor: pointer;
 }
 
-.centerText{
+.centerText {
   justify-content: center;
   align-items: center;
   display: flex;
 }
 
-#imagestyle{
+#imagestyle { 
   width: 200px;
   height: 200px;
 }
