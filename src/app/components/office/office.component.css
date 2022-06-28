@@ -195,3 +195,17 @@
     border-color: red;
     color: white;
 }
+
+/* Creates some distance between elements */
+.space {
+    width: 20px; 
+    height: auto; 
+    display: inline-block;
+}
+
+/* Creates small distance between elements */
+.spaceSmall {
+    width: 10px; 
+    height: auto; 
+    display: inline-block;
+}

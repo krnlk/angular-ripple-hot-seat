@@ -73,7 +73,6 @@ export class ReservationsComponent implements OnInit {
 
         // przekopiowanie rezerwacji do zmiennej lokalnej
         this.reservations = response;
-        console.log(this.reservations);
       },
       error => {
         console.log("Error while loading reservations.");

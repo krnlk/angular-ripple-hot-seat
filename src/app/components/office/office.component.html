@@ -17,12 +17,16 @@
     <div class="example-fill-remaining-space"></div>
     <div class="dateCenter">
       <input class="dateBox" type="date" [(ngModel)]="dateFrom">
+      <div class="spaceSmall"></div>
       <a> - </a>
+      <div class="space"></div>
       <input class="dateBox" type="date" [(ngModel)]="dateUntil">
     </div>
     <div class="timeRight">
       <input class="timeBox" type="time" [(ngModel)]="timeFrom">
+      <div class="spaceSmall"></div>
       <a> - </a>
+      <div class="space"></div>
       <input class="timeBox" type="time" [(ngModel)]="timeUntil">
     </div>
   </div>
@@ -57,15 +61,21 @@
             <img [src]="imageToShow" alt="Place image title" *ngIf="!isImageLoading;">
             <!--Print dots on the room image-->
             <div class="dots" *ngFor="let dot of dots">
-              <!--Add something past /room/ so you can reroute to a specific dot-->
-              <a href="office/room/{{dot.id}}">
+              <!--If no desks are reserved in a room-->
+              <a href="office/room/{{dot.id}}" *ngIf="dot.percentage == 0">
+                <img class="dot" [style.width.px]="50" [style.top.px]="dot.positionY" [style.left.px]="dot.positionX"
+                  src="assets/dots/dot_green.png" (click)="getRoomData(dot.number)" />
+              </a>
+
+              <!--If any desk is reserved in a room-->
+              <a href="office/room/{{dot.id}}" *ngIf="dot.percentage > 0">
                 <img class="dot" [style.width.px]="50" [style.top.px]="dot.positionY" [style.left.px]="dot.positionX"
                   src="assets/dots/dot_red.png" (click)="getRoomData(dot.number)" />
               </a>
             </div>
           </div>
         </div>
-        
+
         <div class="centerText">
           <input class="centerAddButton" style="cursor:pointer" type="submit" value="Search" (click)="doSearch()">
         </div>
@@ -120,12 +130,14 @@
   <input type="text" placeholder="New office's name..." [(ngModel)]="officeName">
   <br>
   <button class="normalButton" (click)="doAddOffice();closeAddOfficeDialog()">Add</button>
+  <div class="space"></div>
   <button class="normalButton" (click)="closeAddOfficeDialog()">Cancel</button>
 </dialog>
 
 <dialog id="removeOfficeDialog" class="dialogBox">
   <p>Remove this office?</p>
   <button class="removeButton" (click)="openRemoveOfficeSureDialog()">Remove</button>
+  <div class="space"></div>
   <button class="normalButton" (click)="closeRemoveOfficeDialog()">Cancel</button>
 </dialog>
 
@@ -134,12 +146,14 @@
   <input type="number" placeholder="New level's number..." [(ngModel)]="levelNumber">
   <br>
   <button class="normalButton" (click)="doAddLevel();closeAddLevelDialog()">Add</button>
+  <div class="space"></div>
   <button class="normalButton" (click)="closeAddLevelDialog()">Cancel</button>
 </dialog>
 
 <dialog id="removeLevelDialog" class="dialogBox">
   <p>Remove this level?</p>
   <button class="removeButton" (click)="openRemoveLevelSureDialog()">Remove</button>
+  <div class="space"></div>
   <button class="normalButton" (click)="closeRemoveLevelDialog()">Cancel</button>
 </dialog>
 
@@ -149,6 +163,7 @@
   <input type="number" placeholder="New room's number ">
   <br>
   <button class="normalButton" (click)="closeAddRoomDialog()">Add</button>
+  <div class="space"></div>
   <button class="normalButton" (click)="closeAddRoomDialog()">Cancel</button>
 </dialog>
 
@@ -156,6 +171,7 @@
 <dialog id="removeRoomDialog" class="dialogBox">
   <p>Remove this room?</p>
   <button class="removeButton" (click)="openRemoveSureDialog()">Remove</button>
+  <div class="space"></div>
   <button class="normalButton" (click)="closeRemoveRoomDialog()">Cancel</button>
 </dialog>
 
@@ -166,6 +182,7 @@
   <p>This action is irreversible!</p>
   <button class="removeButton"
     (click)="doRemoveOffice();closeRemoveOfficeSureDialog(); closeRemoveOfficeDialog()">Remove</button>
+  <div class="space"></div>
   <button class="normalButton"
     (click)="closeRemoveOfficeSureDialog();closeRemoveRoomDialog();closeEditDeskDialog()">Cancel</button>
 </dialog>
@@ -176,6 +193,7 @@
   <p>This action is irreversible!</p>
   <button class="removeButton"
     (click)="doRemoveLevel();closeRemoveLevelSureDialog(); closeRemoveLevelDialog()">Remove</button>
+  <div class="space"></div>
   <button class="normalButton"
     (click)="closeRemoveLevelSureDialog();closeRemoveLevelDialog();closeEditDeskDialog()">Cancel</button>
 </dialog>
@@ -224,6 +242,7 @@
   <input type="dateUntil" class="date_input" [(ngModel)]="Input2" placeholder="{{dateUntil}}">
   <br>
   <button class="normalButton" (click)="updateDateQuery()">OK</button>
+  <div class="space"></div>
   <button class="normalButton" (click)="closeDateDialog()">Cancel</button>
 </dialog>
 
@@ -234,6 +253,7 @@
   <input type="text" class="time_input" [(ngModel)]="Input2" placeholder="Until...">
   <br>
   <button class="normalButton" (click)="updateTimeQuery()">OK</button>
+  <div class="space"></div>
   <button class="normalButton" (click)="closeTimeDialog()">Cancel</button>
 </dialog>
 z

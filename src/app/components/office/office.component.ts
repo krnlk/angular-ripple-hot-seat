@@ -76,6 +76,8 @@ export class OfficeComponent {
 
   // stores the list of offices
   offices: any;
+  // stores the list of percentages of desks taken in each room
+  percentages: any;
 
   // stores the list of levels of that office
   levels: any;
@@ -157,6 +159,9 @@ export class OfficeComponent {
         console.log(response);
 
         this.offices = response;
+
+        // if there is no office being shown currently, show the first available one
+        this.setOfficeId(this.offices[0].id);
       },
       error => {
         console.log('Error: ');
@@ -189,6 +194,12 @@ export class OfficeComponent {
         console.log(response);
 
         this.levels = response;
+
+        // if there is no default level loaded, the first available level (if any exists) should be loaded
+        if (sessionStorage.getItem('levelId') == null) this.setLevel(this.levels[0].id, this.levels[0].number);
+
+        // upon loading the page, do a search with default date & time settings
+        this.doSearch();
       },
       error => {
         console.log('Error: ');
@@ -209,7 +220,7 @@ export class OfficeComponent {
       this.imageToShow = reader.result;
       this.height = this.imageToShow.height;
       this.width = this.imageToShow.width;
-      console.log(this.height, this.width);
+      //console.log(this.height, this.width);
     }, false);
 
     if (image) {
@@ -256,12 +267,22 @@ export class OfficeComponent {
 
   }
 
-  //makes a request to the database regarding the reservations that fit so and so criteria
+  // given startDate, endDate, startTime, endTime, returns percentage of desks reserved for each room
   doSearch() {
     this.service.search(this.levelId).subscribe(
       response => {
         console.log('Response: ');
         console.log(response);
+
+        // save percentage taken data for each room
+        this.percentages = response;
+
+        // add percentage of desks taken for each room
+        for (let i in this.percentages) {
+          this.dots[i].percentage = this.percentages[i].percentage;
+        }
+
+        console.log(this.dots);
       },
       error => {
         console.log('Error: ');
@@ -301,7 +322,6 @@ export class OfficeComponent {
       (error) => {
         console.log('Error while adding an office.');
         console.log(error);
-        console.log(post);
       }
     )
   }
@@ -414,6 +434,8 @@ export class OfficeComponent {
 
         this.dots = response;
 
+        // get colors for dots
+        this.doSearch(); 
       },
       error => {
         console.log('Error: ');
@@ -427,9 +449,6 @@ export class OfficeComponent {
 
   // updates officeId
   setOfficeId(officeId: any) {
-    console.log(this.officeId);
-    console.log(sessionStorage.getItem('officeId'));
-
     // if the new officeId isn't the same as the old one
     if (this.officeId != sessionStorage.getItem('officeId') || sessionStorage.getItem('levelId') == null) {
       this.officeId = officeId;
@@ -441,6 +460,9 @@ export class OfficeComponent {
 
       // get levels for this particular office
       this.doGetLevels();
+
+      // the first available level (if any exists) should be loaded
+
     }
   }
 
@@ -454,7 +476,6 @@ export class OfficeComponent {
         this.levelId = levelId;
         this.currentLevelNumber = currentLevelNumber;
         sessionStorage.setItem('levelId', this.levelId);
-        console.log(this.levels);
 
         // find the number of a level with this levelId
         var i = 0;
