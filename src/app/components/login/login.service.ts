@@ -34,6 +34,7 @@ export class LoginService{
       return localStorage.getItem('token')
     }
 
+    // checks if the user is logged in
     isLoggedIn(){
       // https://www.youtube.com/watch?v=7L80dKtfHe0&list=PLC3y8-rFHvwg2RBz6UplKTGIXREj9dV0G&index=25
       // wedlug tego tutoriala, takie podwojne zaprzeczenie oznacza, ze metoda zwroci albo true, albo false (w zaleznosci od tego, czy ktos jest zalogowany)

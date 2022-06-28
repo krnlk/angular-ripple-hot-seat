@@ -48,7 +48,7 @@ export class RoomService {
   }
 
   removeRoom(roomId: string) {
-    return this.http.delete(`https://ripple-hot-seat-backend-app.herokuapp.com/rooms/delete/${roomId}`, {responseType: 'text'})
+    return this.http.delete(`https://ripple-hot-seat-backend-app.herokuapp.com/rooms/delete/${roomId}`, { responseType: 'text' })
   }
 
   //adds a desk to the server
@@ -68,18 +68,23 @@ export class RoomService {
       headers: new HttpHeaders({ 'Content-Type': 'application/json' }),
       responseType: 'text' as const
     }
-    
+
     return this.http.patch(`https://ripple-hot-seat-backend-app.herokuapp.com/desks/update/${deskId}`, JSON.stringify(patch), httpOptions)
   }
 
   // remove this desk
   deleteDesk(roomId: string) {
-    return this.http.delete(`https://ripple-hot-seat-backend-app.herokuapp.com/desks/delete/${roomId}`, {responseType: 'text'})
+    return this.http.delete(`https://ripple-hot-seat-backend-app.herokuapp.com/desks/delete/${roomId}`, { responseType: 'text' })
   }
 
   // get all the desks of that room
   getDesks(roomId: string) {
     return this.http.get(`https://ripple-hot-seat-backend-app.herokuapp.com/desks/byRoomId/${roomId}`)
+  }
+
+  // change later
+  search(levelId: string) {
+    return this.http.get(`https://ripple-hot-seat-backend-app.herokuapp.com/levels/percentage/${levelId}`);
   }
 
 }

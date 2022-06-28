@@ -179,3 +179,23 @@
   width: 200px;
   height: 200px;
 }
+
+.dialogBox {
+    border-width: 5px;
+    border-color: rgb(37, 150, 190);
+    text-align: center;
+    justify-content: center;
+    align-items: center;
+}
+
+.normalButton {
+    background: rgb(37, 150, 190);
+    border-color: rgb(37, 150, 190);
+    color: white;
+}
+
+.removeButton {
+    background: red;
+    border-color: red;
+    color: white;
+}

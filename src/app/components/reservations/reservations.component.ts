@@ -44,8 +44,8 @@ export class ReservationsComponent implements OnInit {
   //endDay: String = this.endTime.substr(0, 10);
   endhour!: String;
 
-  deskId!: String;
-  userId!: String;
+  deskId!: string;
+  userId!: string;
   isPermanent!: boolean;
 
   // pagination
@@ -81,34 +81,6 @@ export class ReservationsComponent implements OnInit {
         console.log(error);
       }
     )
-    //this.getServerData();
-
-  }
-  /*
-  public getServerData(event?:PageEvent){
-    this.service.getReservations(event).subscribe(
-      response =>{
-        if(response.error) {
-          // handle error
-        } else {
-          this.datasource = response.data;
-          this.pageIndex = response.pageIndex;
-          this.pageSize = response.pageSize;
-          this.length = response.length;
-        }
-      },
-      error =>{
-        // handle error
-      }
-    );
-    return event;
-  }*/
-
-  // gets reservations for this user
-  doGetReservations() {
-    console.log("Reservations are being properly shown.");
-    //console.log(this.reservations);
-    this.service.getReservations("https://ripple-hot-seat-backend-app.herokuapp.com/reservations/byUserId/{");
   }
 
 }

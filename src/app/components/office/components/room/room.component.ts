@@ -139,8 +139,7 @@ export class RoomComponent implements OnInit {
   }
 
   // fill reservation's initial info
-  initialReservationInfo ()
-  {
+  initialReservationInfo() {
     this.startDay = this.dateFrom;
     this.endDay = this.dateUntil;
     this.startHour = this.timeFrom;
@@ -235,11 +234,6 @@ export class RoomComponent implements OnInit {
         console.log(error);
       }
     )
-  }
-
-  // makes a request to the database regarding the reservations that fit so and so criteria
-  doSearch() {
-
   }
 
   // delete a desk
@@ -337,6 +331,25 @@ export class RoomComponent implements OnInit {
 
   selectRoomFile() {
 
+  }
+
+  // go back to office page
+  routeBack() {
+    this.router.navigateByUrl('/office');
+  }
+
+  // change it later
+  doSearch() {
+    this.service.search(this.roomId).subscribe(
+      response => {
+        console.log('Response: ');
+        console.log(response);
+      },
+      error => {
+        console.log('Error: ');
+        console.log(error);
+      }
+    )
   }
 
   // POP UP WINDOWS SPAM HURRAY

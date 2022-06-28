@@ -81,6 +81,9 @@ export class OfficeComponent {
   levels: any;
   // id and number of a level in an office that's being displayed
   levelId!: string;
+  currentLevelNumber!: string;
+
+  // for adding new levels
   public levelNumber!: number;
 
   // stores all rooms
@@ -130,6 +133,22 @@ export class OfficeComponent {
       }
     }
 
+    // if there is an office and a level to load already (from previous requests)
+    if (sessionStorage.getItem('officeId') != undefined && sessionStorage.getItem('levelId') != undefined && sessionStorage.getItem('currentLevelNumber')) {
+      this.officeId = sessionStorage.getItem('officeId') || '{}';
+      this.levelId = sessionStorage.getItem('levelId') || '{}';
+      this.currentLevelNumber = sessionStorage.getItem('currentLevelNumber') || '{}';
+
+      this.doGetLevels();
+
+      // load image for this particular level in the office
+      this.getImageFromService();
+
+      // after a new office is loaded and a level is selected, image along with the dots should be loaded
+      this.doAddDot();
+    }
+
+
     this.service.getOffices().subscribe(
       response => {
         console.log('Response: ');
@@ -146,6 +165,9 @@ export class OfficeComponent {
 
   // returns all levels in the current office
   doGetLevels() {
+    // unload image
+    this.noImageFromService();
+
     // in case this method has been called before - reloading
     if (this.levels != undefined) {
       if (this.levels.length === 0) {
@@ -369,8 +391,8 @@ export class OfficeComponent {
 
   //adds a dot on the image, the dot's color will signify how many desks are taken
   doAddDot() {
-     // in case this method has been called before - reloading
-     if (this.dots != undefined) {
+    // in case this method has been called before - reloading
+    if (this.dots != undefined) {
       if (this.dots.length === 0) {
         // turning an array into a null array
         this.dots.length = 0;
@@ -394,7 +416,7 @@ export class OfficeComponent {
     )
   }
 
-   //functions for sharing data with other components
+  //functions for sharing data with other components
 
   // updates officeId
   setOfficeId(officeId: any) {
@@ -407,14 +429,22 @@ export class OfficeComponent {
   }
 
   // updates the current level in a particular office
-  setLevel(levelId: any, levelNumber: number) {
+  setLevel(levelId: any, currentLevelNumber: string) {
     // if there is even an officeId to work with in the first place
     if (this.officeId != undefined) {
       this.levelId = levelId;
-      this.levelNumber = levelNumber;
+      this.currentLevelNumber = currentLevelNumber;
       sessionStorage.setItem('levelId', this.levelId);
-      //sessionStorage.setItem('levelNumber', this.levelNumber.toString());
-      //console.log(this.levelNumber.toString());
+      console.log(this.levels);
+
+      // find the number of a level with this levelId
+      var i = 0;
+      while (this.levels[i].id != levelId && i <= this.levels.length) {
+        i++;
+      }
+      this.currentLevelNumber = this.levels[i].number;
+
+      sessionStorage.setItem('currentLevelNumber', this.currentLevelNumber.toString());
 
       // load image for this particular level in the office
       this.getImageFromService();
