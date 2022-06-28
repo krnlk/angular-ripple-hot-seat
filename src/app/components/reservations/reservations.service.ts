@@ -1,38 +1,21 @@
 "use strict";
 import { Component, OnInit } from '@angular/core';
 import { Injectable } from '@angular/core';
-import { HttpClient, HttpResponse, HttpHeaders} from '@angular/common/http';
+import { HttpClient, HttpResponse, HttpHeaders } from '@angular/common/http';
 import { HttpClientModule } from '@angular/common/http';
 import { User } from 'src/app/classes/user';
 
 @Injectable({
-  providedIn: 'root'
+    providedIn: 'root'
 })
 
-export class ReservationsService{
+export class ReservationsService {
     private apiUrl = 'reservations';
-    constructor(private http: HttpClient) {}
+    constructor(private http: HttpClient) { }
 
-//na razie kazdy powinien miec do tego dostep (bez jwt i autoryzacji), zeby testowac
+    //na razie kazdy powinien miec do tego dostep (bez jwt i autoryzacji), zeby testowac
 
-getReservations(userId: string) {
-    return this.http.get(`https://ripple-hot-seat-backend-app.herokuapp.com/reservations/byUserId/${userId}`)
-}
-
-/*
-getReservations() {
-    console.log("Getting reservations...");
-    this.http.get<any>(`http://localhost:8080/reservations`)
-        .subscribe(
-            response =>{
-                console.log('Response: ');
-                console.log(response);
-            },
-            error =>{
-                console.log('Error');
-                console.log(error);
-        }
-    )
-}
-*/
+    getReservations(userId: string) {
+        return this.http.get(`https://ripple-hot-seat-backend-app.herokuapp.com/reservations/byUserId/${userId}`)
+    }
 }

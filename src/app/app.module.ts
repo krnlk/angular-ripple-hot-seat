@@ -32,6 +32,7 @@ import { ResetPasswordComponent } from './components/reset-password/reset-passwo
 import { RegisterService } from './components/register/register.service';
 import { DatePipe } from '@angular/common';
 import { RoomComponent } from './components/office/components/room/room.component';
+import {MatTableModule} from "@angular/material/table";
 
 @NgModule({
   declarations: [
@@ -47,22 +48,23 @@ import { RoomComponent } from './components/office/components/room/room.componen
     ResetPasswordComponent,
     RoomComponent
   ],
-  imports: [
-    BrowserModule,
-    AppRoutingModule,
-    MatSliderModule,
-    FormsModule,
-    BrowserAnimationsModule,
-    NgMaterialModule,
-    ReactiveFormsModule,
-    MatListModule,
-    MatButtonModule,
-    MatDialogModule,
-    HttpClientModule,
-    MatIconModule,
-    MatPaginatorModule
-  ],
-  providers: [RestapiService, LoginService, ReservationsService, OfficeService, OfficeComponent, RegisterService, 
+    imports: [
+        BrowserModule,
+        AppRoutingModule,
+        MatSliderModule,
+        FormsModule,
+        BrowserAnimationsModule,
+        NgMaterialModule,
+        ReactiveFormsModule,
+        MatListModule,
+        MatButtonModule,
+        MatDialogModule,
+        HttpClientModule,
+        MatIconModule,
+        MatPaginatorModule,
+        MatTableModule
+    ],
+  providers: [RestapiService, LoginService, ReservationsService, OfficeService, OfficeComponent, RegisterService,
   {
     provide: HTTP_INTERCEPTORS,
     useClass: TokenInterceptorService,

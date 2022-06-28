@@ -25,8 +25,9 @@ export class OfficeService {
     return this.http.post<Response>('https://ripple-hot-seat-backend-app.herokuapp.com/rooms/image/62769a0b74ea2f51b016c7a5', formData);
   }
 
-  getImage(imageUrl: string): Observable<Blob> {
-    return this.http.get(`https://ripple-hot-seat-backend-app.herokuapp.com/rooms/image/${imageUrl}`, { responseType: 'blob' });
+  getImage(levelId: string): Observable<Blob> {
+    //return this.http.get(`https://ripple-hot-seat-backend-app.herokuapp.com/levels/image/${levelId}`, { responseType: 'blob' });
+    return this.http.get(`https://ripple-hot-seat-backend-app.herokuapp.com/levels/image/62b1bc6d8f9ca074a2b9aa64`, { responseType: 'blob' });
   }
 
   //gets the room image from the server
@@ -75,7 +76,7 @@ export class OfficeService {
 
   // removes an office
   removeOffice(officeId: string) {
-    return this.http.delete(`https://ripple-hot-seat-backend-app.herokuapp.com/offices/delete/${officeId}`)
+    return this.http.delete(`https://ripple-hot-seat-backend-app.herokuapp.com/offices/delete/${officeId}`, { responseType: 'blob' })
   }
 
   //returns all existing levels in that office
@@ -95,7 +96,7 @@ export class OfficeService {
 
   // removes a level 
   removeLevel(levelId: string) {
-    return this.http.delete(`https://ripple-hot-seat-backend-app.herokuapp.com/levels/delete/${levelId}`)
+    return this.http.delete(`https://ripple-hot-seat-backend-app.herokuapp.com/levels/delete/${levelId}`, { responseType: 'text' })
   }
 
   // adds a dot on top of the background image

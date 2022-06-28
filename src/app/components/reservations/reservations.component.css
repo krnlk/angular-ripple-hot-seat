@@ -15,7 +15,7 @@
 #background {
     background-color: rgba(0, 0, 0, .7);
     position: absolute;
-    height: 96%;
+    height: 90%;
     width: 100%;
 }
 
@@ -23,11 +23,13 @@
 #centerTable {
     position: relative;
     margin: 5%;
+    height: 87%;
+    overflow: auto;
 }
 
 /* Stolen from https://www.w3docs.com/tools/editor/4282 */
 table {
-    position: absolute;
+    /*position: absolute;*/
     table-layout: fixed;
     width: 100%;
     border-collapse: collapse;

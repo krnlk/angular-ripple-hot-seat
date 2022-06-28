@@ -55,6 +55,8 @@ export class ReservationsComponent implements OnInit {
   pageSize!: number;
   length!: number;
 
+  displayedColumnes = ['date', 'time', 'office', 'room', 'desk', 'isPermanent'];
+
   constructor(public service: ReservationsService) {
   }
 
@@ -71,7 +73,7 @@ export class ReservationsComponent implements OnInit {
 
         // przekopiowanie rezerwacji do zmiennej lokalnej
         this.reservations = response;
-        this.reservations.paginator = this.paginator;
+        console.log(this.reservations);
       },
       error => {
         console.log("Error while loading reservations.");
@@ -102,11 +104,11 @@ export class ReservationsComponent implements OnInit {
     return event;
   }*/
 
-  // ???????????
+  // gets reservations for this user
   doGetReservations() {
     console.log("Reservations are being properly shown.");
     //console.log(this.reservations);
-    this.service.getReservations("a");
+    this.service.getReservations("https://ripple-hot-seat-backend-app.herokuapp.com/reservations/byUserId/{");
   }
 
 }
