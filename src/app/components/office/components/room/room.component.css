@@ -5,30 +5,30 @@
     width: 90%;
 }
 
-.example-fill-remaining-space{
+.example-fill-remaining-space {
     flex: 1 1 auto;
-  }
-  
-  #aboveBackground {
-      display: flex;
-      align-items: center;
-  }
-  
-  #offices{
-      width: 15%;
-      margin: 0 1% 0 1%;
-  }
-  
-  #levels{
-      width: 15%;
-      margin: 0 1% 0 1%;
-  }
-  
-  /* For elements that are inside the background and should be positioned at the top of it */
-  #insideBackgroundTop {
+}
+
+#aboveBackground {
     display: flex;
     align-items: center;
-  }
+}
+
+#offices {
+    width: 15%;
+    margin: 0 1% 0 1%;
+}
+
+#levels {
+    width: 15%;
+    margin: 0 1% 0 1%;
+}
+
+/* For elements that are inside the background and should be positioned at the top of it */
+#insideBackgroundTop {
+    display: flex;
+    align-items: center;
+}
 
 .centerAll {
     top: 50%;
@@ -43,7 +43,7 @@
 
 /* Background */
 .background {
-    background-color: rgba(0,0,0,.7);
+    background-color: rgba(0, 0, 0, .7);
     /*position: absolute;*/
     min-height: 400px;
     height: 100%;
@@ -102,8 +102,9 @@
 }
 
 .centerText {
-    position: relative;
-    text-align: center;
+    justify-content: center;
+    align-items: center;
+    display: flex;
 }
 
 /* For the text box containing the "X", "Y" letters to the left of the mouse coordinates */
@@ -142,7 +143,7 @@
 }
 
 .submitButton {
-    background-color:rgb(37, 150, 190);
+    background-color: rgb(37, 150, 190);
     color: white;
 }
 
@@ -173,6 +174,7 @@
     float: right;
     background: transparent;
     */
+    float: right;
 }
 
 .timeBox {
@@ -202,14 +204,14 @@
     cursor: pointer;
 }
 
-#editable p{
-    margin:0;
-    padding:0;
+#editable p {
+    margin: 0;
+    padding: 0;
 }
 
 /* Used by desks on the image */
 .desk {
-    position:absolute;
+    position: absolute;
 }
 
 .desk:hover {

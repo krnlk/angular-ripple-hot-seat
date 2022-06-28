@@ -6,95 +6,116 @@
 
   <div class="background">
     <div id="insideBackgroundTop">
-        <span *ngIf="roomInfo != undefined"> Room {{roomInfo.number}} </span>
+      <span *ngIf="roomInfo != undefined"> Room {{roomInfo.number}} </span>
 
-        <span class="material-icons" (click)="openRemoveRoomDialog()" *ngIf="_login.isAdmin()">
-          remove
-        </span>
+      <span class="material-icons" (click)="openRemoveRoomDialog()" *ngIf="_login.isAdmin()">
+        remove
+      </span>
 
-        <div class="dateCenter">
-          <input class="dateBox" type="date" [(ngModel)]="dateFrom">
-          <a> - </a>
-          <input class="dateBox" type="date" [(ngModel)]="dateUntil">
-        </div>
+      <!--Makes some room between elements-->
+      <div class="example-fill-remaining-space"></div>
 
-        <div class="timeRight">
-          <input class="timeBox" type="time" [(ngModel)]="timeFrom">
-          <a> - </a>
-          <input class="timeBox" type="time" [(ngModel)]="timeUntil">
-        </div>
-    </div>
-
-  <div class="leftUser">
-    <!--show room image-->
-    <div id="aroundImage">
-      <div class="centerText">
-    <div class="centerImage" (mousemove)="mouseMoved($event)">
-      <img [src]="imageToShow" [style.width.px]="600" [style.height.px]="500" alt="Place image title"
-        *ngIf="!isImageLoading;">
-
-      <!--It might be needed to move out desk generation out of here later-->
-      <!--Print desks on the room image-->
-      <div *ngFor="let desk of desks">
-        <!--Display every desk with its number next to it on the room's image, changes deskId to the desk that was clicked-->
-        <img class="desk" [style.width.px]="25" [style.top.px]="desk.positionY" [style.left.px]="desk.positionX"
-          src="assets/desks/desk_black.png" (click)="currentDeskId(desk); openEditDeskDialog();" />
+      <div class="dateCenter">
+        <input class="dateBox" type="date" [(ngModel)]="dateFrom">
+        <a> - </a>
+        <input class="dateBox" type="date" [(ngModel)]="dateUntil">
       </div>
+
+      <!--Makes some room between elements-->
+      <div class="example-fill-remaining-space"></div>
+
+      <div class="timeRight">
+        <input class="timeBox" type="time" [(ngModel)]="timeFrom">
+        <a> - </a>
+        <input class="timeBox" type="time" [(ngModel)]="timeUntil">
       </div>
     </div>
 
-    <div class="centerText">
-      <input class="centerAddButton" style="cursor:pointer" type="submit" value="Make a reservation"
-        (click)="openReservationDialog(); initialReservationInfo()">
-      <input class="centerAddButton" style="cursor:pointer" type="submit" value="Back to office page"
-        (click)="routeBack()">    
-            <!--search for the rooms fulfilling the date & time criteria-->
-      <input class="centerAddButton" style="cursor:pointer" type="submit" value="Search"
-        (click)="doSearch()">
+    <div class="leftUser">
+      <!--show room image-->
+      <div id="aroundImage">
+        <div class="centerText">
+          <div (mousemove)="mouseMoved($event)">
+            <img [src]="imageToShow" [style.width.px]="600" [style.height.px]="500" alt="Place image title"
+              *ngIf="!isImageLoading;">
+
+            <!--It might be needed to move out desk generation out of here later-->
+            <!--Print desks on the room image-->
+            <div class="dots" *ngFor="let desk of desks">
+              <!--Display every desk with its number next to it on the room's image, changes deskId to the desk that was clicked-->
+              <!--If the user is an admin-->
+              <img class="desk" *ngIf="_login.isAdmin(); else notAdmin" [style.width.px]="50" [style.top.px]="desk.positionY" [style.left.px]="desk.positionX"
+                src="assets/desks/desk_black.png" (click)="currentDeskId(desk); openEditDeskDialog();" />
+                
+                <!--If the user is not an admin-->
+                <ng-template #notAdmin>
+                  <img class="desk" [style.width.px]="50" [style.top.px]="desk.positionY" [style.left.px]="desk.positionX"
+                  src="assets/desks/desk_black.png" (click)="currentDeskId(desk); openUserDeskDialog();" />
+                </ng-template>
+            </div>
+          </div>
         </div>
-  </div>
 
-  <!--This should only load in for the admin...-->
-  <!--For adding a desk-->
-  <div class="rightAdmin" *ngIf="_login.isAdmin()">
-    <span class="centerText">Current cursor position:</span>
-    <br>
-    <input type="text" class="centerTextCursor1" value="X:" disabled="disabled">
-    <input class="centerTextInput" type="number" value="{{cursorX}}" readonly="readonly" />
-    <br><br>
-    <input type="text" class="centerTextCursor1" value="Y:" disabled="disabled">
-    <input class="centerTextInput" type="number" value="{{cursorY}}" readonly="readonly" />
-    <br><br>
-    <span class="centerText">Add a new desk:</span>
-    <br>
-    <input type="text" class="centerTextCursor2" value="X:" disabled="disabled">
-    <input class="centerTextInput" type="number" [(ngModel)]="positionX" />
-    <br><br>
-    <input type="text" class="centerTextCursor2" value="Y:" disabled="disabled">
-    <input class="centerTextInput" type="number" [(ngModel)]="positionY" />
-    <br><br>
-    <input type="text" class="centerTextCursor2" value="NR:" disabled="disabled">
-    <input class="centerTextInput" type="number" [(ngModel)]="number" />
-    <br><br>
-    <input type="text" class="centerTextCursor2" value="FACING:" disabled="disabled">
+        <div class="centerText">
+          <input class="centerAddButton" style="cursor:pointer" type="submit" value="Back to office page"
+            (click)="routeBack()">
+          <!--search for the rooms fulfilling the date & time criteria-->
+          <input class="centerAddButton" style="cursor:pointer" type="submit" value="Search" (click)="doSearch()">
+        </div>
+      </div>
 
-    <select class="centerTextInput" list="orientation">
-      <option value="NORTH">NORTH</option>
-      <option value="EAST">EAST</option>
-      <option value="SOUTH">SOUTH</option>
-      <option value="WEST">WEST</option>
-    </select>
+      <!--This should only load in for the admin...-->
+      <!--For adding a desk-->
+      <div class="rightAdmin" *ngIf="_login.isAdmin()">
+        <span class="centerText">Current cursor position:</span>
+        <br>
+        <div class="centerText">
+          <input type="text" class="centerTextCursor1" value="X:" disabled="disabled">
+          <input class="centerTextInput" type="number" value="{{cursorX}}" readonly="readonly" />
+        </div>
+        <br><br>
+        <div class="centerText">
+          <input type="text" class="centerTextCursor1" value="Y:" disabled="disabled">
+          <input class="centerTextInput" type="number" value="{{cursorY}}" readonly="readonly" />
+        </div>
+        <br><br>
+        <span class="centerText">Add a new desk:</span>
+        <br>
+        <div class="centerText">
+          <input type="text" class="centerTextCursor2" value="X:" disabled="disabled">
+          <input class="centerTextInput" type="number" [(ngModel)]="positionX" />
+        </div>
+        <br><br>
+        <div class="centerText">
+          <input type="text" class="centerTextCursor2" value="Y:" disabled="disabled">
+          <input class="centerTextInput" type="number" [(ngModel)]="positionY" />
+        </div>
+        <br><br>
+        <div class="centerText">
+          <input type="text" class="centerTextCursor2" value="NR:" disabled="disabled">
+          <input class="centerTextInput" type="number" [(ngModel)]="number" />
+        </div>
+        <br><br>
+        <div class="centerText">
+          <input type="text" class="centerTextCursor2" value="FACING:" disabled="disabled">
+        <select class="centerTextInput" list="orientation">
+          <option value="NORTH">NORTH</option>
+          <option value="EAST">EAST</option>
+          <option value="SOUTH">SOUTH</option>
+          <option value="WEST">WEST</option>
+        </select>
+      </div>
 
-    <br><br>
-    <div class="centerText">
-      <input class="centerAddButton" style="cursor:pointer" type="submit" value="ADD" (click)="doAddDesk()">
+        <br><br>
+        <div class="centerText">
+          <input class="centerAddButton" style="cursor:pointer" type="submit" value="ADD" (click)="doAddDesk()">
+        </div>
+      </div>
+      <!--End of things that should only load for the admin...-->
     </div>
   </div>
-  <!--End of things that should only load for the admin...-->
- </div>
-</div>
 
-<div></div>
+  <div></div>
 </div>
 
 <!--Renders a file input for an admin if the room is missing a room image-->
@@ -136,6 +157,7 @@
     (click)="closeRemoveDeskSureDialog();closeRemoveDeskDialog();closeEditDeskDialog()">Cancel</button>
 </dialog>
 
+<!--When admin clicks a desk-->
 <dialog id="editDeskDialog" class="dialogBox">
   <span class="centerText">Edit desk</span>
   <br>
@@ -155,10 +177,37 @@
   <input class="centerTextInput" type="text" placeholder="deskId" [(ngModel)]="deskId">
   <br>
   <br>
+  <input class="centerAddButton" style="cursor:pointer" type="submit" value="Make a reservation"
+  (click)="openReservationDialog(); initialReservationInfo()">
   <button class="normalButton" (click)="doUpdateDesk(); closeEditDeskDialog();">Save</button>
   <button class="normalButton" (click)="closeEditDeskDialog()">Cancel</button>
   <br>
   <button class="removeButton" (click)="openRemoveDeskSureDialog()">Remove</button>
+</dialog>
+
+<!--When user clicks a desk-->
+<dialog id="userDeskDialog" class="dialogBox">
+  <span class="centerText">Edit desk</span>
+  <br>
+  <input type="text" class="centerTextCursor2" value="X:" disabled="disabled">
+  <input class="centerTextInput" type="number" placeholder="deskPositionX" [(ngModel)]="deskPositionX" disabled="disabled" />
+  <br>
+  <br>
+  <input type="text" class="centerTextCursor2" value="Y:" disabled="disabled">
+  <input class="centerTextInput" type="number" placeholder="deskPositionY" [(ngModel)]="deskPositionY" disabled="disabled" />
+  <br>
+  <br>
+  <input type="text" class="centerTextCursor2" value="NR:" disabled="disabled">
+  <input class="centerTextInput" type="number" placeholder="deskNumber" [(ngModel)]="deskNumber" disabled="disabled">
+  <br>
+  <br>
+  <input type="text" class="centerTextCursor2" value="ID:" disabled="disabled">
+  <input class="centerTextInput" type="text" placeholder="deskId" [(ngModel)]="deskId" disabled="disabled">
+  <br>
+  <br>
+  <input class="centerAddButton" style="cursor:pointer" type="submit" value="Make a reservation"
+  (click)="openReservationDialog(); initialReservationInfo()">
+  <button class="normalButton" (click)="closeUserDeskDialog()">Cancel</button>
 </dialog>
 
 <dialog id="positionDialog" class="dialogBox">

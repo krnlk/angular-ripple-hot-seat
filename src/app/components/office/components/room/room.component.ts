@@ -432,6 +432,17 @@ export class RoomComponent implements OnInit {
     editDeskDialog.close();
   }
 
+  // open desk with that id
+  openUserDeskDialog() {
+    let userDeskDialog: any = <any>document.getElementById("userDeskDialog");
+    userDeskDialog.showModal();
+  }
+
+  closeUserDeskDialog() {
+    let userDeskDialog: any = <any>document.getElementById("userDeskDialog");
+    userDeskDialog.close();
+  }
+
   // position
   openPositionDialog() {
     let positionDialog: any = <any>document.getElementById("positionDialog");

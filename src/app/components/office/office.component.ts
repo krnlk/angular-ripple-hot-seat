@@ -139,6 +139,8 @@ export class OfficeComponent {
       this.levelId = sessionStorage.getItem('levelId') || '{}';
       this.currentLevelNumber = sessionStorage.getItem('currentLevelNumber') || '{}';
 
+      // when new levels are loaded for an office, the old levelId from another office should be forgotten
+      //sessionStorage.removeItem('levelId');
       this.doGetLevels();
 
       // load image for this particular level in the office
@@ -174,6 +176,11 @@ export class OfficeComponent {
         // turning an array into a null array
         this.levels.length = 0;
       }
+    }
+
+    // remove dots when swapping levels
+    if (this.dots != undefined) {
+      this.dots.length = 0;
     }
 
     this.service.getLevels(this.officeId).subscribe(
@@ -420,36 +427,49 @@ export class OfficeComponent {
 
   // updates officeId
   setOfficeId(officeId: any) {
-    this.officeId = officeId;
-    this.officeIdChange.next(this.officeId);
-    sessionStorage.setItem('officeId', this.officeId);
+    console.log(this.officeId);
+    console.log(sessionStorage.getItem('officeId'));
 
-    // get levels for this particular office
-    this.doGetLevels();
+    // if the new officeId isn't the same as the old one
+    if (this.officeId != sessionStorage.getItem('officeId') || sessionStorage.getItem('levelId') == null) {
+      this.officeId = officeId;
+      this.officeIdChange.next(this.officeId); // ???
+      sessionStorage.setItem('officeId', this.officeId);
+
+      // when new levels are loaded for an office, the old levelId from another office should be forgotten
+      sessionStorage.removeItem('levelId');
+
+      // get levels for this particular office
+      this.doGetLevels();
+    }
   }
 
   // updates the current level in a particular office
   setLevel(levelId: any, currentLevelNumber: string) {
-    // if there is even an officeId to work with in the first place
-    if (this.officeId != undefined) {
-      this.levelId = levelId;
-      this.currentLevelNumber = currentLevelNumber;
-      sessionStorage.setItem('levelId', this.levelId);
-      console.log(this.levels);
+    // nothing should be done if new levelId would be the same as the old one
+    if (sessionStorage.getItem('levelId') != levelId) {
 
-      // find the number of a level with this levelId
-      var i = 0;
-      while (this.levels[i].id != levelId && i <= this.levels.length) {
-        i++;
+      // if there is even an officeId to work with in the first place
+      if (this.officeId != undefined) {
+        this.levelId = levelId;
+        this.currentLevelNumber = currentLevelNumber;
+        sessionStorage.setItem('levelId', this.levelId);
+        console.log(this.levels);
+
+        // find the number of a level with this levelId
+        var i = 0;
+        while (this.levels[i].id != levelId && i <= this.levels.length) {
+          i++;
+        }
+        this.currentLevelNumber = this.levels[i].number;
+
+        sessionStorage.setItem('currentLevelNumber', this.currentLevelNumber.toString());
+
+        // load image for this particular level in the office
+        this.getImageFromService();
+        // after a new office is loaded and a level is selected, image along with the dots should be loaded
+        this.doAddDot();
       }
-      this.currentLevelNumber = this.levels[i].number;
-
-      sessionStorage.setItem('currentLevelNumber', this.currentLevelNumber.toString());
-
-      // load image for this particular level in the office
-      this.getImageFromService();
-      // after a new office is loaded and a level is selected, image along with the dots should be loaded
-      this.doAddDot();
     }
   }
 

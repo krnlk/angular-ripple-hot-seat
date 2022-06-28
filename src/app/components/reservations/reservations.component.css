@@ -50,6 +50,7 @@ th, td {
 
 /* Define the hover highlight color for the table row */
 .table tr:hover {
-    background-color: white;
-    color: black;
+    /* Switched background color from white to gray because color property doesn't work with scroll/pagination for some reason */
+    background-color: gray;
+    /* color: black; */
 }

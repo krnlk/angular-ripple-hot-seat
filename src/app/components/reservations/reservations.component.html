@@ -9,7 +9,7 @@
 
         <ng-container matColumnDef="date">
           <th mat-header-cell *matHeaderCellDef style="text-align: center;">date</th>
-          <td mat-cell *matCellDef="let element"> {{ element.startTime | date }} </td>
+          <td mat-cell *matCellDef="let element"> {{ element.startTime | date }} - {{ element.endTime | date }} </td>
         </ng-container>
 
         <ng-container matColumnDef="time">
@@ -19,17 +19,17 @@
 
         <ng-container matColumnDef="office">
           <th mat-header-cell *matHeaderCellDef style="text-align: center;">office</th>
-          <td mat-cell *matCellDef="let element"> {{ element.startTime  }} </td>
+          <td mat-cell *matCellDef="let element"> {{ element.officeName  }} </td>
         </ng-container>
 
         <ng-container matColumnDef="room">
           <th mat-header-cell *matHeaderCellDef style="text-align: center;">room</th>
-          <td mat-cell *matCellDef="let element"> {{ element.endTime }} </td>
+          <td mat-cell *matCellDef="let element"> {{ element.roomNumber }} </td>
         </ng-container>
 
         <ng-container matColumnDef="desk">
           <th mat-header-cell *matHeaderCellDef style="text-align: center;">desk</th>
-          <td mat-cell *matCellDef="let element"> {{ element.deskId }} </td>
+          <td mat-cell *matCellDef="let element"> {{ element.deskNumber }} </td>
         </ng-container>
 
         <ng-container matColumnDef="isPermanent">

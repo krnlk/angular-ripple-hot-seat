@@ -4,6 +4,7 @@
     <span class="officeLeft"> Office </span>
     <!--Prints a list of all available levels in that office-->
     <select id="offices" [(ngModel)]="officeId" name="officeId">
+      <option value="" disabled="disabled" selected="selected">Select an office</option>
       <option class="optionBox" *ngFor="let office of offices" value="{{office.id}}">{{office.name}}</option>
     </select>
     <input type="submit" class="submitButton" value="Submit" (click)="setOfficeId(officeId)">
@@ -32,6 +33,7 @@
 
       <!--Prints a list of all available levels in that office-->
       <select id="levels" [(ngModel)]="levelId" name="levelId">
+        <option value="" disabled="disabled" selected="selected">Select a level</option>
         <option class="optionBox" *ngFor="let level of levels" value="{{level.id}}">{{level.number}}</option>
       </select>
       <input type="submit" class="submitButton" value="Submit" (click)="setLevel(levelId, currentLevelNumber)">
@@ -61,9 +63,9 @@
                   src="assets/dots/dot_red.png" (click)="getRoomData(dot.number)" />
               </a>
             </div>
-
           </div>
         </div>
+        
         <div class="centerText">
           <input class="centerAddButton" style="cursor:pointer" type="submit" value="Search" (click)="doSearch()">
         </div>
