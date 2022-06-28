@@ -53,19 +53,16 @@
         <div class="centerText">
           <div class="centerImage" (mousemove)="mouseMoved($event)">
             <img [src]="imageToShow" alt="Place image title" *ngIf="!isImageLoading;">
-
             <!--Print dots on the room image-->
-            <div *ngFor="let dot of dots">
+            <div class="dots" *ngFor="let dot of dots">
               <!--Add something past /room/ so you can reroute to a specific dot-->
               <a href="office/room/{{dot.id}}">
-                <img class="dot" [style.width.px]="50" [style.top.px]="dot.positionY" [style.left.px]="dot.positionX"
-                  src="assets/Kropka1.jpg" (click)="getRoomData(dot.number)" />
+                <img [style.width.px]="50" [style.top.px]="dot.positionY" [style.left.px]="dot.positionX"
+                     src="assets/Kropka1.jpg" (click)="getRoomData(dot.number)" />
               </a>
             </div>
-            
           </div>
         </div>
-
         <div class="centerText">
           <input class="centerAddButton" style="cursor:pointer" type="submit" value="Search" (click)="doSearch()">
         </div>
@@ -86,15 +83,21 @@
         <br>
         <span class="centerText">Add a room:</span>
         <br>
-        <input type="text" class="centerTextCursor2" value="X:" disabled="disabled">
-        <input class="centerTextInput" type="number" [(ngModel)]="positionX" />
-        <br><br>
-        <input type="text" class="centerTextCursor2" value="Y:" disabled="disabled">
-        <input class="centerTextInput" type="number" [(ngModel)]="positionY" />
-        <br><br>
-        <input type="text" class="centerTextCursor2" value="NR:" disabled="disabled">
-        <input class="centerTextInput" type="number" [(ngModel)]="number" />
-        <br><br>
+        <div class="centerText">
+          <input type="text" class="centerTextCursor2" value="X:" disabled="disabled">
+          <input class="centerTextInput" type="number" [(ngModel)]="positionX" />
+        </div>
+        <br>
+        <div class="centerText">
+          <input type="text" class="centerTextCursor2" value="Y:" disabled="disabled">
+          <input class="centerTextInput" type="number" [(ngModel)]="positionY" />
+        </div>
+        <br>
+        <div class="centerText">
+          <input type="text" class="centerTextCursor2" value="NR:" disabled="disabled">
+          <input class="centerTextInput" type="number" [(ngModel)]="number" />
+        </div>
+        <br>
         <div class="centerText">
           <input class="centerAddButton" style="cursor:pointer" type="submit" value="ADD" (click)="doAddRoom()">
         </div>
