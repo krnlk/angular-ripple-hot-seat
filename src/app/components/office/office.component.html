@@ -51,11 +51,10 @@
     -->
       <div id="aroundImage">
         <div class="centerText">
-          <div class="centerImage" (mousemove)="mouseMoved($event)">
+          <div (mousemove)="mouseMoved($event)">
             <img [src]="imageToShow" alt="Place image title" *ngIf="!isImageLoading;">
-
             <!--Print dots on the room image-->
-            <div *ngFor="let dot of dots">
+            <div class="dots" *ngFor="let dot of dots">
               <!--Add something past /room/ so you can reroute to a specific dot-->
               <a href="office/room/{{dot.id}}">
                 <img class="dot" [style.width.px]="50" [style.top.px]="dot.positionY" [style.left.px]="dot.positionX"
@@ -65,7 +64,6 @@
 
           </div>
         </div>
-
         <div class="centerText">
           <input class="centerAddButton" style="cursor:pointer" type="submit" value="Search" (click)="doSearch()">
         </div>

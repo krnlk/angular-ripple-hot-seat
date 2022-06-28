@@ -161,7 +161,7 @@
 
 /* Used by dots on the image */
 .dot {
-    /*position:absolute;*/
+    position: absolute;
 }
 
 .dot:hover {
@@ -175,7 +175,7 @@
   display: flex;
 }
 
-#imagestyle { 
+#imagestyle {
   width: 200px;
   height: 200px;
 }
