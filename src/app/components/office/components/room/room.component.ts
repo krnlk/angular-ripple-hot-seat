@@ -162,6 +162,10 @@ export class RoomComponent implements OnInit {
         console.log('Data: ');
         console.log(data);
 
+        // if the reservation is succesful, close the dialogue windows
+        this.closeReservationDialog();
+        this.closeUserDeskDialog();
+        this.closeUserDeskDialog();
       },
       (error) => {
         console.log('Error while making a reservation: ');
