@@ -54,3 +54,9 @@ th, td {
     background-color: gray;
     /* color: black; */
 }
+
+.removeButton {
+    background: red;
+    border-color: red;
+    color: white;
+}
