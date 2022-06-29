@@ -13,9 +13,13 @@ export class ReservationsService {
     private apiUrl = 'reservations';
     constructor(private http: HttpClient) { }
 
-    //na razie kazdy powinien miec do tego dostep (bez jwt i autoryzacji), zeby testowac
-
+    // gets all reservations
     getReservations(userId: string) {
         return this.http.get(`https://ripple-hot-seat-backend-app.herokuapp.com/reservations/byUserId/${userId}`)
+    }
+
+    // removes a reservation with reservationId
+    removeReservation(reservationId: string) {
+        return this.http.delete(`https://ripple-hot-seat-backend-app.herokuapp.com/reservations/delete/${reservationId}`, {responseType: 'text'})
     }
 }

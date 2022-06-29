@@ -103,7 +103,7 @@ export class OfficeComponent {
   selectedFile!: ImageSnippet;
 
   constructor(private service: OfficeService, public login: LoginService, public http: HttpClient) {
-    this.dateFrom = formatDate(this.DateCurrent, 'YYYY-MM-dd', 'en-US', '+0530');
+    this.dateFrom = formatDate(this.DateCurrent, 'YYYY-MM-dd', 'en-GB', '+0000');
     this.dateUntil = this.dateFrom;
   }
 

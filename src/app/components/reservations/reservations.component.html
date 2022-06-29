@@ -12,9 +12,11 @@
           <td mat-cell *matCellDef="let element"> {{ element.startTime | date }} - {{ element.endTime | date }} </td>
         </ng-container>
 
+        <!--Temporary solution because | date hh:mm doesn't work with this format for some reason-->
+        <!--Redo it later so it also takes time zone into consideration-->
         <ng-container matColumnDef="time">
           <th mat-header-cell *matHeaderCellDef style="text-align: center;">time</th>
-          <td mat-cell *matCellDef="let element"> {{ element.startTime | date:'hh:mm' }} - {{ element.endTime | date:'hh:mm' }} </td>
+          <td mat-cell *matCellDef="let element"> {{ element.startTime.substr(11, 5) }} - {{ element.endTime.substr(11, 5) }} </td>
         </ng-container>
 
         <ng-container matColumnDef="office">
@@ -39,6 +41,12 @@
             <ng-template #notPermanent>no</ng-template>
           </td>
         </ng-container>
+
+        <ng-container matColumnDef="operations">
+          <th mat-header-cell *matHeaderCellDef style="text-align: center;">operations</th>
+          <td mat-cell *matCellDef="let element"> <button (click)="doRemoveReservation(element.id)"> remove </button> </td>
+        </ng-container>
+
         <tr mat-header-row *matHeaderRowDef="displayedColumnes; sticky: true"></tr>
         <tr mat-row *matRowDef="let row; columns: displayedColumnes"></tr>
       </table>

@@ -86,9 +86,9 @@ export class RoomComponent implements OnInit {
   private _subscription: any;
 
   constructor(private service: RoomService, public _login: LoginService, public _office: OfficeComponent, public route: ActivatedRoute, public router: Router, public http: HttpClient) {
-    this.dateFrom = formatDate(this.DateCurrent, 'yyyy-MM-dd', 'en-US', '+0530');
+    this.dateFrom = formatDate(this.DateCurrent, 'YYYY-MM-dd', 'en-GB', '+0200');
     this.dateUntil = this.dateFrom;
-    this.timeFrom = formatDate(this.DateCurrent, 'hh:mm', 'en-US', '+0530');
+    this.timeFrom = formatDate(this.DateCurrent, 'HH:mm', 'en-US', '+0200');
     this.timeUntil = '17:00';
     // chyba two way data bindindg przy dacie
 
@@ -149,7 +149,6 @@ export class RoomComponent implements OnInit {
   // makes a reservation
   doMakeReservation() {
     let post = {
-      //startTime: this.startTime,
       startTime: this.startDay + "T" + this.startHour,
       endTime: this.endDay + "T" + this.endHour,
       deskId: this.deskId,

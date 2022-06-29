@@ -55,19 +55,23 @@ export class ReservationsComponent implements OnInit {
   pageSize!: number;
   length!: number;
 
-  displayedColumnes = ['date', 'time', 'office', 'room', 'desk', 'isPermanent'];
+  // for mat column
+  displayedColumnes = ['date', 'time', 'office', 'room', 'desk', 'isPermanent', 'operations'];
 
   constructor(public service: ReservationsService) {
   }
-
 
   // pagination
   @ViewChild(MatPaginator) paginator!: MatPaginator;
 
   ngOnInit() {
+    this.doGetReservations();
+  }
+
+  // get all reservations of the logged user
+  doGetReservations() {
     this.service.getReservations(localStorage.getItem('userId') || '{}').subscribe(
       response => {
-        console.log("Reservations are being properly shown.");
         console.log('Response: ');
         console.log(response);
 
@@ -75,7 +79,23 @@ export class ReservationsComponent implements OnInit {
         this.reservations = response;
       },
       error => {
-        console.log("Error while loading reservations.");
+        console.log('Error: ');
+        console.log(error);
+      }
+    )
+  }
+
+  // removes a reservation 
+  doRemoveReservation(reservationId: string) {
+    this.service.removeReservation(reservationId).subscribe(
+      response => {
+        console.log('Response: ');
+        console.log(response);
+
+        // reload reservations
+        this.doGetReservations();
+      },
+      error => {
         console.log('Error: ');
         console.log(error);
       }
