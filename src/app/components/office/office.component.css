@@ -57,7 +57,7 @@
 
 /* Positioning stuff on the left and middle of the background */
 .leftUser {
-    position: relative;
+    justify-content: center;
     display: flex;
     align-items: center;
 }
@@ -178,4 +178,19 @@
 #imagestyle {
   width: 200px;
   height: 200px;
+}
+
+.margins{
+  margin-left: 20%;
+  margin-right: 20%;
+}
+
+.dot-position{
+  justify-content: center;
+  align-items: center;
+  display: flex;
+}
+
+.image-dots{
+  position: relative;
 }

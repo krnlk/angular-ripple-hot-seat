@@ -51,12 +51,12 @@
     -->
       <div id="aroundImage">
         <div class="centerText">
-          <div (mousemove)="mouseMoved($event)">
+          <div class="image-dots" (mousemove)="mouseMoved($event)">
             <img [src]="imageToShow" alt="Place image title" *ngIf="!isImageLoading;">
             <!--Print dots on the room image-->
             <div class="dots" *ngFor="let dot of dots">
               <!--Add something past /room/ so you can reroute to a specific dot-->
-              <a href="office/room/{{dot.id}}">
+              <a class="dot-position" href="office/room/{{dot.id}}">
                 <img class="dot" [style.width.px]="50" [style.top.px]="dot.positionY" [style.left.px]="dot.positionX"
                      src="assets/Kropka1.jpg" (click)="getRoomData(dot.number)" />
               </a>
