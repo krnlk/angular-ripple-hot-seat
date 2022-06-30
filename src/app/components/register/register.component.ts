@@ -28,8 +28,7 @@ export class RegisterComponent implements OnInit {
 
   constructor(public app: AppComponent, public http: RegisterService, public router: Router)
   {
-    // unlike in appservice, this does work in constructor - might cause issues later down the line
-    this.app.hideMatToolbar();
+    this.checkIfLogged();
   }
 
   ngOnInit(): void {
@@ -94,4 +93,14 @@ export class RegisterComponent implements OnInit {
     if(error.error == "'password' should be longer than 5 characters" ) this.registerErrorPassShort = true;
     else this.registerErrorPassShort = false;
   }
+
+   // in case the user is already logged in, he should be routed out of the login page
+   checkIfLogged () {
+    if(this.http.isLoggedIn() == true) {
+      this.router.navigateByUrl('');
+    }
+    // in case the user is not logged in, the top toolbar should be now hidden
+    else this.app.hideMatToolbar();
+  }
+  
 }

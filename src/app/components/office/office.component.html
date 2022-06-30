@@ -4,6 +4,7 @@
     <span class="officeLeft"> Office </span>
     <!--Prints a list of all available levels in that office-->
     <select id="offices" [(ngModel)]="officeId" name="officeId">
+      <option value="" disabled="disabled" selected="selected">Select an office</option>
       <option class="optionBox" *ngFor="let office of offices" value="{{office.id}}">{{office.name}}</option>
     </select>
     <input type="submit" class="submitButton" value="Submit" (click)="setOfficeId(officeId)">
@@ -16,12 +17,16 @@
     <div class="example-fill-remaining-space"></div>
     <div class="dateCenter">
       <input class="dateBox" type="date" [(ngModel)]="dateFrom">
+      <div class="spaceSmall"></div>
       <a> - </a>
+      <div class="space"></div>
       <input class="dateBox" type="date" [(ngModel)]="dateUntil">
     </div>
     <div class="timeRight">
       <input class="timeBox" type="time" [(ngModel)]="timeFrom">
+      <div class="spaceSmall"></div>
       <a> - </a>
+      <div class="space"></div>
       <input class="timeBox" type="time" [(ngModel)]="timeUntil">
     </div>
   </div>
@@ -32,9 +37,10 @@
 
       <!--Prints a list of all available levels in that office-->
       <select id="levels" [(ngModel)]="levelId" name="levelId">
+        <option value="" disabled="disabled" selected="selected">Select a level</option>
         <option class="optionBox" *ngFor="let level of levels" value="{{level.id}}">{{level.number}}</option>
       </select>
-      <input type="submit" class="submitButton" value="Submit" (click)="setLevel(levelId, levelNumber)">
+      <input type="submit" class="submitButton" value="Submit" (click)="setLevel(levelId, currentLevelNumber)">
       <!--Adding a level in one particular office, only admin should be able to see it-->
       <div *ngIf="login.isAdmin()" style="display: inline-block">
         <span class="material-icons" (click)="openAddLevelDialog()">add</span>
@@ -58,11 +64,18 @@
               <!--Add something past /room/ so you can reroute to a specific dot-->
               <a class="dot-position" href="office/room/{{dot.id}}">
                 <img class="dot" [style.width.px]="50" [style.top.px]="dot.positionY" [style.left.px]="dot.positionX"
-                     src="assets/Kropka1.jpg" (click)="getRoomData(dot.number)" />
+                  src="assets/dots/dot_green.png" (click)="getRoomData(dot.number)" />
+              </a>
+
+              <!--If any desk is reserved in a room-->
+              <a href="office/room/{{dot.id}}" *ngIf="dot.percentage > 0">
+                <img class="dot" [style.width.px]="50" [style.top.px]="dot.positionY" [style.left.px]="dot.positionX"
+                  src="assets/dots/dot_red.png" (click)="getRoomData(dot.number)" />
               </a>
             </div>
           </div>
         </div>
+
         <div class="centerText">
           <input class="centerAddButton" style="cursor:pointer" type="submit" value="Search" (click)="doSearch()">
         </div>
@@ -112,68 +125,80 @@
 </div>
 
 <!--Pop up window zone-->
-<dialog id="addOfficeDialog">
+<dialog id="addOfficeDialog" class="dialogBox">
   <p>Add a new office</p>
   <input type="text" placeholder="New office's name..." [(ngModel)]="officeName">
   <br>
-  <button (click)="doAddOffice();closeAddOfficeDialog()">Add</button>
-  <button (click)="closeAddOfficeDialog()">Cancel</button>
+  <button class="normalButton" (click)="doAddOffice();closeAddOfficeDialog()">Add</button>
+  <div class="space"></div>
+  <button class="normalButton" (click)="closeAddOfficeDialog()">Cancel</button>
 </dialog>
 
-<dialog id="removeOfficeDialog">
+<dialog id="removeOfficeDialog" class="dialogBox">
   <p>Remove this office?</p>
-  <button (click)="openRemoveOfficeSureDialog()">Remove</button>
-  <button (click)="closeRemoveOfficeDialog()">Cancel</button>
+  <button class="removeButton" (click)="openRemoveOfficeSureDialog()">Remove</button>
+  <div class="space"></div>
+  <button class="normalButton" (click)="closeRemoveOfficeDialog()">Cancel</button>
 </dialog>
 
-<dialog id="addLevelDialog">
+<dialog id="addLevelDialog" class="dialogBox">
   <p>Add a new level</p>
   <input type="number" placeholder="New level's number..." [(ngModel)]="levelNumber">
   <br>
-  <button (click)="doAddLevel();closeAddLevelDialog()">Add</button>
-  <button (click)="closeAddLevelDialog()">Cancel</button>
+  <button class="normalButton" (click)="doAddLevel();closeAddLevelDialog()">Add</button>
+  <div class="space"></div>
+  <button class="normalButton" (click)="closeAddLevelDialog()">Cancel</button>
 </dialog>
 
-<dialog id="removeLevelDialog">
+<dialog id="removeLevelDialog" class="dialogBox">
   <p>Remove this level?</p>
-  <button (click)="openRemoveLevelSureDialog()">Remove</button>
-  <button (click)="closeRemoveLevelDialog()">Cancel</button>
+  <button class="removeButton" (click)="openRemoveLevelSureDialog()">Remove</button>
+  <div class="space"></div>
+  <button class="normalButton" (click)="closeRemoveLevelDialog()">Cancel</button>
 </dialog>
 
 <!--This shouldn't even exist...-->
-<dialog id="addRoomDialog">
+<dialog id="addRoomDialog" class="dialogBox">
   <p>Add a new room</p>
   <input type="number" placeholder="New room's number ">
   <br>
-  <button (click)="closeAddRoomDialog()">Add</button>
-  <button (click)="closeAddRoomDialog()">Cancel</button>
+  <button class="normalButton" (click)="closeAddRoomDialog()">Add</button>
+  <div class="space"></div>
+  <button class="normalButton" (click)="closeAddRoomDialog()">Cancel</button>
 </dialog>
 
 <!--This should exist, but in rooms only I think?-->
-<dialog id="removeRoomDialog">
+<dialog id="removeRoomDialog" class="dialogBox">
   <p>Remove this room?</p>
-  <button (click)="openRemoveSureDialog()">Remove</button>
-  <button (click)="closeRemoveRoomDialog()">Cancel</button>
+  <button class="removeButton" (click)="openRemoveSureDialog()">Remove</button>
+  <div class="space"></div>
+  <button class="normalButton" (click)="closeRemoveRoomDialog()">Cancel</button>
 </dialog>
 
 
-<dialog id="removeOfficeSureDialog">
+<dialog id="removeOfficeSureDialog" class="dialogBox">
   <p>Are you sure you want to remove this office?</p>
   <br>
   <p>This action is irreversible!</p>
-  <button (click)="doRemoveOffice();closeRemoveOfficeSureDialog(); closeRemoveOfficeDialog()">Remove</button>
-  <button (click)="closeRemoveOfficeSureDialog();closeRemoveRoomDialog();closeEditDeskDialog()">Cancel</button>
+  <button class="removeButton"
+    (click)="doRemoveOffice();closeRemoveOfficeSureDialog(); closeRemoveOfficeDialog()">Remove</button>
+  <div class="space"></div>
+  <button class="normalButton"
+    (click)="closeRemoveOfficeSureDialog();closeRemoveRoomDialog();closeEditDeskDialog()">Cancel</button>
 </dialog>
 
-<dialog id="removeLevelSureDialog">
+<dialog id="removeLevelSureDialog" class="dialogBox">
   <p>Are you sure you want to remove this level?</p>
   <br>
   <p>This action is irreversible!</p>
-  <button (click)="doRemoveLevel();closeRemoveLevelSureDialog(); closeRemoveLevelDialog()">Remove</button>
-  <button (click)="closeRemoveLevelSureDialog();closeRemoveLevelDialog();closeEditDeskDialog()">Cancel</button>
+  <button class="removeButton"
+    (click)="doRemoveLevel();closeRemoveLevelSureDialog(); closeRemoveLevelDialog()">Remove</button>
+  <div class="space"></div>
+  <button class="normalButton"
+    (click)="closeRemoveLevelSureDialog();closeRemoveLevelDialog();closeEditDeskDialog()">Cancel</button>
 </dialog>
 
-<dialog id="removeSureDialog">
+<dialog id="removeSureDialog" class="dialogBox">
   <p>Are you sure you want to remove this desk?</p>
   <br>
   <p>This action is irreversible!</p>
@@ -181,7 +206,7 @@
   <button (click)="closeRemoveSureDialog();closeRemoveRoomDialog();closeEditDeskDialog()">Cancel</button>
 </dialog>
 
-<dialog id="editDeskDialog">
+<dialog id="editDeskDialog" class="dialogBox">
   <p>Edit a desk</p>
   <input type="text" name="username" id="whatever" placeholder="...">
   <br>
@@ -202,7 +227,7 @@
 
 </dialog>
 
-<dialog id="positionDialog">
+<dialog id="positionDialog" class="dialogBox">
   <p>Add level</p>
   <input type="text" name="username" id="whatever" placeholder="...">
   <br>
@@ -210,23 +235,25 @@
   <button (click)="closePositionDialog()">Cancel</button>
 </dialog>
 
-<dialog id="dateDialog">
+<dialog id="dateDialog" class="dialogBox">
   <p>Please select date(s)</p>
   <input type="dateFrom" class="date_input" [(ngModel)]="Input1" placeholder="{{dateFrom}}">
   <br>
   <input type="dateUntil" class="date_input" [(ngModel)]="Input2" placeholder="{{dateUntil}}">
   <br>
-  <button (click)="updateDateQuery()">OK</button>
-  <button (click)="closeDateDialog()">Cancel</button>
+  <button class="normalButton" (click)="updateDateQuery()">OK</button>
+  <div class="space"></div>
+  <button class="normalButton" (click)="closeDateDialog()">Cancel</button>
 </dialog>
 
-<dialog id="timeDialog">
+<dialog id="timeDialog" class="dialogBox">
   <p>Please select reservation time</p>
   <input type="text" class="time_input" [(ngModel)]="Input1" placeholder="From...">
   <br>
   <input type="text" class="time_input" [(ngModel)]="Input2" placeholder="Until...">
   <br>
-  <button (click)="updateTimeQuery()">OK</button>
-  <button (click)="closeTimeDialog()">Cancel</button>
+  <button class="normalButton" (click)="updateTimeQuery()">OK</button>
+  <div class="space"></div>
+  <button class="normalButton" (click)="closeTimeDialog()">Cancel</button>
 </dialog>
 z

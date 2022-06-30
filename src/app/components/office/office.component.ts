@@ -76,11 +76,16 @@ export class OfficeComponent {
 
   // stores the list of offices
   offices: any;
+  // stores the list of percentages of desks taken in each room
+  percentages: any;
 
   // stores the list of levels of that office
   levels: any;
   // id and number of a level in an office that's being displayed
   levelId!: string;
+  currentLevelNumber!: string;
+
+  // for adding new levels
   public levelNumber!: number;
 
   // stores all rooms
@@ -98,7 +103,7 @@ export class OfficeComponent {
   selectedFile!: ImageSnippet;
 
   constructor(private service: OfficeService, public login: LoginService, public http: HttpClient) {
-    this.dateFrom = formatDate(this.DateCurrent, 'YYYY-MM-dd', 'en-US', '+0530');
+    this.dateFrom = formatDate(this.DateCurrent, 'YYYY-MM-dd', 'en-GB', '+0000');
     this.dateUntil = this.dateFrom;
   }
 
@@ -130,12 +135,33 @@ export class OfficeComponent {
       }
     }
 
+    // if there is an office and a level to load already (from previous requests)
+    if (sessionStorage.getItem('officeId') != undefined && sessionStorage.getItem('levelId') != undefined && sessionStorage.getItem('currentLevelNumber')) {
+      this.officeId = sessionStorage.getItem('officeId') || '{}';
+      this.levelId = sessionStorage.getItem('levelId') || '{}';
+      this.currentLevelNumber = sessionStorage.getItem('currentLevelNumber') || '{}';
+
+      // when new levels are loaded for an office, the old levelId from another office should be forgotten
+      //sessionStorage.removeItem('levelId');
+      this.doGetLevels();
+
+      // load image for this particular level in the office
+      this.getImageFromService();
+
+      // after a new office is loaded and a level is selected, image along with the dots should be loaded
+      this.doAddDot();
+    }
+
+
     this.service.getOffices().subscribe(
       response => {
         console.log('Response: ');
         console.log(response);
 
         this.offices = response;
+
+        // if there is no office being shown currently, show the first available one
+        this.setOfficeId(this.offices[0].id);
       },
       error => {
         console.log('Error: ');
@@ -146,6 +172,9 @@ export class OfficeComponent {
 
   // returns all levels in the current office
   doGetLevels() {
+    // unload image
+    this.noImageFromService();
+
     // in case this method has been called before - reloading
     if (this.levels != undefined) {
       if (this.levels.length === 0) {
@@ -154,12 +183,23 @@ export class OfficeComponent {
       }
     }
 
+    // remove dots when swapping levels
+    if (this.dots != undefined) {
+      this.dots.length = 0;
+    }
+
     this.service.getLevels(this.officeId).subscribe(
       response => {
         console.log('Response: ');
         console.log(response);
 
         this.levels = response;
+
+        // if there is no default level loaded, the first available level (if any exists) should be loaded
+        if (sessionStorage.getItem('levelId') == null) this.setLevel(this.levels[0].id, this.levels[0].number);
+
+        // upon loading the page, do a search with default date & time settings
+        this.doSearch();
       },
       error => {
         console.log('Error: ');
@@ -180,7 +220,7 @@ export class OfficeComponent {
       this.imageToShow = reader.result;
       this.height = this.imageToShow.height;
       this.width = this.imageToShow.width;
-      console.log(this.height, this.width);
+      //console.log(this.height, this.width);
     }, false);
 
     if (image) {
@@ -227,12 +267,22 @@ export class OfficeComponent {
 
   }
 
-  //makes a request to the database regarding the reservations that fit so and so criteria
+  // given startDate, endDate, startTime, endTime, returns percentage of desks reserved for each room
   doSearch() {
     this.service.search(this.levelId).subscribe(
       response => {
         console.log('Response: ');
         console.log(response);
+
+        // save percentage taken data for each room
+        this.percentages = response;
+
+        // add percentage of desks taken for each room
+        for (let i in this.percentages) {
+          this.dots[i].percentage = this.percentages[i].percentage;
+        }
+
+        console.log(this.dots);
       },
       error => {
         console.log('Error: ');
@@ -272,7 +322,6 @@ export class OfficeComponent {
       (error) => {
         console.log('Error while adding an office.');
         console.log(error);
-        console.log(post);
       }
     )
   }
@@ -369,8 +418,8 @@ export class OfficeComponent {
 
   //adds a dot on the image, the dot's color will signify how many desks are taken
   doAddDot() {
-     // in case this method has been called before - reloading
-     if (this.dots != undefined) {
+    // in case this method has been called before - reloading
+    if (this.dots != undefined) {
       if (this.dots.length === 0) {
         // turning an array into a null array
         this.dots.length = 0;
@@ -385,6 +434,8 @@ export class OfficeComponent {
 
         this.dots = response;
 
+        // get colors for dots
+        this.doSearch(); 
       },
       error => {
         console.log('Error: ');
@@ -394,32 +445,52 @@ export class OfficeComponent {
     )
   }
 
-   //functions for sharing data with other components
+  //functions for sharing data with other components
 
   // updates officeId
   setOfficeId(officeId: any) {
-    this.officeId = officeId;
-    this.officeIdChange.next(this.officeId);
-    sessionStorage.setItem('officeId', this.officeId);
+    // if the new officeId isn't the same as the old one
+    if (this.officeId != sessionStorage.getItem('officeId') || sessionStorage.getItem('levelId') == null) {
+      this.officeId = officeId;
+      this.officeIdChange.next(this.officeId); // ???
+      sessionStorage.setItem('officeId', this.officeId);
 
-    // get levels for this particular office
-    this.doGetLevels();
+      // when new levels are loaded for an office, the old levelId from another office should be forgotten
+      sessionStorage.removeItem('levelId');
+
+      // get levels for this particular office
+      this.doGetLevels();
+
+      // the first available level (if any exists) should be loaded
+
+    }
   }
 
   // updates the current level in a particular office
-  setLevel(levelId: any, levelNumber: number) {
-    // if there is even an officeId to work with in the first place
-    if (this.officeId != undefined) {
-      this.levelId = levelId;
-      this.levelNumber = levelNumber;
-      sessionStorage.setItem('levelId', this.levelId);
-      //sessionStorage.setItem('levelNumber', this.levelNumber.toString());
-      //console.log(this.levelNumber.toString());
+  setLevel(levelId: any, currentLevelNumber: string) {
+    // nothing should be done if new levelId would be the same as the old one
+    if (sessionStorage.getItem('levelId') != levelId) {
 
-      // load image for this particular level in the office
-      this.getImageFromService();
-      // after a new office is loaded and a level is selected, image along with the dots should be loaded
-      this.doAddDot();
+      // if there is even an officeId to work with in the first place
+      if (this.officeId != undefined) {
+        this.levelId = levelId;
+        this.currentLevelNumber = currentLevelNumber;
+        sessionStorage.setItem('levelId', this.levelId);
+
+        // find the number of a level with this levelId
+        var i = 0;
+        while (this.levels[i].id != levelId && i <= this.levels.length) {
+          i++;
+        }
+        this.currentLevelNumber = this.levels[i].number;
+
+        sessionStorage.setItem('currentLevelNumber', this.currentLevelNumber.toString());
+
+        // load image for this particular level in the office
+        this.getImageFromService();
+        // after a new office is loaded and a level is selected, image along with the dots should be loaded
+        this.doAddDot();
+      }
     }
   }
 

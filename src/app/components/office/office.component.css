@@ -1,6 +1,6 @@
 /* For elements that are above the darkened background */
-.example-fill-remaining-space{
-  flex: 1 1 auto;
+.example-fill-remaining-space {
+    flex: 1 1 auto;
 }
 
 #aboveBackground {
@@ -8,20 +8,20 @@
     align-items: center;
 }
 
-#offices{
+#offices {
     width: 15%;
     margin: 0 1% 0 1%;
 }
 
-#levels{
+#levels {
     width: 15%;
     margin: 0 1% 0 1%;
 }
 
 /* For elements that are inside the background and should be positioned at the top of it */
 #insideBackgroundTop {
-  display: flex;
-  align-items: center;
+    display: flex;
+    align-items: center;
 }
 
 .centerAll {
@@ -38,7 +38,7 @@
 
 /* Background */
 .background {
-    background-color: rgba(0,0,0,.7);
+    background-color: rgba(0, 0, 0, .7);
     min-height: 400px;
     height: 100%;
 }
@@ -95,8 +95,8 @@
 /* For the text box containing the coordinates of the cursor. */
 .centerTextInput {
     background-color: white;
-    border: rgb(37, 150, 190);
-    border-width: 1px;
+    border-color: rgb(37, 150, 190);
+    border-width: 2px;
     color: black;
     text-align: center;
     width: 50%;
@@ -116,9 +116,7 @@
 }
 
 /* Puts the office name on the left */
-.officeLeft {
-
-}
+.officeLeft {}
 
 /* Centers the date filter */
 .dateCenter {
@@ -132,9 +130,7 @@
 }
 
 /* Puts the time filter on the right */
-.timeRight {
-
-}
+.timeRight {}
 
 .timeBox {
     background-color: transparent;
@@ -170,14 +166,48 @@
 }
 
 .centerText {
-  justify-content: center;
-  align-items: center;
-  display: flex;
+    justify-content: center;
+    align-items: center;
+    display: flex;
 }
 
 #imagestyle {
-  width: 200px;
-  height: 200px;
+    width: 200px;
+    height: 200px;
+}
+
+.dialogBox {
+    border-width: 5px;
+    border-color: rgb(37, 150, 190);
+    text-align: center;
+    justify-content: center;
+    align-items: center;
+}
+
+.normalButton {
+    background: rgb(37, 150, 190);
+    border-color: rgb(37, 150, 190);
+    color: white;
+}
+
+.removeButton {
+    background: red;
+    border-color: red;
+    color: white;
+}
+
+/* Creates some distance between elements */
+.space {
+    width: 20px; 
+    height: auto; 
+    display: inline-block;
+}
+
+/* Creates small distance between elements */
+.spaceSmall {
+    width: 10px; 
+    height: auto; 
+    display: inline-block;
 }
 
 .margins{

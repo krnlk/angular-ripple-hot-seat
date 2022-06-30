@@ -27,7 +27,7 @@ export class LoginComponent implements OnInit {
 
   constructor(public app: AppComponent, private http: LoginService, private router: Router) {
     //unlike in appservice, this does work in constructor - might cause issues later down the line
-    this.app.hideMatToolbar();
+    this.checkIfLogged();
   }
 
   ngOnInit(): void {
@@ -98,6 +98,15 @@ export class LoginComponent implements OnInit {
   // handles login error
   handleLoginError() {
     this.loginError = true;
+  }
+
+  // in case the user is already logged in, he should be routed out of the login page
+  checkIfLogged () {
+    if(this.http.isLoggedIn() == true) {
+      this.router.navigateByUrl('');
+    }
+    // in case the user is not logged in, the top toolbar should be now hidden
+    else this.app.hideMatToolbar();
   }
 
   /*
