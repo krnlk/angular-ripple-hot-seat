@@ -39,6 +39,8 @@ export class ReservationsComponent implements OnInit {
 
   endTime!: String;
 
+  isTimeNull!: boolean;
+
   //splitting endTime into date and time, also formats it
   //endDay!: String = this.endTime.substr(8, 2)+this.endTime.substr(5, 2);
   //endDay: String = this.endTime.substr(0, 10);
@@ -85,7 +87,7 @@ export class ReservationsComponent implements OnInit {
     )
   }
 
-  // removes a reservation 
+  // removes a reservation
   doRemoveReservation(reservationId: string) {
     this.service.removeReservation(reservationId).subscribe(
       response => {
